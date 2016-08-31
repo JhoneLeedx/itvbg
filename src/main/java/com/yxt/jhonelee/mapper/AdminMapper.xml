@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.AdminDao">
+	<resultMap type="Admin" id="AdminMap" >
+		<result property="mId" column="id" />
+		<result property="mAdminName" column="name" />
+		<result property="mAdminPass" column="pass" />
+		<result property="mLevel" column="level" />
+		<result property="mPid" column="pid"/>
+	</resultMap>
+
+	<select id="SelectAllAdmin" resultMap="AdminMap" resultType="Admin">
+		select * from ITV_ADMIN where name = #{mAdminName} 
+	</select>
+</mapper>
