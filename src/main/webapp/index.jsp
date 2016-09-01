@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="top col-lg-12 col-md-12">
-				<img class="logo" src="img/logo.png" /> <span class="company">家庭医生后台数据管理</span>
+				<img class="logo" src="images/logo.png" /> <span class="company">家庭医生后台数据管理</span>
 				<button class="btn btn-default">退出登录</button>
 				<div class="admin">
 					当前管理员：<span>Ultrame</span>
@@ -25,17 +25,17 @@
 		<div class="row">
 			<div class="nav col-lg-12 col-md-12"></div>
 		</div>
-		<div class="row">
-			<div class="span3 content-left">
+		<div class="row-fluid">
+			<div class="span2 content-left">
 				<ul class="doctor">
-					<li><img src="img/list.png">数据管理列表</li>
+					<li><img src="images/list.png">数据管理列表</li>
 				</ul>
 				<ul class="doctorList">
 					<li>地区管理
 				</ul>
 			</div>
-			<div class="span9 content-right">
-				<iframe src="a.html"></iframe>
+			<div class="span10 content-right">
+				<iframe  src="<%=request.getContextPath() %>/address/showAddress"></iframe>
 			</div>
 		</div>
 	</div>

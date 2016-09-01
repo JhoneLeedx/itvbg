@@ -128,3 +128,36 @@ iframe {
 .col-lg-10 {
 	background: #f1f1f1;
 }
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+.tableHead {
+	height: 50px;
+	background: #44a9db;
+	color: #f1f1f1;
+	font-size: 18px;
+
+}
+th{
+	font-weight: bold;
+	text-align: center;
+	line-height: 36px; cellspacing ='0px';
+	border-collapse: collapse;
+	border: 1px solid #ddd;
+}
+td {
+	color: #4d4d4d;
+	font-weight: bold;
+	text-align: center;
+	line-height: 36px; cellspacing ='0px';
+	border-collapse: collapse;
+	border: 1px solid #ddd;
+}
+button {
+	border-radius: 4px;
+}
+.patient:hover {
+	background: skyblue;
+	color: #f1f1f1;
+}

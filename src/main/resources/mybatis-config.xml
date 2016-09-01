@@ -3,15 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-
-		<typeAlias type="com.yxt.jhonelee.model.Admin" alias="Admin"/>
-		<typeAlias type="com.yxt.jhonelee.model.ITVAddress" alias="ITVAddress"/>
-		
+		<typeAlias type="com.yxt.jhonelee.model.Admin" alias="Admin" />
+		<typeAlias type="com.yxt.jhonelee.model.ITVAddress" alias="ITVAddress" />
+		<typeAlias type="com.yxt.jhonelee.model.Address" alias="Address" />
 	</typeAliases>
 	<mappers>
-		
-		<mapper resource="com/yxt/jhonelee/mapper/AdminMapper.xml"/>
-<mapper resource="com/yxt/jhonelee/mapper/ITVAddressMapper.xml"/>
+		<mapper resource="com/yxt/jhonelee/mapper/AddressMapper.xml" />
+		<mapper resource="com/yxt/jhonelee/mapper/AdminMapper.xml" />
+		<mapper resource="com/yxt/jhonelee/mapper/ITVAddressMapper.xml" />
 	</mappers>
 </configuration>
 
