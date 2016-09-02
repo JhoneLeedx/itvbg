@@ -3,21 +3,48 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yxt.jhonelee.mapper.ITVAddressDao">
 
-   <resultMap type="ITVAddress" id="ITVAddressMap">
-     <id property="mId" column="id"/>
-     <result property="mAreaCode" column="area_code"/>
-     <result property="mAreaName" column="area_name"/>
-     <result property="mShortName" column="short_name"/>
-     <result property="mAddressId" column="address_id"/>
-     <result property="mWXQrcodeImageURL" column="wx_qrcode_image"/>
-     <result property="mLogoIMageURL" column="logo_image"/>
-     <result property="mIsFull" column="isfull"/>
-     <result property="mState" column="state"/>
-     <result property="mCreateTime" column="create_time"/>
-   </resultMap>
+	<resultMap type="ITVAddress" id="ITVAddressMap">
+		<id property="mId" column="id" />
+		<result property="mAreaCode" column="area_code" />
+		<result property="mAreaName" column="area_name" />
+		<result property="mShortName" column="short_name" />
+		<result property="mAddressId" column="address_id" />
+		<result property="mWXQrcodeImageURL" column="wx_qrcode_image" />
+		<result property="mLogoIMageURL" column="logo_image" />
+		<result property="mIsFull" column="is_full" />
+		<result property="mState" column="state" />
+		<result property="mCreateTime" column="create_time" />
+	</resultMap>
 
-   <select id="AllITVAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
-     select * from ITV_ADDRESS;
-   </select>
-
+	<select id="AllITVAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
+		select * from ITV_ADDRESS;
+	</select>
+	<update id="UpdateItvAddress" parameterType="ITVAddress">
+		update ITV_ADDRESS
+		<set>
+			<if test="mShortName!=null">
+				short_name=#{mShortName},
+			</if>
+			<if test="mAddressId!=0">
+				address_id=#{mAddressId},
+			</if>
+			<if test="mWXQrcodeImageURL!=null">
+				wx_qrcode_image=#{mWXQrcodeImageURL},
+			</if>
+			<if test="mLogoIMageURL!=null">
+				logo_image=#{mLogoIMageURL},
+			</if>
+			<choose>
+			<when test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null">
+			is_full = 1
+			</when>
+			<otherwise>
+			is_full = 0
+			</otherwise>
+			</choose>
+		</set>
+		<where>
+			area_code = #{mAreaCode}
+		</where>
+	</update>
 </mapper>

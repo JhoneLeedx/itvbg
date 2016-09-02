@@ -8,9 +8,7 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="bootstrap/css/main.css" />
-<script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 	<div class="container">
 		<div class="row">

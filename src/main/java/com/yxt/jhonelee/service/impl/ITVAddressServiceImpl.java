@@ -20,4 +20,8 @@ public class ITVAddressServiceImpl implements ITVAddressService{
 	public List<ITVAddress> AllITVAddress() {
 		return dao.AllITVAddress();
 	}
+	public Integer UpdateItvAddress(ITVAddress itvAddress) {
+		// TODO Auto-generated method stub
+		return dao.UpdateItvAddress(itvAddress);
+	}
 }

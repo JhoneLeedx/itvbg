@@ -1,0 +1,53 @@
+.mBox {
+	width: 500px;
+	height: 360px;
+	padding: 0 0 0 20px;
+	box-shadow: 0 0 6px #54C9FF;
+	background: #f6f6f6;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin: -260px 0 0 -250px;
+}
+
+.same {
+	width: 180px;
+	height: 28px;
+	border-radius: 4px;
+	border: 1px solid skyblue;
+	margin-bottom: 15px;
+}
+
+.noBorder {
+	border: none;
+	background: #f6f6f6;
+}
+
+.address {
+	width: 100px;
+	padding: 0 0 0 10px;
+}
+
+.erCode {
+	margin-bottom: 15px;
+}
+
+.mbtn {
+	width: 181px;
+	margin: 50px auto 0;
+}
+#wxcode{
+	position:relative;
+}
+#wxImg{
+	position:absolute;
+	width:120px;
+	left:360px;
+	top:195px;
+}
+#sub, #cancel {
+	width: 72px;
+	height: 28px;
+	border-radius: 4px;
+	border: 1px solid skyblue;
+}
