@@ -21,7 +21,6 @@ public class ITVAddressServiceImpl implements ITVAddressService{
 		return dao.AllITVAddress();
 	}
 	public Integer UpdateItvAddress(ITVAddress itvAddress) {
-		// TODO Auto-generated method stub
 		return dao.UpdateItvAddress(itvAddress);
 	}
 }

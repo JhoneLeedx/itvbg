@@ -19,22 +19,18 @@ public class ItvVideoMenuServiceImpl  implements ItvVideoMenuService{
 	private ITVVideoDao dao;
 	
 	public List<ITVVideoMenu> AllItvVideoMenu(String mAreaCode) {
-		// TODO Auto-generated method stub
 		return dao.AllItvVideoMenu(mAreaCode);
 	}
 
 	public int AddVideoMenu(ITVVideoMenu menu) {
-		// TODO Auto-generated method stub
 		return dao.AddVideoMenu(menu);
 	}
 
 	public int UpdateVideoMenu(ITVVideoMenu menu) {
-		// TODO Auto-generated method stub
 		return dao.UpdateVideoMenu(menu);
 	}
 
 	public int DeleteVideoMenu(int mState,int mId) {
-		// TODO Auto-generated method stub
 		return dao.DeleteVideoMenu(mState,mId);
 	}
 
