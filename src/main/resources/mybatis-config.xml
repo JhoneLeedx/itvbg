@@ -6,13 +6,27 @@
 		<typeAlias type="com.yxt.jhonelee.model.Admin" alias="Admin" />
 		<typeAlias type="com.yxt.jhonelee.model.ITVAddress" alias="ITVAddress" />
 		<typeAlias type="com.yxt.jhonelee.model.Address" alias="Address" />
-		<typeAlias type="com.yxt.jhonelee.model.ITVVideoMenu" alias="ItvVideo"/>
+		<typeAlias type="com.yxt.jhonelee.model.ITVVideoMenu" alias="ItvVideo" />
 	</typeAliases>
+
+	<plugins>
+		<plugin
+			interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+			<property name="dialectClass"
+				value="com.github.miemiedev.mybatis.paginator.dialect.OracleDialect" />
+		</plugin>
+	</plugins>
+
 	<mappers>
 		<mapper resource="com/yxt/jhonelee/mapper/AddressMapper.xml" />
 		<mapper resource="com/yxt/jhonelee/mapper/AdminMapper.xml" />
 		<mapper resource="com/yxt/jhonelee/mapper/ITVAddressMapper.xml" />
-		<mapper resource="com/yxt/jhonelee/mapper/ITVVideoMenuMapper.xml"/>
+		<mapper resource="com/yxt/jhonelee/mapper/ITVVideoMenuMapper.xml" />
 	</mappers>
+
+
+
 </configuration>
+
+
 

@@ -32,13 +32,17 @@
 			index=#{mIndex},area_cd=#{mAreaCode},title=#{mTitle},filespec=#{mFileSpec},
 			startpos=#{mStartpos},length=#{mLength},state=#{mState},create_time=#{mCreatetime}
 		</set>
-		where id=#{mId}
+		<where>
+			id=#{mId}
+		</where>
 	</update>
 	<update id="DeleteVideoMenu" parameterType="ItvVideo">
 		update ITV_VIDEOMENU
 		<set>
 			state = #{state}
 		</set>
-		where id = #{mId}
+		<where>
+			id = #{mId}
+		</where>
 	</update>
 </mapper>

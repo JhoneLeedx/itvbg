@@ -1,5 +1,6 @@
 package com.yxt.jhonelee.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.yxt.jhonelee.model.ITVVideoMenu;
 import com.yxt.jhonelee.service.ItvVideoMenuService;
 
+/**
+ * 
+ * @author JhoneLee
+ *   itv视频菜单管理控制器
+ */
 @RequestMapping("/itvmenu")
 @Controller
 public class ItvVideoMenuController {
@@ -26,5 +32,32 @@ public class ItvVideoMenuController {
 		map.addAttribute("shortName", shortname);
 		return "/itvideomenu";
 	}
-	
+	@RequestMapping("/insert")
+	public void insertVideo(ITVVideoMenu menu){
+		int insertFlag = service.AddVideoMenu(menu);
+		if(insertFlag>0){
+			
+		}else{
+			
+		}
+		
+	}
+	@RequestMapping("/update")
+	public void updateVideo(ITVVideoMenu menu){
+		int update = service.UpdateVideoMenu(menu);
+		if(update>0){
+			
+		}else{
+			
+		}
+	}
+	@RequestMapping("/delete")
+	public void deUpdate(@RequestParam(value="id")int mId,@RequestParam(value="state")int state,PrintWriter writer){
+		int deupdate = service.DeleteVideoMenu(state, mId);
+		if(deupdate>0){
+			writer.write("禁用成功");
+		}else{
+			writer.write("禁用失败");
+		}
+	}
 }
