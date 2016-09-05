@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yxt.jhonelee.model.ITVAddress;
 import com.yxt.jhonelee.service.ITVAddressService;
+import com.yxt.jhonelee.util.Config;
 
 @RequestMapping("/address")
 @Controller
@@ -33,41 +34,57 @@ public class ITVAddressController {
 		return "/main";
 	}
 
-	@RequestMapping(value={"/upload"},method=RequestMethod.POST)
-	public String uploadImage(@RequestParam(value = "logo", required = false) MultipartFile logo,HttpServletRequest request,ModelMap map) {
-		
+	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
+	public String uploadImage(@RequestParam(value = "logo", required = false) MultipartFile logo,
+			HttpServletRequest request, ModelMap map, @RequestParam(value = "areaCode") String areaCode,
+			@RequestParam(value = "shortName") String shortName,
+			@RequestParam(value = "addressCodeValue") String addressCodeValue,
+			@RequestParam(value = "wxCode") String urlwxCode) {
+
 		
 		ITVAddress address = new ITVAddress();
-		int up = service.UpdateItvAddress(address);
-		if(up>0){
-			return "/result";
-		}else{
-			return "/error";
-		}
-		
-		
-	/*	String logoname = logo.getOriginalFilename();
-		
-		if(logoname.equals("")){
-			return "/";
-		}else{
-			// process the uploaded file
+		address.setmAreaCode(areaCode);
+		address.setmShortName(shortName);
+		address.setmWXQrcodeImageURL(urlwxCode);
+		address.setmAddressId(addressCodeValue);
+
+		String logoname = logo.getOriginalFilename();
+
+		if (logoname.equals("")) {
+			return "redirect:/main";
+		} else { // process the uploaded
+
 			String savePath = request.getSession().getServletContext().getRealPath("images");
-			File logofile = new File(savePath,"upload/logo");
+			File logofile = new File(savePath, "upload/logo");
 			if (!logofile.exists() && !logofile.isDirectory()) {
-				System.out.println(savePath + "目录不存在，需要创建");
-				// 创建目录
+				System.out.println(savePath + "目录不存在，需要创建"); // 创建目录
 				logofile.mkdir();
 			}
-				 try {
-					FileUtils.writeByteArrayToFile(new File(logofile,logoname), logo.getBytes());
-					String logourl =request.getContextPath()+"/images/upload/logo/" + logoname;
-					map.addAttribute("logourl", logourl);
-				} catch (IOException e) {
-					e.printStackTrace();
-					return "图片上传失败";
-				}
-			return "/result";
-		}*/
+			try {
+
+				FileUtils.writeByteArrayToFile(new File(logofile, logoname), logo.getBytes());
+				String logourl = Config.url+request.getContextPath() + "/images/upload/logo/" + logoname;
+				address.setmLogoIMageURL(logourl);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				return "图片上传失败";
+			}
+			int up = service.UpdateItvAddress(address);
+			if (up > 0) {
+
+				return "redirect:/main";
+			} else {
+
+				return "/error";
+			}
+		}
+
+	}
+	@RequestMapping("/home")
+	public String showHome(){
+		
+		return "home";
+		
 	}
 }

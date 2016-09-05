@@ -25,16 +25,16 @@
 				<th>地区名称</th>
 				<th>地区简称</th>
 				<th>地区ID</th>
-				<th>微信公众号图片</th>
+				<th>微信公众号</th>
 				<th>Logo图片</th>
 				<th>状态(正常/禁用)</th>
 				<th>创建时间</th>
 				<th>信息完整</th>
+				<th>区域视频菜单</th>
 				<th>修改信息</th>
 			</tr>
 		</thead>
 		<tbody>
-
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="itvaddress">
 					<tr class="patient">
@@ -42,8 +42,25 @@
 						<td>${itvaddress.mAreaName }</td>
 						<td>${itvaddress.mShortName }</td>
 						<td>${itvaddress.mAddressId }</td>
-						<td><img src="${itvaddress.mWXQrcodeImageURL }" /></td>
-						<td><img src="${itvaddress.mLogoIMageURL }" /></td>
+						<td>
+						<c:choose>
+						<c:when test="${!empty itvaddress.mWXQrcodeImageURL }">
+						存在
+						</c:when>
+						<c:otherwise>
+						不存在
+						</c:otherwise>
+						</c:choose>
+						 </td>
+						<td><c:choose>
+								<c:when test="${!empty itvaddress.mLogoIMageURL }">
+						存在
+						</c:when>
+						<c:otherwise>
+						不存在
+						</c:otherwise>
+						</c:choose>
+						</td>
 						<td><c:choose>
 								<c:when test="${itvaddress.mState==1 }">正常</c:when>
 								<c:when test="${itvaddress.mState==0 }">禁用</c:when>
@@ -54,6 +71,7 @@
 								<c:when test="${itvaddress.mIsFull==1 }">完整</c:when>
 								<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 							</c:choose></td>
+							<td><a href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressId}&shortname=${itvaddress.mShortName}"><button>视频菜单管理</button></a></td>
 						<td><button
 								onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }')">修改</button></td>
 					</tr>
@@ -66,32 +84,36 @@
 			<form id="modifyForm" method="post" action="<%=path%>/address/upload"
 				enctype="multipart/form-data">
 				
-					地区编码:<input id="area_code" type="text" readonly="readonly"
+					地区编码:<input id="area_code" type="text" readonly="readonly" name="areaCode"
 						class="same noBorder" style="border: none" /><br />
 			
 					地区名称:<input id="area_name" type="text" readonly="readonly"
 						class="same noBorder" style="border: none" /><br />
 				
-					简&nbsp;&nbsp;称:<input class="same" id="short_name" type="text" />
+					简&nbsp;&nbsp;称:<input class="same" id="short_name" type="text" name="shortName"/>
 				<div class="ssq"><br />
 					省:<select class="address same" id="province" onchange="findcity()">
 						<option>请选择</option>
 					</select> 市: <select class="address same" id="city" onchange="findtown()">
 						<option>请选择</option>
-					</select> 区: <select class="address same" id="town" name="addressId">
+					</select> 区: <select class="address same" id="town" name="addressCodeValue">
 						<option>请选择</option>
 					</select>
 				</div>
 				<div class="erCode">
-					选择微信公众号 <select id="wxcode" onchange="chooseWxcode()">
+					选择微信公众号 <select id="wxcode" onchange="chooseWxcode()" name="wxCode">
 						<option>请选择</option>
-						<option value="<%=path%>/images/upload/wx/yizongguan.png">医总管</option>
+						<option value="<%=basePath%>images/upload/wx/yizongguan.png">医总管</option>
 					</select>
 					<img id="wxImg" alt="" src="" style="display: none;">
 				</div>
 				<div class="erCode">
 					选择logo图片：<input id="logo_url" name="logo" type="file"
 						accept=".gif,.png,.jpg" />
+				</div>
+				<div>状态值：
+				<input type="checkbox" value="正常">正常
+				<input type="checkbox" value="禁用">禁用
 				</div>
 				<div class="mbtn">
 					<input id="sub" type="submit" value="提交" /> 
@@ -194,13 +216,32 @@
 							$("#town").html("");
 							for (var i = 0; i < obj.length; i++) {
 								var address = obj[i];
-								str += "<option value='" +address.mId+ "'>"
+								str += "<option value='" +address.mCodeValue+ "'>" //现在用code_value标识，后期会改成id标识
 										+ address.mName + "</option>";
 							}
 							$("#town").append(str);
 						}
 					});
 		}
+
+     function showVideoMenu(mcodevalue) {
+		$.ajax({
+			data : {"codevalue" : mcodevalue},
+			url : "<%=path%>/itvmenu/allMenu",
+			ache:false,
+			dataType:"json",
+			async:true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+				alert("请与管理员联系");
+			},
+			success : function(data) {
+				var json = JSON.stringify(data);
+				var obj = jQuery.parseJSON(json);
+			}
+		});
+	}
+	
 	</script>
 </body>
 </html>

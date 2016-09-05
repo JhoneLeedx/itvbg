@@ -29,11 +29,13 @@
 					<li><img src="images/list.png">数据管理列表</li>
 				</ul>
 				<ul class="doctorList">
-					<li>地区管理
+					<li><a target="right" href="<%=request.getContextPath() %>/address/showAddress">地区管理</a></li>
+					<li><a target="right" href="#">公众号管理</a></li>
+					<li><a target="right" href="#">登录管理</a></li>
 				</ul>
 			</div>
 			<div class="span10 content-right">
-				<iframe  src="<%=request.getContextPath() %>/address/showAddress"></iframe>
+				<iframe name="right" src="<%=request.getContextPath() %>/address/home"></iframe>
 			</div>
 		</div>
 	</div>
