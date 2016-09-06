@@ -22,14 +22,14 @@
 	<insert id="AddVideoMenu" parameterType="ItvVideo">
 		insert into
 		ITV_VIDEOMENU
-		(index,area_cd,title,filespec,startpos,length,state,create_time)
+		(`index`,area_cd,title,filespec,startpos,length,state,create_time)
 		values
 		(#{mIndex},#{mAreaCode},#{mTitle},#{mFileSpec},#{mStartpos},#{mLength},#{mState},#{mCreatetime})
 	</insert>
 	<update id="UpdateVideoMenu" parameterType="ItvVideo">
 		update ITV_VIDEOMENU
 		<set>
-			index=#{mIndex},area_cd=#{mAreaCode},title=#{mTitle},filespec=#{mFileSpec},
+			`index`=#{mIndex},area_cd=#{mAreaCode},title=#{mTitle},filespec=#{mFileSpec},
 			startpos=#{mStartpos},length=#{mLength},state=#{mState},create_time=#{mCreatetime}
 		</set>
 		<where>

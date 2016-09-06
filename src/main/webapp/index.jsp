@@ -35,7 +35,7 @@
 				</ul>
 			</div>
 			<div class="span10 content-right">
-				<iframe name="right" src="<%=request.getContextPath() %>/address/home"></iframe>
+				<iframe  name="right" src="<%=request.getContextPath() %>/address/home"></iframe>
 			</div>
 		</div>
 	</div>

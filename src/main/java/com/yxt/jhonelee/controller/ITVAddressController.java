@@ -39,7 +39,8 @@ public class ITVAddressController {
 			HttpServletRequest request, ModelMap map, @RequestParam(value = "areaCode") String areaCode,
 			@RequestParam(value = "shortName") String shortName,
 			@RequestParam(value = "addressCodeValue") String addressCodeValue,
-			@RequestParam(value = "wxCode") String urlwxCode) {
+			@RequestParam(value = "wxCode") String urlwxCode,
+			@RequestParam(value="flag")int flag) {
 
 		
 		ITVAddress address = new ITVAddress();
@@ -47,6 +48,7 @@ public class ITVAddressController {
 		address.setmShortName(shortName);
 		address.setmWXQrcodeImageURL(urlwxCode);
 		address.setmAddressId(addressCodeValue);
+		address.setmState(flag);
 
 		String logoname = logo.getOriginalFilename();
 

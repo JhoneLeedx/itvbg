@@ -34,13 +34,18 @@
 			<if test="mLogoIMageURL!=null">
 				logo_image=#{mLogoIMageURL},
 			</if>
+			<if test="mState!=null">
+				state = #{mState},
+			</if>
+
 			<choose>
-			<when test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null">
-			is_full = 1
-			</when>
-			<otherwise>
-			is_full = 0
-			</otherwise>
+				<when
+					test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null and mState!=null">
+					is_full = 1
+				</when>
+				<otherwise>
+					is_full = 0
+				</otherwise>
 			</choose>
 		</set>
 		<where>

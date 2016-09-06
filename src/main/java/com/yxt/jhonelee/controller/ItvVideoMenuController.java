@@ -1,11 +1,13 @@
 package com.yxt.jhonelee.controller;
 
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,25 +32,30 @@ public class ItvVideoMenuController {
 		List<ITVVideoMenu> list=service.AllItvVideoMenu(codevalue);
 		map.addAttribute("menuList", list);
 		map.addAttribute("shortName", shortname);
+		map.addAttribute("menu",new ITVVideoMenu());
 		return "/itvideomenu";
 	}
 	@RequestMapping("/insert")
-	public void insertVideo(ITVVideoMenu menu){
+	public void insertVideo(@ModelAttribute ITVVideoMenu menu,PrintWriter writer){
+		
+		Date date = new Date();
+		menu.setmCreatetime(date);
+		menu.setmState(1);
 		int insertFlag = service.AddVideoMenu(menu);
 		if(insertFlag>0){
-			
+			writer.write("添加成功");
 		}else{
-			
+			writer.write("添加失败");
 		}
 		
 	}
 	@RequestMapping("/update")
-	public void updateVideo(ITVVideoMenu menu){
+	public void updateVideo(ITVVideoMenu menu,PrintWriter writer){
 		int update = service.UpdateVideoMenu(menu);
 		if(update>0){
-			
+			writer.write("更新成功");
 		}else{
-			
+			writer.write("更新失败");
 		}
 	}
 	@RequestMapping("/delete")
