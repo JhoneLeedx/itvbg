@@ -73,14 +73,14 @@
 									</c:choose></td>
 								<td class="last-td"><c:choose>
 										<c:when test="${menu.mState==1 }">
-											<a onclick="dele(${menu.mId},0)"
-												class="ico del">禁用</a>
+											<a onclick="dele(${menu.mId},0)" class="ico del">禁用</a>
 										</c:when>
 										<c:otherwise>
-											<a onclick="qiyong(${menu.mId},1)"
-												class="ico del">启用</a>
+											<a onclick="qiyong(${menu.mId},1)" class="ico del">启用</a>
 										</c:otherwise>
-									</c:choose> <a href="#" class="ico edit">编辑</a></td>
+									</c:choose> <a
+									onclick="edit(${menu.mId },${menu.mIndex },'${menu.mTitle }','${menu.mFileSpec }',${menu.mStartpos },${menu.mLength },${menu.mState })"
+									class="ico edit">编辑</a></td>
 							</tr>
 
 						</c:forEach>
@@ -100,7 +100,7 @@
 			<form:form commandName="menu" action="${path }/itvmenu/insert">
 				<fieldset>
 					<legend>添加视频菜单文件</legend>
-					<form:hidden path="mAreaCode" id="areacode" value="510115" />
+					<form:hidden path="mAreaCode" id="areacode" value="${codevalue }" />
 					<br />
 					<div
 						style="width: 360px; margin: 0 auto 45px; border-bottom: 2px solid #e1e1e1;">
@@ -130,6 +130,25 @@
 			</form:form>
 		</div>
 	</div>
+
+	<div id="edit">
+		<form>
+			<label>编号：</label><input type="text" readonly="readonly" id="id"
+				style="border: none; background: #f6f6f6;" /><br /> <label>排序索引：</label><input
+				type="text" id="indexs" /><br /> <label>视频名称：</label><input
+				type="text" id="titles" /><br /> <label>视频链接：</label><input
+				type="text" id="filespecs" /><br /> <label>视频start：</label><input
+				type="text" id="starttime" /><br /> <label>视频长度：</label><input
+				type="text" id="slength" /><br /> <label>视频状态：</label><input
+				type="radio" name="state" id="state1" />启用<input type="radio"
+				name="state" id="state2" />禁用<br />
+		</form>
+
+	</div>
+
+
+
+
 	<script type="text/javascript">
 		$("#operation").hide();
 		$(".last-td").hide();
@@ -154,8 +173,71 @@
 		}
 		
 		function dele(id,state){
-			
+			$.ajax({
+				url:"<%=path%>/itvmenu/deletes",
+				data : {"id":id,"state":state},
+				ache : false,
+				dataType : "text",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+						alert("请与管理员联系");
+					},
+				success : function(data) {
+					alert(data);
+					location.reload();
+				}
+			});
 		}
+		function qiyong(id,state){
+			$.ajax({
+				url:"<%=path%>/itvmenu/deletes",
+				data : {"id":id,"state":state},
+				ache : false,
+				dataType : "text",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+						alert("请与管理员联系");
+					},
+				success : function(data) {
+					alert("启用成功");
+					location.reload();
+				}
+			});
+		}
+		function edit(id,index,title,filespec,startpos,length,state) {
+			
+			document.getElementById("edit").style.display="block";
+			$("#id").val(id);
+			$("#indexs").val(index);
+			$("#titles").val(title);
+			$("#filespecs").val(filespec);
+			$("#starttime").val(startpos);
+			$("#slength").val(length);
+			if(state==1){
+				document.getElementById("state1").checked = true;
+			}else{
+				document.getElementById("state2").checked = true;
+			}
+	<%-- 		
+			$.ajax({
+				url:"<%=path%>/itvmenu/update",
+				data : {"id":id,"state":state},
+				ache : false,
+				dataType : "text",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+						alert("请与管理员联系");
+					},
+				success : function(data) {
+					alert("编辑成功");
+					location.reload();
+				}
+			}); --%>
+		}
+		
 	</script>
 </body>
 </html>

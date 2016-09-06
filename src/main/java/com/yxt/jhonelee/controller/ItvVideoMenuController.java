@@ -33,6 +33,7 @@ public class ItvVideoMenuController {
 		map.addAttribute("menuList", list);
 		map.addAttribute("shortName", shortname);
 		map.addAttribute("menu",new ITVVideoMenu());
+		map.addAttribute("codevalue", codevalue);
 		return "/itvideomenu";
 	}
 	@RequestMapping("/insert")
@@ -51,14 +52,19 @@ public class ItvVideoMenuController {
 	}
 	@RequestMapping("/update")
 	public void updateVideo(ITVVideoMenu menu,PrintWriter writer){
+
+		Date date = new Date();
+		menu.setmCreatetime(date);
+		menu.setmState(1);
 		int update = service.UpdateVideoMenu(menu);
+		
 		if(update>0){
 			writer.write("更新成功");
 		}else{
 			writer.write("更新失败");
 		}
 	}
-	@RequestMapping("/delete")
+	@RequestMapping("/deletes")
 	public void deUpdate(@RequestParam(value="id")int mId,@RequestParam(value="state")int state,PrintWriter writer){
 		int deupdate = service.DeleteVideoMenu(state, mId);
 		if(deupdate>0){
