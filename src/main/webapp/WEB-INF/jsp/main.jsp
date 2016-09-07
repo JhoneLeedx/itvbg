@@ -70,7 +70,7 @@
 								<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 							</c:choose></td>
 						<td><a
-							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressId}&shortname=${itvaddress.mShortName}"><button>视频菜单管理</button></a></td>
+							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressId}&shortname=${itvaddress.mShortName}&pageNow=1"><button>视频菜单管理</button></a></td>
 						<td><button
 								onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }',${itvaddress.mState })">修改</button></td>
 					</tr>

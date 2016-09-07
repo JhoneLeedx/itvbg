@@ -27,7 +27,7 @@
 		<div class="box-head">
 			<button class="button" onclick="add()">添加</button>
 			<button class="button" onclick="mod()">编辑</button>
-			<button class="button" onclick="del()">禁用</button>
+			<button class="button" onclick="del()">禁用（启用）</button>
 			<div class="right">
 				<label>搜索</label> <input type="text" class="field small-field" /> <input
 					type="submit" class="button" value="搜索" />
@@ -91,64 +91,74 @@
 		<!-- Table -->
 	</div>
 	<!-- End Box -->
-	<div
-		style="display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0;">
-		<div class="pop"
-			style="width: 500px; height: 360px; overflow: hidden; border-radius: 8px; box-shadow: 0 0 4px 4px #116A9A; background: #f6f6f6; position: fixed; left: 50%; margin: -180px 0 0 -250px; top: 50%;">
-			<div class="bg"
-				style="height: 36px; background: linear-gradient(#116a9a, skyblue); margin-bottom: 20px;"></div>
-			<form:form commandName="menu" action="${path }/itvmenu/insert">
-				<fieldset>
-					<legend>添加视频菜单文件</legend>
-					<form:hidden path="mAreaCode" id="areacode" value="${codevalue }" />
-					<br />
-					<div
-						style="width: 360px; margin: 0 auto 45px; border-bottom: 2px solid #e1e1e1;">
-						排序的索引
-						<form:input path="mIndex" id="index" />
+						<!-- 分页开始 -->
+					<div align="center" style="margin-top: 20px">
+						<c:choose>
+							<c:when test="${page.totalPageCount==0}">
+							</c:when>
+							<c:otherwise>
+								<div>
+									<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
+										${page.pageNow} 页</font> <a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=1">首页</a>
+									<c:choose>
+										<c:when test="${page.pageNow - 1 > 0}">
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow - 1}">上一页</a>
+										</c:when>
+										<c:when test="${page.pageNow - 1 <= 0}">
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=1">上一页</a>
+										</c:when>
+									</c:choose>
+									<c:choose>
+										<c:when test="${page.totalPageCount==0}">
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow}">下一页</a>
+										</c:when>
+										<c:when test="${page.pageNow + 1 < page.totalPageCount}">
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow + 1}">下一页</a>
+										</c:when>
+										<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.totalPageCount}">下一页</a>
+										</c:when>
+									</c:choose>
+									<c:choose>
+										<c:when test="${page.totalPageCount==0}">
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow}">尾页</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.totalPageCount}">尾页</a>
+										</c:otherwise>
+									</c:choose>
+
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
-					<div
-						style="width: 360px; margin: 0 auto 0; border-bottom: 2px solid #e1e1e1;">
-						视频的名称
-						<form:input path="mTitle" id="title" />
-					</div>
-					<label>视频的url地址 </label>
-					<form:input path="mFileSpec" id="filespec" />
-					<br /> <label>视频的开始时间(选填)</label>
-					<form:input path="mStartpos" id="startpos" />
-					<br /> <label>视频的长度(选填)</label>
-					<form:input path="mLength" id="length" />
-					<br />
-					<div id="buttons">
-						<input type="reset" id="reset" value="重置"
-							style="border: 1px solid black; background: white; border-radius: 8px; width: 76px; height: 30px; margin: 0 auto; display: block;">
-						<input
-							style="border: 1px solid black; background: white; border-radius: 8px; width: 76px; height: 30px; margin: 0 auto; display: block;"
-							type="submit" id="submit" value="提交">
-					</div>
-				</fieldset>
-			</form:form>
-		</div>
-	</div>
 
 	<div id="edit">
 		<form>
 			<label>编号：</label><input type="text" readonly="readonly" id="id"
-				style="border: none; background: #f6f6f6;" /><br /> <label>排序索引：</label><input
-				type="text" id="indexs" /><br /> <label>视频名称：</label><input
-				type="text" id="titles" /><br /> <label>视频链接：</label><input
+				style="border: none; background: #f6f6f6;" /><br /> <label>排序
+				索引：</label><input type="text" id="indexs" /><br /> <label>视频 名称：</label><input
+				type="text" id="titles" /><br /> <label>视频 链接：</label><input
 				type="text" id="filespecs" /><br /> <label>视频start：</label><input
-				type="text" id="starttime" /><br /> <label>视频长度：</label><input
-				type="text" id="slength" /><br /> <label>视频状态：</label><input
+				type="text" id="starttime" /><br /> <label>视频 长度：</label><input
+				type="text" id="slength" /><br /> <label>视频 状态：</label><input
 				type="radio" name="state" id="state1" />启用<input type="radio"
 				name="state" id="state2" />禁用<br />
+			<div>
+				<input type="button" value="提交" onclick="sumbit()" /> <input
+					type="reset" value="取消" onclick="cancle()" />
+			</div>
 		</form>
 
 	</div>
-
-
-
-
 	<script type="text/javascript">
 		$("#operation").hide();
 		$(".last-td").hide();
@@ -206,6 +216,39 @@
 				}
 			});
 		}
+		
+		function cancle(){
+			document.getElementById("edit").style.display="none";
+		}
+		function sumbit(){
+			var id = $("#id").val();
+			var index = $("#indexs").val();
+			var title =	$("#titles").val();
+			var filespec = 	$("#filespecs").val();
+			var starttime =	$("#starttime").val();
+			var length =	$("#slength").val();
+			var state = 0;
+		if(document.getElementById("state1").checked){
+			state = 1;
+		}else{
+			state = 0;
+		}
+			$.ajax({
+				url:"<%=path%>/itvmenu/update",
+				data : {"id":id,"state":state,"index":index,"title":title,"filespec":filespec,"starttime":starttime,"length":length},
+				ache : false,
+				dataType : "text",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+						alert("请与管理员联系");
+					},
+				success : function(data) {
+					alert("编辑成功");
+					location.reload();
+				}
+			}); 
+		}
 		function edit(id,index,title,filespec,startpos,length,state) {
 			
 			document.getElementById("edit").style.display="block";
@@ -220,22 +263,6 @@
 			}else{
 				document.getElementById("state2").checked = true;
 			}
-	<%-- 		
-			$.ajax({
-				url:"<%=path%>/itvmenu/update",
-				data : {"id":id,"state":state},
-				ache : false,
-				dataType : "text",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-						alert("请与管理员联系");
-					},
-				success : function(data) {
-					alert("编辑成功");
-					location.reload();
-				}
-			}); --%>
 		}
 		
 	</script>

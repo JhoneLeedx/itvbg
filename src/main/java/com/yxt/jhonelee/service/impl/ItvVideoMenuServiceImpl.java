@@ -18,8 +18,8 @@ public class ItvVideoMenuServiceImpl  implements ItvVideoMenuService{
 	@Resource
 	private ITVVideoDao dao;
 	
-	public List<ITVVideoMenu> AllItvVideoMenu(String mAreaCode) {
-		return dao.AllItvVideoMenu(mAreaCode);
+	public List<ITVVideoMenu> AllItvVideoMenu(String mAreaCode,int startPos,int pageSize) {
+		return dao.AllItvVideoMenu(mAreaCode,startPos,pageSize);
 	}
 
 	public int AddVideoMenu(ITVVideoMenu menu) {
@@ -32,6 +32,11 @@ public class ItvVideoMenuServiceImpl  implements ItvVideoMenuService{
 
 	public int DeleteVideoMenu(int mState,int mId) {
 		return dao.DeleteVideoMenu(mState,mId);
+	}
+
+	public int getCount(String codevalue) {
+		// TODO Auto-generated method stub
+		return dao.getCount(codevalue);
 	}
 
 }

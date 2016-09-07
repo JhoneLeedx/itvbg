@@ -16,7 +16,11 @@
 	</resultMap>
 
 	<select id="AllItvVideoMenu" resultMap="ItvVideoMap" resultType="ItvVideo">
-		select * from ITV_VIDEOMENU where area_cd = #{mAreaCode}
+		select * from ITV_VIDEOMENU where area_cd = #{mAreaCode} limit #{startPos},#{pageSize}
+	</select>
+	
+	<select id="getCount"  resultType="int">
+		select count(id) from ITV_VIDEOMENU where area_cd = #{mAreaCode}
 	</select>
 
 	<insert id="AddVideoMenu" parameterType="ItvVideo">
@@ -29,7 +33,7 @@
 	<update id="UpdateVideoMenu" parameterType="ItvVideo">
 		update ITV_VIDEOMENU
 		<set>
-			`index`=#{mIndex},area_cd=#{mAreaCode},title=#{mTitle},filespec=#{mFileSpec},
+			`index`=#{mIndex},title=#{mTitle},filespec=#{mFileSpec},
 			startpos=#{mStartpos},length=#{mLength},state=#{mState},create_time=#{mCreatetime}
 		</set>
 		<where>
