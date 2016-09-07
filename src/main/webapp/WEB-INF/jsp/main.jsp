@@ -7,7 +7,7 @@
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="from" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="from"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,9 +19,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table class ="table">
+	<table class="table">
 		<thead>
-			<tr >
+			<tr>
 				<th>地区编码</th>
 				<th>地区名称</th>
 				<th>地区简称</th>
@@ -38,7 +38,7 @@
 		<tbody>
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="itvaddress">
-					<tr >
+					<tr>
 						<td>${itvaddress.mAreaCode }</td>
 						<td>${itvaddress.mAreaName }</td>
 						<td>${itvaddress.mShortName }</td>
@@ -70,7 +70,8 @@
 								<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 							</c:choose></td>
 						<td><a
-							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1"><button class="button">视频菜单管理</button></a></td>
+							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1"><button
+									class="button">视频菜单管理</button></a></td>
 						<td><button class="button"
 								onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }',${itvaddress.mState })">修改</button></td>
 					</tr>
@@ -82,38 +83,42 @@
 		<div class="mBox">
 			<form id="modifyForm" method="post" action="<%=path%>/address/upload"
 				enctype="multipart/form-data">
-
-				地区编码:<input id="area_code" type="text" readonly="readonly"
-					name="areaCode" class="same noBorder" style="border: none" /><br />
-
-				地区名称:<input id="area_name" type="text" readonly="readonly"
-					class="same noBorder" style="border: none" /><br />
-
-				简&nbsp;&nbsp;称:<input class="same" id="short_name" type="text"
-					name="shortName" />
-				<div class="ssq">
-					<br /> 省:<select class="address same" id="province"
+               <label style="font-size: 22px;font-style: oblique;">编辑</label>
+				<div style="margin-left: 15px;margin-top: 20px">
+					地区编码:<input id="area_code" type="text" readonly="readonly" style="margin-left: 15px"
+						name="areaCode" class="same noBorder" style="border: none" />
+				</div>
+				<div style="margin-left: 15px">
+					地区名称:<input id="area_name" type="text" readonly="readonly" style="margin-left: 15px"
+						class="same noBorder" style="border: none" />
+				</div>
+				<div style="margin-left: 15px">
+					简&nbsp;&nbsp;称:<input class="same" id="short_name" type="text" style="margin-left: 15px"
+						name="shortName" />
+				</div>
+				<div class="ssq" style="margin-left: 15px">
+					<br /> 省:<select class="address same" id="province" style="margin-left: 15px;;margin-right: 15px"
 						onchange="findcity()">
 						<option>请选择</option>
-					</select> 市: <select class="address same" id="city" onchange="findtown()">
+					</select> 市: <select class="address same" id="city" onchange="findtown()" style="margin-left: 15px;margin-right: 15px">
 						<option>请选择</option>
-					</select> 区: <select class="address same" id="town" name="addressCodeValue">
+					</select> 区: <select class="address same" id="town" name="addressCodeValue" style="margin-left: 15px;margin-right: 15px">
 						<option>请选择</option>
 					</select>
 				</div>
-				<div class="erCode">
-					选择微信公众号 <select id="wxcode" onchange="chooseWxcode()" name="wxCode">
+				<div class="erCode" style="margin-left: 15px">
+					选择微信公众号 <select id="wxcode" onchange="chooseWxcode()" name="wxCode" style="margin-left: 15px">
 						<option>请选择</option>
 						<option value="<%=basePath%>images/upload/wx/yizongguan.png">医总管</option>
 					</select> <img id="wxImg" alt="" src="" style="display: none;">
 				</div>
-				<div class="erCode">
+				<div class="erCode" style="margin-left: 15px">
 					选择logo图片：<input id="logo_url" name="logo" type="file"
-						accept=".gif,.png,.jpg" />
+						accept=".gif,.png,.jpg" style="margin-left: 15px" />
 				</div>
-				<div>
-					状态值： <input name="flag" type="radio" value="1" id="flag1">正常 <input
-						name="flag" type="radio" value="0" id="flag0">禁用
+				<div style="margin-left: 15px">
+					状态值： <input name="flag" type="radio" value="1" id="flag1">正常
+					<input name="flag" type="radio" value="0" id="flag0">禁用
 				</div>
 				<div class="mbtn">
 					<input id="sub" type="submit" value="提交" /> <input id="cancel"

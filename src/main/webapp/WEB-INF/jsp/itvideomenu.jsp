@@ -182,7 +182,7 @@
 			<input type="text" id="codevalue" value="${codevalue }"
 				style="display: none;" />
 			<div style="padding-left: 120px; margin-top: 30px">
-				<label>排序 索引：</label><input type="text" id="index" />*<br/>
+				<label>排序 索引：</label><input type="text" id="index" />*<br />
 			</div>
 			<div style="margin-left: 120px; margin-top: 5px">
 				<label>视频 名称：</label><input type="text" id="title" />*<br />
@@ -265,9 +265,11 @@
 			});
 		}
 		
+		//关闭编辑弹窗
 		function cancle(){
 			document.getElementById("edit").style.display="none";
 		}
+		//提交编辑后的结果
 		function sumbit(){
 			var id = $("#id").val();
 			var index = $("#indexs").val();
@@ -297,6 +299,7 @@
 				}
 			}); 
 		}
+		//显示编辑框数据
 		function edit(id,index,title,filespec,startpos,length,state) {
 			
 			document.getElementById("edit").style.display="block";
@@ -312,13 +315,15 @@
 				document.getElementById("state2").checked = true;
 			}
 		}
-		
+		//显示添加弹窗
 		function add(){
 			document.getElementById("add").style.display="block";
 		}
+		//关闭添加弹窗
 		function cancleAdd(){
 			document.getElementById("add").style.display="none";
 		}
+		//提交添加数据
 		function sumbitAdd(){
 			var codevalue = $("#codevalue").val();
 			var index = $("#index").val();
