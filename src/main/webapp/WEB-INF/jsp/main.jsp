@@ -19,9 +19,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table>
+	<table class ="table">
 		<thead>
-			<tr class="tableHead">
+			<tr >
 				<th>地区编码</th>
 				<th>地区名称</th>
 				<th>地区简称</th>
@@ -38,7 +38,7 @@
 		<tbody>
 			<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="itvaddress">
-					<tr class="patient">
+					<tr >
 						<td>${itvaddress.mAreaCode }</td>
 						<td>${itvaddress.mAreaName }</td>
 						<td>${itvaddress.mShortName }</td>
@@ -70,8 +70,8 @@
 								<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 							</c:choose></td>
 						<td><a
-							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressId}&shortname=${itvaddress.mShortName}&pageNow=1"><button>视频菜单管理</button></a></td>
-						<td><button
+							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1"><button class="button">视频菜单管理</button></a></td>
+						<td><button class="button"
 								onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }',${itvaddress.mState })">修改</button></td>
 					</tr>
 				</c:forEach>
@@ -222,7 +222,7 @@
 							$("#town").html("");
 							for (var i = 0; i < obj.length; i++) {
 								var address = obj[i];
-								str += "<option value='" +address.mCodeValue+ "'>" //现在用code_value标识，后期会改成id标识
+								str += "<option value='" +address.mId+ "@"+address.mCodeValue+"'>" //现在用code_value标识，后期会改成id标识
 										+ address.mName + "</option>";
 							}
 							$("#town").append(str);

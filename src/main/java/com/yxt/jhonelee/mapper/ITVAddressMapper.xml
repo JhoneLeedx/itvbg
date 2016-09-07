@@ -9,6 +9,7 @@
 		<result property="mAreaName" column="area_name" />
 		<result property="mShortName" column="short_name" />
 		<result property="mAddressId" column="address_id" />
+		<result property="mAddressCode" column="address_code"/>
 		<result property="mWXQrcodeImageURL" column="wx_qrcode_image" />
 		<result property="mLogoIMageURL" column="logo_image" />
 		<result property="mIsFull" column="is_full" />
@@ -25,9 +26,13 @@
 			<if test="mShortName!=null">
 				short_name=#{mShortName},
 			</if>
-			<if test="mAddressId!=0">
+			<if test="mAddressId!=null">
 				address_id=#{mAddressId},
 			</if>
+			<if test="mAddressCode!=null">
+			  address_code = #{mAddressCode},
+			</if>
+			
 			<if test="mWXQrcodeImageURL!=null">
 				wx_qrcode_image=#{mWXQrcodeImageURL},
 			</if>
@@ -40,7 +45,7 @@
 
 			<choose>
 				<when
-					test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null and mState!=null">
+					test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null and mState!=null and mAddressCode!=null">
 					is_full = 1
 				</when>
 				<otherwise>

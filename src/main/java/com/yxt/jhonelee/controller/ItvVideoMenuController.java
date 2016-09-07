@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -47,11 +46,20 @@ public class ItvVideoMenuController {
 	}
 
 	@RequestMapping("/insert")
-	public void insertVideo(@ModelAttribute ITVVideoMenu menu, PrintWriter writer) {
-
+	public void insertVideo( @RequestParam(value = "state") int state,@RequestParam(value = "codevalue") String codevalue,
+			@RequestParam(value = "title") String title, @RequestParam(value = "filespec") String filespec,
+			@RequestParam(value = "starttime") int time, @RequestParam(value = "length") int length,
+			@RequestParam(value="index")int mIndex, PrintWriter writer) {
+		ITVVideoMenu menu = new ITVVideoMenu();
 		Date date = new Date();
 		menu.setmCreatetime(date);
-		menu.setmState(1);
+		menu.setmState(state);
+		menu.setmFileSpec(filespec);
+		menu.setmIndex(mIndex);
+		menu.setmTitle(title);
+		menu.setmLength(length);
+		menu.setmStartpos(time);
+		menu.setmAreaCode(codevalue);
 		int insertFlag = service.AddVideoMenu(menu);
 		if (insertFlag > 0) {
 			writer.write("添加成功");

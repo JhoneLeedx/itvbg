@@ -13,9 +13,7 @@ public class ITVAddress {
 	private String mAreaName;//地区全称
 	private String mShortName;//地区简称
 	private String mAddressId;//地区id
-	
-	
-	
+	private String mAddressCode;//地区code
 	private String mWXQrcodeImageURL;//相关地区微信二维码图片的url地址
 	private String mLogoIMageURL;//当前地区logo图片的url地址
 	private int mIsFull;//信息是否完整
@@ -50,6 +48,12 @@ public class ITVAddress {
 	}
 	public void setmAddressId(String mAddressId) {
 		this.mAddressId = mAddressId;
+	}
+	public String getmAddressCode() {
+		return mAddressCode;
+	}
+	public void setmAddressCode(String mAddressCode) {
+		this.mAddressCode = mAddressCode;
 	}
 	public String getmWXQrcodeImageURL() {
 		return mWXQrcodeImageURL;

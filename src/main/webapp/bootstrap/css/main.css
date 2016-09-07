@@ -61,7 +61,7 @@
 
 .doctor {
 	height: 50px;
-	background: #44a9db;
+	background: #ccc;
 	font-weight: bold;
 	color: #f1f1f1;
 }
@@ -79,7 +79,7 @@ li {
 }
 
 li:hover {
-	background: #4aced5;
+	background: #cdd1b6;
 }
 
 a {
@@ -87,7 +87,7 @@ a {
 }
 
 a:focus {
-	background: #44a9db;
+	background: #cdd1b6;
 	color: #f1f1f1;
 	text-decoration: none;
 }
@@ -139,25 +139,53 @@ table {
 	font-size: 18px;
 
 }
-th{
-	font-weight: bold;
-	text-align: center;
-	line-height: 36px; cellspacing ='0px';
-	border-collapse: collapse;
-	border: 1px solid #ddd;
+
+.button {
+	background: #eee url(../images/button.gif) repeat-x 0 0;
+	border: solid 1px #b1a874;
+	color: #7f7f7f;
+	font-size: 14px;
+	padding: 2px 6px 2px 6px;
+	cursor: pointer;
+	line-height: 14px !important;
 }
-td {
-	color: #4d4d4d;
-	font-weight: bold;
-	text-align: center;
-	line-height: 36px; cellspacing ='0px';
-	border-collapse: collapse;
-	border: 1px solid #ddd;
+
+.button:hover {
+	color: #333;
+	border-color: #857b42;
 }
-button {
-	border-radius: 4px;
-}
+
 .patient:hover {
 	background: skyblue;
 	color: #f1f1f1;
+}
+.table {
+	
+}
+
+.table th {
+	background: #fffdfa url(../images/th.gif) repeat-x 0 0;
+	color: #818181;
+	text-align: center;
+	padding: 16px 10px;
+	border-bottom: solid 1px #d2d1cb;
+}
+
+.table td {
+	background: #fbfcfc;
+	border-bottom: solid 1px #e0e0e0;
+	padding: 15px 10px;
+	text-align: center;
+}
+
+.table tr.odd td {
+	background: #f8f8f8;
+}
+
+.table tr:hover td {
+	background: #fff9e1;
+}
+
+.table a.ico {
+	
 }

@@ -47,7 +47,9 @@ public class ITVAddressController {
 		address.setmAreaCode(areaCode);
 		address.setmShortName(shortName);
 		address.setmWXQrcodeImageURL(urlwxCode);
-		address.setmAddressId(addressCodeValue);
+		String[]a = addressCodeValue.split("@");
+		address.setmAddressId(a[0]);
+		address.setmAddressCode(a[1]);
 		address.setmState(flag);
 
 		String logoname = logo.getOriginalFilename();
@@ -65,7 +67,7 @@ public class ITVAddressController {
 			try {
 
 				FileUtils.writeByteArrayToFile(new File(logofile, logoname), logo.getBytes());
-				String logourl = Config.url+request.getContextPath() + "/images/upload/logo/" + logoname;
+				String logourl = Config.url+":"+request.getServerPort()+request.getContextPath() + "/images/upload/logo/" + logoname;
 				address.setmLogoIMageURL(logourl);
 
 			} catch (IOException e) {
@@ -81,7 +83,6 @@ public class ITVAddressController {
 				return "/error";
 			}
 		}
-
 	}
 	@RequestMapping("/home")
 	public String showHome(){
