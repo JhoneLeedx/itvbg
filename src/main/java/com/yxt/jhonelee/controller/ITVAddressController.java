@@ -48,8 +48,10 @@ public class ITVAddressController {
 		address.setmShortName(shortName);
 		address.setmWXQrcodeImageURL(urlwxCode);
 		String[]a = addressCodeValue.split("@");
-		address.setmAddressId(a[0]);
-		address.setmAddressCode(a[1]);
+		if(a.length>=2){
+			address.setmAddressId(a[0]);
+			address.setmAddressCode(a[1]);
+		}
 		address.setmState(flag);
 
 		String logoname = logo.getOriginalFilename();
@@ -77,7 +79,7 @@ public class ITVAddressController {
 			int up = service.UpdateItvAddress(address);
 			if (up > 0) {
 
-				return "redirect:/main";
+				return "/home";
 			} else {
 
 				return "/error";

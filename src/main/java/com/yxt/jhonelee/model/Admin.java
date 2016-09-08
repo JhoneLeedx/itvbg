@@ -11,6 +11,7 @@ public class Admin {
 	private String mAdminPass;
 	private int mLevel;
 	private String mPid;
+	private int mType;
 	
 	
 	public int getmId() {
@@ -42,6 +43,12 @@ public class Admin {
 	}
 	public void setmPid(String mPid) {
 		this.mPid = mPid;
+	}
+	public int getmType() {
+		return mType;
+	}
+	public void setmType(int mType) {
+		this.mType = mType;
 	}
 
 

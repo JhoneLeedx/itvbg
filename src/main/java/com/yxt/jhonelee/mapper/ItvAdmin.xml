@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.ItvAdminDao">
+
+	<resultMap type="ItvAdmin" id="ItvAdminMap">
+		<id property="mId" column="id" />
+		<result property="mName" column="name" />
+		<result property="mPass" column="pass" />
+		<result property="mLevel" column="level" />
+		<result property="mType" column="sys_type" />
+	</resultMap>
+
+	<select id="AllItvAdmin" resultMap="ItvAdminMap">
+		select * from ITV_ADMIN
+	</select>
+	<insert id="AddAdmin" parameterType="ItvAdmin">
+		insert into ITV_ADMIN (name,pass,level,sys_type) values(#{mName},#{mPass},#{mLevel},#{mType})
+	</insert>
+	<update id="updateAdmin">
+	
+	</update>
+</mapper>

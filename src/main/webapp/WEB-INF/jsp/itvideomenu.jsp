@@ -26,12 +26,6 @@
 		<!-- Box Head -->
 		<div class="box-head">
 			<button class="button" onclick="add()">添加</button>
-			<button class="button" onclick="mod()">编辑</button>
-			<button class="button" onclick="del()">禁用（启用）</button>
-			<div class="right">
-				<label>搜索</label> <input type="text" class="field small-field" /> <input
-					type="submit" class="button" value="搜索" />
-			</div>
 		</div>
 		<!-- End Box Head -->
 
@@ -48,7 +42,7 @@
 						<th>视频长度</th>
 						<th>创建(更新)时间</th>
 						<th>状态</th>
-						<th class="ac" id="operation">操作</th>
+						<th class="ac">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -71,7 +65,7 @@
 										禁用
 										</c:otherwise>
 									</c:choose></td>
-								<td class="last-td"><c:choose>
+								<td ><c:choose>
 										<c:when test="${menu.mState==1 }">
 											<a onclick="dele(${menu.mId},0)" class="ico del">禁用</a>
 										</c:when>
@@ -208,28 +202,6 @@
 	</div>
 	<script type="text/javascript">
 	
-		$("#operation").hide();
-		$(".last-td").hide();
-		function mod() {
-			$("#operation").show().animate({
-				"width" : "100"
-			}, 1000);
-			$(".last-td").show();
-			$(".edit").show();
-			$(".del").hide();
-			var tr = document.getElementsByTagName("tr");
-		}
-		function del() {
-			$("#operation").show().animate({
-				"width" : "100"
-			}, 1000);
-			$(".last-td").show();
-			$(".edit").hide();
-			$(".del").show();
-			var tr = document.getElementsByTagName("tr");
-
-		}
-		
 		function dele(id,state){
 			$.ajax({
 				url:"<%=path%>/itvmenu/deletes",
