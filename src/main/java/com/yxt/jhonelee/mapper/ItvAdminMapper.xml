@@ -15,9 +15,15 @@
 		select * from ITV_ADMIN
 	</select>
 	<insert id="AddAdmin" parameterType="ItvAdmin">
-		insert into ITV_ADMIN (name,pass,level,sys_type) values(#{mName},#{mPass},#{mLevel},#{mType})
+		insert into ITV_ADMIN
+		(name,pass,level,sys_type)
+		values(#{mName},#{mPass},#{mLevel},#{mType})
 	</insert>
 	<update id="updateAdmin">
-	
+
 	</update>
+	<select id="LoginAdmin" resultMap="ItvAdminMap" resultType="ItvAdmin">
+		select * from ITV_ADMIN where name = #{mAdminName} and pass = #{mPass}
+		limit 1
+	</select>
 </mapper>

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%
@@ -16,6 +17,8 @@
 <link rel="stylesheet" href="<%=path%>/bootstrap/css/modify.css" />
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -32,7 +35,7 @@
 				<th>创建时间</th>
 				<th>信息完整</th>
 				<th>区域视频菜单</th>
-				<th>修改信息</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,7 +45,14 @@
 						<td>${itvaddress.mAreaCode }</td>
 						<td>${itvaddress.mAreaName }</td>
 						<td>${itvaddress.mShortName }</td>
-						<td>${itvaddress.mAddressId }</td>
+						<td><c:choose>
+								<c:when test="${itvaddress.mAddressId>0 }">
+						${itvaddress.mAddressId }
+						</c:when>
+								<c:otherwise>
+						不存在
+						</c:otherwise>
+							</c:choose></td>
 						<td><c:choose>
 								<c:when test="${!empty itvaddress.mWXQrcodeImageURL }">
 						存在
@@ -69,11 +79,15 @@
 								<c:when test="${itvaddress.mIsFull==1 }">完整</c:when>
 								<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 							</c:choose></td>
-						<td><a
+						<td>
+						<c:if test="${itvaddress.mAddressCode!=''}">
+						<a
 							href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1"><button
-									class="button">视频菜单管理</button></a></td>
+									class="button">视频菜单管理</button></a>
+						</c:if>
+						</td>
 						<td><button class="button"
-								onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }',${itvaddress.mState })">修改</button></td>
+								onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }',${itvaddress.mState },${itvaddress.mAddressId })">编辑</button></td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -81,35 +95,40 @@
 	</table>
 	<div id="modify" style="display: none">
 		<div class="mBox">
-			<form id="modifyForm" method="post" action="<%=path%>/address/upload"
-				enctype="multipart/form-data">
-               <label style="font-size: 22px;font-style: oblique;">编辑</label>
-				<div style="margin-left: 15px;margin-top: 20px">
-					地区编码:<input id="area_code" type="text" readonly="readonly" style="margin-left: 15px"
-						name="areaCode" class="same noBorder" style="border: none" />
+			<form id="modifyForm" enctype="multipart/form-data">
+				<label style="font-size: 22px; font-style: oblique;">编辑</label>
+				<div style="margin-left: 15px; margin-top: 20px">
+					地区编码:<input id="area_code" type="text" readonly="readonly"
+						style="margin-left: 15px" name="areaCode" class="same noBorder"
+						style="border: none" />
 				</div>
 				<div style="margin-left: 15px">
-					地区名称:<input id="area_name" type="text" readonly="readonly" style="margin-left: 15px"
-						class="same noBorder" style="border: none" />
+					地区名称:<input id="area_name" type="text" readonly="readonly"
+						style="margin-left: 15px" class="same noBorder"
+						style="border: none" />
 				</div>
 				<div style="margin-left: 15px">
-					简&nbsp;&nbsp;称:<input class="same" id="short_name" type="text" style="margin-left: 15px"
-						name="shortName" />
+					简&nbsp;&nbsp;称:<input class="same" id="short_name" type="text"
+						style="margin-left: 15px" name="shortName" />
 				</div>
 				<div class="ssq" style="margin-left: 15px">
-					<br /> 省:<select class="address same" id="province" style="margin-left: 15px;;margin-right: 15px"
+					<br /> 省:<select class="address same" id="province"
+						style="margin-left: 15px;; margin-right: 15px"
 						onchange="findcity()">
 						<option>请选择</option>
-					</select> 市: <select class="address same" id="city" onchange="findtown()" style="margin-left: 15px;margin-right: 15px">
+					</select> 市: <select class="address same" id="city" onchange="findtown()"
+						style="margin-left: 15px; margin-right: 15px">
 						<option>请选择</option>
-					</select> 区: <select class="address same" id="town" name="addressCodeValue" style="margin-left: 15px;margin-right: 15px">
+					</select> 区: <select class="address same" id="town" name="addressCodeValue"
+						style="margin-left: 15px; margin-right: 15px">
 						<option>请选择</option>
 					</select>
 				</div>
 				<div class="erCode" style="margin-left: 15px">
-					选择微信公众号 <select id="wxcode" onchange="chooseWxcode()" name="wxCode" style="margin-left: 15px">
+					选择微信公众号 <select id="wxcode" onchange="chooseWxcode()" name="wxCode"
+						style="margin-left: 15px">
 						<option>请选择</option>
-						<option value="<%=basePath%>images/upload/wx/yzg.jpg">医总管</option>
+						<option value="http://123.56.23.62:8015/itvbg/images/upload/wx/yzg.jpg">医总管</option>
 					</select> <img id="wxImg" alt="" src="" style="display: none;">
 				</div>
 				<div class="erCode" style="margin-left: 15px">
@@ -121,21 +140,84 @@
 					<input name="flag" type="radio" value="0" id="flag0">禁用
 				</div>
 				<div class="mbtn">
-					<input id="sub" type="submit" value="提交" /> <input id="cancel"
+					<input id="sub" type="button" value="提交" onclick="upload()"/> <input id="cancel"
 						type="reset" value="取消" onclick="canCel()" />
 				</div>
 			</form>
 		</div>
 	</div>
 	<script type="text/javascript">
+	
+	
+	function upload(){
+		   $("#modifyForm").ajaxSubmit({
+			   url:"<%=path%>/address/upload",
+			   type: 'post',
+			   dataType : "text",
+			   contentType: "application/x-www-form-urlencoded; charset=utf-8",  
+				error : function() {
+					alert("请与管理员联系");
+				},
+	           success: function(data) {  
+	        	   alert(data);
+	        	   canCel();
+	        	   location.reload();
+	              }
+			   
+		   });
+		
+	}
+	
+	
+	function parentAddress(mId){
+		$.ajax({
+			data : {"id":mId},
+		    url:"<%=path%>/addresstll/parentAddress",
+			ache : false,
+			dataType : "json",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+					alert("请与管理员联系");
+				},
+			success : function(data) {
+					var json = JSON.stringify(data);
+					var obj = jQuery.parseJSON(json);
+					var str = "";
+					$("#province").html("");
+					var provinceAddress = obj[0];
+					var cityAddress = obj[1];
+					var townAddress = obj[2];
+					str="<option>请选择</option>";
+						str = str+"<option selected='selected' value='" +provinceAddress.mCodeValue+ "'>"+provinceAddress.mName+"</option>";
+						
+					$("#province").append(str);
+					str="";
+					str = "<option value='" +cityAddress.mCodeValue+ "'>"+cityAddress.mName+"</option>";
+					$("#city").html("");
+					$("#city").append(str);
+					str="";
+					str = "<option value='"+townAddress.mId+ "@"+townAddress.mCodeValue+"'>"+townAddress.mName+"</option>";
+					$("#town").html("");
+					$("#town").append(str);
+				}
+			});
+	}
+	
+	
+	
 	function canCel(){
 		document.getElementById("modify").style.display="none";
 		document.getElementById("wxImg").style.display= "block"; 
 	}
-	function showModify(code,name,shorname,state){
+	function showModify(code,name,shorname,state,id){
 		console.log(state);
 		document.getElementById("modify").style.display="block";
-		findprovince();
+		if(id>0){
+			parentAddress(id);
+		}else{
+			findprovince();
+		}
 		$("#area_code").val(code);
 		$("#area_name").val(name);
 		$("#short_name").val(shorname);
@@ -149,8 +231,14 @@
 	function chooseWxcode(){
 		var url = document.getElementById("wxcode").value;
 		console.log(url);
-	 	document.getElementById("wxImg").src =url;
-		document.getElementById("wxImg").style.display= "block"; 
+		if(url!="请选择"){
+		 	document.getElementById("wxImg").src =url;
+			document.getElementById("wxImg").style.display= "block"; 
+		}else{
+			document.getElementById("wxImg").src ="";
+			document.getElementById("wxImg").style.display= "block"; 
+		}
+
 	}
 	function findprovince() {
 		var country = $("#country").val();
@@ -252,6 +340,16 @@
 						}
 					});
 		}
+     
+     function uploadFailed(msg){
+    	 alert(msg);
+     }
+     function uploadSucced(msg){
+    	 alert(msg);
+     }
 	</script>
 </body>
+
+
+
 </html>

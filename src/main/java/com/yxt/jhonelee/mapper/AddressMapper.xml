@@ -13,7 +13,14 @@
 
 
 	<select id="SelectAddress" resultType="Address" resultMap="AddressMap">
-		select id,name,code_value,pid from address where pid =#{mCodeValue};
+		select id,name,code_value,pid from address where pid =#{mCodeValue}
 	</select>
 
+	<select id="SelectParentAddress" resultType="Address" resultMap="AddressMap">
+		SELECT id,name,code_value,pid FROM address WHERE code_value =(SELECT code_value FROM
+		address WHERE FIND_IN_SET(code_value,getAddressParentList (#{mId}))) limit 1
+	</select>
+     <select id="SelectOneAddress" resultType="Address" resultMap="AddressMap">
+		 select id,name,code_value,pid from address where id =#{mId} limit 1
+	</select>
 </mapper>

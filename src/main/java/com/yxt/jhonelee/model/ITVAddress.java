@@ -1,18 +1,20 @@
 package com.yxt.jhonelee.model;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * 
  * @author JhoneLee
  * itv所在的地区
  */
-public class ITVAddress {
+public class ITVAddress implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int mId;//主键id
 	private String mAreaCode; //地区编码
 	private String mAreaName;//地区全称
 	private String mShortName;//地区简称
-	private String mAddressId;//地区id
+	private int mAddressId;//地区id
 	private String mAddressCode;//地区code
 	private String mWXQrcodeImageURL;//相关地区微信二维码图片的url地址
 	private String mLogoIMageURL;//当前地区logo图片的url地址
@@ -43,10 +45,10 @@ public class ITVAddress {
 	public void setmShortName(String mShortName) {
 		this.mShortName = mShortName;
 	}
-	public String getmAddressId() {
+	public int getmAddressId() {
 		return mAddressId;
 	}
-	public void setmAddressId(String mAddressId) {
+	public void setmAddressId(int mAddressId) {
 		this.mAddressId = mAddressId;
 	}
 	public String getmAddressCode() {

@@ -2,6 +2,7 @@ package com.yxt.jhonelee.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,31 +36,30 @@ public class ITVAddressController {
 	}
 
 	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
-	public String uploadImage(@RequestParam(value = "logo", required = false) MultipartFile logo,
+	public void uploadImage(@RequestParam(value = "logo", required = false) MultipartFile logo,
 			HttpServletRequest request, ModelMap map, @RequestParam(value = "areaCode") String areaCode,
 			@RequestParam(value = "shortName") String shortName,
 			@RequestParam(value = "addressCodeValue") String addressCodeValue,
-			@RequestParam(value = "wxCode") String urlwxCode,
-			@RequestParam(value="flag")int flag) {
+			@RequestParam(value = "wxCode") String urlwxCode, @RequestParam(value = "flag") int flag,
+			PrintWriter writer) {
 
-		
+		String errorMessage = "";
+
 		ITVAddress address = new ITVAddress();
 		address.setmAreaCode(areaCode);
 		address.setmShortName(shortName);
 		address.setmWXQrcodeImageURL(urlwxCode);
-		String[]a = addressCodeValue.split("@");
-		if(a.length>=2){
-			address.setmAddressId(a[0]);
+		String[] a = addressCodeValue.split("@");
+		if (a.length >= 2) {
+			address.setmAddressId(Integer.parseInt(a[0]));
 			address.setmAddressCode(a[1]);
 		}
 		address.setmState(flag);
 
-		String logoname = logo.getOriginalFilename();
-
-		if (logoname.equals("")) {
-			return "redirect:/main";
-		} else { // process the uploaded
-
+		if (logo == null) {
+			errorMessage = "当前没有上传图片";
+		} else {
+			String logoname = logo.getOriginalFilename();
 			String savePath = request.getSession().getServletContext().getRealPath("images");
 			File logofile = new File(savePath, "upload/logo");
 			if (!logofile.exists() && !logofile.isDirectory()) {
@@ -69,27 +69,26 @@ public class ITVAddressController {
 			try {
 
 				FileUtils.writeByteArrayToFile(new File(logofile, logoname), logo.getBytes());
-				String logourl = Config.url+":"+request.getServerPort()+request.getContextPath() + "/images/upload/logo/" + logoname;
+				String logourl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
+						+ "/images/upload/logo/" + logoname;
 				address.setmLogoIMageURL(logourl);
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				return "图片上传失败";
-			}
-			int up = service.UpdateItvAddress(address);
-			if (up > 0) {
-
-				return "/home";
-			} else {
-
-				return "/error";
+				errorMessage = "图片上传失败";
 			}
 		}
+		int up = service.UpdateItvAddress(address);
+		if (up > 0) {
+			errorMessage = "编辑成功";
+		} else {
+			errorMessage = "编辑失败,请联系管理员";
+		}
+		writer.write(errorMessage);
 	}
+
 	@RequestMapping("/home")
-	public String showHome(){
-		
+	public String showHome() {
 		return "home";
-		
 	}
 }

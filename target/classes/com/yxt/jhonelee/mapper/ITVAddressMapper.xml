@@ -9,13 +9,15 @@
 		<result property="mAreaName" column="area_name" />
 		<result property="mShortName" column="short_name" />
 		<result property="mAddressId" column="address_id" />
-		<result property="mAddressCode" column="address_code"/>
+		<result property="mAddressCode" column="address_code" />
 		<result property="mWXQrcodeImageURL" column="wx_qrcode_image" />
 		<result property="mLogoIMageURL" column="logo_image" />
 		<result property="mIsFull" column="is_full" />
 		<result property="mState" column="state" />
 		<result property="mCreateTime" column="create_time" />
 	</resultMap>
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 
 	<select id="AllITVAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
 		select * from ITV_ADDRESS;
@@ -30,10 +32,10 @@
 				address_id=#{mAddressId},
 			</if>
 			<if test="mAddressCode!=null">
-			  address_code = #{mAddressCode},
+				address_code = #{mAddressCode},
 			</if>
-			
-			<if test="mWXQrcodeImageURL!=null">
+
+			<if test="mWXQrcodeImageURL!=''">
 				wx_qrcode_image=#{mWXQrcodeImageURL},
 			</if>
 			<if test="mLogoIMageURL!=null">

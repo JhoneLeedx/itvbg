@@ -22,5 +22,11 @@ public class AddressServiceImpl implements AddressService {
 	public List<Address> SelectAddress(String mCodeValue) {
 		return dao.SelectAddress(mCodeValue);
 	}
+	public Address SelectParentAddress(int mId) {
+		return dao.SelectParentAddress(mId);
+	}
+	public Address SelectOneAddress(int mId) {
+		return dao.SelectOneAddress(mId);
+	}
 
 }
