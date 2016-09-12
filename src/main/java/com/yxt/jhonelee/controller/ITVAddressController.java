@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yxt.jhonelee.model.ITVAddress;
 import com.yxt.jhonelee.service.ITVAddressService;
 import com.yxt.jhonelee.util.Config;
+import com.yxt.jhonelee.util.Page;
 
 @RequestMapping("/address")
 @Controller
@@ -30,6 +31,14 @@ public class ITVAddressController {
 	@RequestMapping("/showAddress")
 	public String getAddress(HttpServletRequest request) {
 
+		Page page = null;
+		String pageNow = request.getParameter("pageNow");
+		int totalcount = service.getCount();
+		if (pageNow != null) {
+			page = new Page(totalcount, Integer.parseInt(pageNow));
+		} else {
+			page = new Page(totalcount, 1);
+		}
 		List<ITVAddress> list = service.AllITVAddress();
 		request.setAttribute("list", list);
 		return "/main";

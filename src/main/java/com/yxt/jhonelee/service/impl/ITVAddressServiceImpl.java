@@ -23,4 +23,8 @@ public class ITVAddressServiceImpl implements ITVAddressService{
 	public Integer UpdateItvAddress(ITVAddress itvAddress) {
 		return dao.UpdateItvAddress(itvAddress);
 	}
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return dao.getCount();
+	}
 }

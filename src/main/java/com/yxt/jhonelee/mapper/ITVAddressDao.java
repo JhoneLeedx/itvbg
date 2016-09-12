@@ -8,4 +8,5 @@ public interface ITVAddressDao {
 
 	public List<ITVAddress> AllITVAddress();
 	public Integer UpdateItvAddress(ITVAddress itvAddress);
+	public int getCount();
 }
