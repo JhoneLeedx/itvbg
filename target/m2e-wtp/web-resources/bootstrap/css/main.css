@@ -83,18 +83,17 @@ li:hover {
 }
 
 a {
-	display: block;
-}
-
-a:focus {
-	background: #cdd1b6;
-	color: #f1f1f1;
-	text-decoration: none;
+	color: #ba4c32;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 a:hover {
+	color: #8d341f;
 	text-decoration: none;
 }
+
+
 
 .doctor li {
 	color: #f1f1f1;

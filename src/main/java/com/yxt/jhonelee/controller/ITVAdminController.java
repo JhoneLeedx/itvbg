@@ -25,8 +25,6 @@ public class ITVAdminController {
 	@RequestMapping("/adminlist")
 	public String Admin(){
 		
-		
-		
 		return "/admin";
 	}
 	

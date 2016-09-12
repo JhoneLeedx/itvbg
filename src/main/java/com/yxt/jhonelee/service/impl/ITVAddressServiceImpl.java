@@ -17,8 +17,8 @@ public class ITVAddressServiceImpl implements ITVAddressService{
 
 	@Resource
 	private ITVAddressDao  dao;
-	public List<ITVAddress> AllITVAddress() {
-		return dao.AllITVAddress();
+	public List<ITVAddress> AllITVAddress(int startPos,int pageSize) {
+		return dao.AllITVAddress(startPos,pageSize);
 	}
 	public Integer UpdateItvAddress(ITVAddress itvAddress) {
 		return dao.UpdateItvAddress(itvAddress);

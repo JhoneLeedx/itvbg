@@ -39,8 +39,9 @@ public class ITVAddressController {
 		} else {
 			page = new Page(totalcount, 1);
 		}
-		List<ITVAddress> list = service.AllITVAddress();
+		List<ITVAddress> list = service.AllITVAddress(page.getStartPos(),page.getPageSize());
 		request.setAttribute("list", list);
+		request.setAttribute("page", page);
 		return "/main";
 	}
 

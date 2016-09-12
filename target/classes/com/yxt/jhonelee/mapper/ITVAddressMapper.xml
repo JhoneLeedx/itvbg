@@ -20,8 +20,13 @@
 	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 
 	<select id="AllITVAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
-		select * from ITV_ADDRESS;
+		select * from ITV_ADDRESS limit #{startPos},#{pageSize}
 	</select>
+	
+	<select id="getCount" resultType="int">
+	select count(id) from ITV_ADDRESS
+	</select>
+	
 	<update id="UpdateItvAddress" parameterType="ITVAddress">
 		update ITV_ADDRESS
 		<set>
