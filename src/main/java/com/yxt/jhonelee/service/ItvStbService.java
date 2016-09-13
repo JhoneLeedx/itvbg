@@ -7,4 +7,5 @@ import com.yxt.jhonelee.model.ItvSTB;
 
 public interface ItvStbService {
 	 public List<ItvSTB> AllItvStb(int startPos,int pageSize);
+	 public int getCount();
 }

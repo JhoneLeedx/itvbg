@@ -11,10 +11,16 @@
 		<result property="mIsIptv" column="is_iptv" />
 		<result property="mIsMediaCall" column="is_media_call" />
 	</resultMap>
-
+<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
 		select id,brand,model,sys_info,is_iptv,is_media_call from ITV_STB limit
 		#{startPos},#{pageSize}
 	</select>
-
+    
+    <select id="getCount" resultType="int">
+       select count(id) from ITV_STB
+    </select>
+  
+  
+         
 </mapper>

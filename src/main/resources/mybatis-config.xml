@@ -28,6 +28,7 @@
 		<typeAlias type="com.yxt.jhonelee.model.ITVAddress" alias="ITVAddress" />
 		<typeAlias type="com.yxt.jhonelee.model.Address" alias="Address" />
 		<typeAlias type="com.yxt.jhonelee.model.ITVVideoMenu" alias="ItvVideo" />
+		<typeAlias type="com.yxt.jhonelee.model.ItvSTB" alias="ItvStb"/>
 	</typeAliases>
 
 	<plugins>
@@ -42,6 +43,7 @@
 		<mapper resource="com/yxt/jhonelee/mapper/ItvAdminMapper.xml" />
 		<mapper resource="com/yxt/jhonelee/mapper/ITVAddressMapper.xml" />
 		<mapper resource="com/yxt/jhonelee/mapper/ITVVideoMenuMapper.xml" />
+		<mapper resource="com/yxt/jhonelee/mapper/ItvStbMapper.xml" />
 	</mappers>
 </configuration>
 

@@ -22,4 +22,9 @@ public class ItvStbServiceImpl implements ItvStbService {
 		return dao.AllItvStb(startPos, pageSize);
 	}
 
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return dao.getCount();
+	}
+
 }

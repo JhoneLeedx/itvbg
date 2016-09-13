@@ -13,7 +13,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="<%=path%>/bootstrap/css/style.css" />
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>

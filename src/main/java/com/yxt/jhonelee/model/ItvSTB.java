@@ -1,7 +1,13 @@
 package com.yxt.jhonelee.model;
 
-public class ItvSTB {
+import java.io.Serializable;
 
+public class ItvSTB implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int mId;
 	private String mBrand;
 	private String mModel;
