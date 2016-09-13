@@ -6,12 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/admin")
 @Controller
 public class ITVAdminController {
 
-	@RequestMapping("/login")
+	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	public void login(PrintWriter writer,HttpSession session){
 		session.setAttribute("admin", "admin");
 		writer.write("成功");

@@ -1,0 +1,47 @@
+package com.yxt.jhonelee.model;
+
+public class ItvSTB {
+
+	private int mId;
+	private String mBrand;
+	private String mModel;
+	private String mSysInfo;
+	private int mIsIptv;
+	private int mIsMediaCall;
+	public int getmId() {
+		return mId;
+	}
+	public void setmId(int mId) {
+		this.mId = mId;
+	}
+	public String getmBrand() {
+		return mBrand;
+	}
+	public void setmBrand(String mBrand) {
+		this.mBrand = mBrand;
+	}
+	public String getmModel() {
+		return mModel;
+	}
+	public void setmModel(String mModel) {
+		this.mModel = mModel;
+	}
+	public String getmSysInfo() {
+		return mSysInfo;
+	}
+	public void setmSysInfo(String mSysInfo) {
+		this.mSysInfo = mSysInfo;
+	}
+	public int getmIsIptv() {
+		return mIsIptv;
+	}
+	public void setmIsIptv(int mIsIptv) {
+		this.mIsIptv = mIsIptv;
+	}
+	public int getmIsMediaCall() {
+		return mIsMediaCall;
+	}
+	public void setmIsMediaCall(int mIsMediaCall) {
+		this.mIsMediaCall = mIsMediaCall;
+	}
+}

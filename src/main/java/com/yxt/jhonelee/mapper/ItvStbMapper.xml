@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.ItvStbDao">
+
+	<resultMap type="ItvStb" id="ItvStbMap">
+		<id property="mId" column="id" />
+		<result property="mBrand" column="brand" />
+		<result property="mModel" column="model" />
+		<result property="mSysInfo" column="sys_info" />
+		<result property="mIsIptv" column="is_iptv" />
+		<result property="mIsMediaCall" column="is_media_call" />
+	</resultMap>
+
+	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
+		select id,brand,model,sys_info,is_iptv,is_media_call from ITV_STB limit
+		#{startPos},#{pageSize}
+	</select>
+
+</mapper>

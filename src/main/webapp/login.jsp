@@ -8,7 +8,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
 <title>后台登录界面</title>
 <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" href="bootstrap/css/login.css" />
@@ -49,12 +48,12 @@
 	</div>
 	<!-- end login -->
 	<script type="text/javascript">
-	
 		function submits() {
 			console.log("submit");
 			var admin = $("#user").val();
 			var pass = $("#password").val();
 			$.ajax({
+			    type:"post",
 			    data:{"admin":admin,"pass":pass},
 				url:"<%=path%>/admin/login",
 				ache : false,
