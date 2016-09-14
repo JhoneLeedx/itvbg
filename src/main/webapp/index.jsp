@@ -44,7 +44,7 @@
 				<button class="btn btn-default"
 						onclick="logout()">退出登录</button>
 				<div class="admin">
-					当前管理员：<span>${admin }</span>
+					当前管理员：<span>${admin.mAdminName }</span>
 				</div>
 			</div>
 		</div>

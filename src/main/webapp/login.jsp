@@ -53,7 +53,6 @@
 			var admin = $("#user").val();
 			var pass = $("#password").val();
 			$.ajax({
-			    type:"post",
 			    data:{"admin":admin,"pass":pass},
 				url:"<%=path%>/admin/login",
 				ache : false,
@@ -64,8 +63,13 @@
 						alert("请与管理员联系");
 					},
 				success : function(data) {
-					alert("成功");
-					location.href = "index.jsp"
+					if(data=="当前管理员不属于家庭医生后台管理，请重新输入"){
+						alert(data);
+					}else if(data=="不存在当前用户,可能原因账号或密码错误"){
+						alert(data);
+					}else{
+						location.href = "index.jsp"
+					}
 				}
 			});
 		}

@@ -12,5 +12,5 @@ public interface ItvAdminDao {
      
      public List<Admin> AllItvAdmin();
      
-     public int updateAdmin();
+     public int updateAdmin(Admin admin);
 }
