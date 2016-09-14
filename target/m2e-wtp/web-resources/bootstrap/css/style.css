@@ -259,6 +259,20 @@ a.edit {
 	top: 50%;
 	display: none;
 }
+#del{
+	
+    width: 500px;
+	height: 100px;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: 0 0 4px 4px #d3cfc7;
+	background: #f6f6f6;
+	position: fixed;
+	left: 50%;
+	margin: -180px 0 0 -250px;
+	top: 50%;
+	display: none;
+}
 
 #add {
 	width: 500px;

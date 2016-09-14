@@ -7,20 +7,47 @@
 		<id property="mId" column="id" />
 		<result property="mBrand" column="brand" />
 		<result property="mModel" column="model" />
+		<result property="mType" column="type" />
 		<result property="mSysInfo" column="sys_info" />
 		<result property="mIsIptv" column="is_iptv" />
 		<result property="mIsMediaCall" column="is_media_call" />
 	</resultMap>
-<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
-		select id,brand,model,sys_info,is_iptv,is_media_call from ITV_STB limit
+		select
+		id,brand,model,type,sys_info,is_iptv,is_media_call from ITV_STB limit
 		#{startPos},#{pageSize}
 	</select>
-    
-    <select id="getCount" resultType="int">
-       select count(id) from ITV_STB
-    </select>
-  
-  
-         
+
+	<select id="getCount" resultType="int">
+		select count(id) from ITV_STB
+	</select>
+
+	<delete id="deleteSTB" parameterType="int">
+		delete from ITV_STB where
+		id = #{mId}
+	</delete>
+	<update id="updateSTB" parameterType="ItvStb">
+		update ITV_STB
+		<set>
+			<if test="mBrand!=null">
+				brand = #{mBrand},
+			</if>
+			<if test="mModel!=null">
+				model = #{mModel},
+			</if>
+			<if test="mType!=null">
+				type = #{mType},
+			</if>
+			is_iptv = #{mIsIptv},
+			is_media_call = #{mIsMediaCall}
+
+		</set>
+		<where>
+			id = #{mId}
+		</where>
+	</update>
+
+
+
 </mapper>

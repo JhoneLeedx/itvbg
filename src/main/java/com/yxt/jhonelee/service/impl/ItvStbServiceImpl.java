@@ -11,6 +11,12 @@ import com.yxt.jhonelee.mapper.ItvStbDao;
 import com.yxt.jhonelee.model.ItvSTB;
 import com.yxt.jhonelee.service.ItvStbService;
 
+
+/**
+ * 
+ * @author JhoneLee
+ *        ItvStb dao层对应的服务层实现类
+ */
 @Transactional
 @Service
 public class ItvStbServiceImpl implements ItvStbService {
@@ -25,6 +31,16 @@ public class ItvStbServiceImpl implements ItvStbService {
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return dao.getCount();
+	}
+
+	public int deleteSTB(int mId) {
+		// TODO Auto-generated method stub
+		return dao.deleteSTB(mId);
+	}
+
+	public int updateSTB(ItvSTB itvstb) {
+		// TODO Auto-generated method stub
+		return dao.updateSTB(itvstb);
 	}
 
 }
