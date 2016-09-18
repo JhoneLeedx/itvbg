@@ -8,21 +8,22 @@
 		<result property="mAdminName" column="name" />
 		<result property="mAdminPass" column="pass" />
 		<result property="mLevel" column="level" />
+		<result property="mPid" column="pid"/>
 		<result property="mType" column="sys_type" />
 	</resultMap>
-
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 	<select id="AllItvAdmin" resultMap="ItvAdminMap">
-		select * from ITV_ADMIN
+		select * from ITV_ADMIN limit #{startPos},#{pageSize}
 	</select>
 	<insert id="AddAdmin" parameterType="ItvAdmin">
 		insert into ITV_ADMIN
 		(name,pass,level,sys_type)
-		values(#{mName},#{mPass},#{mLevel},#{mType})
+		values(#{mAdminName},#{mAdminPass},#{mLevel},#{mType})
 	</insert>
 	<update id="updateAdmin">
 		update ITV_ADMIN
 		<set>
-			name=#{mAdminName},pass={#mPass},level=#{mLevel},sys_type=#{mType}
+			name=#{mAdminName},pass=#{mAdminPass},level=#{mLevel},sys_type=#{mType}
 		</set>
 		<where>
 			id= #{mId}
@@ -32,4 +33,11 @@
 		select * from ITV_ADMIN where name = #{mAdminName} and pass = #{mPass}
 		limit 1
 	</select>
+
+	<select id="getCount" resultType="int">
+		select count(id) from ITV_ADMIN
+	</select>
+    <delete id="delAdmin" parameterType="int">
+    	delete from ITV_ADMIN where id = #{mId}
+    </delete>
 </mapper>

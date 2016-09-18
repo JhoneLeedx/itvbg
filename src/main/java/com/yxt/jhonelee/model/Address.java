@@ -1,7 +1,10 @@
 package com.yxt.jhonelee.model;
 
-public class Address {
+import java.io.Serializable;
 
+public class Address implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int mId;
 	private String mCodeValue;
 	private String mName;

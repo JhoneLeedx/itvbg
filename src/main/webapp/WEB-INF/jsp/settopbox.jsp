@@ -163,42 +163,41 @@
 		</c:choose>
 	</div>
 	
-	<div id="edit">
-		<form>
-			<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
-			<div style="margin-left: 100px; margin-top: 30px">
-				<label>序号：</label><input type="text" readonly="readonly" id="id"
+	<div id="div">
+		<div id="edit">
+			<form>
+				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
+				<div style="margin-left: 100px; margin-top: 30px">
+					<label>序号：</label><input type="text" readonly="readonly" id="id"
 					style="border: none; background: #f6f6f6;" /><br />
-			</div>
-	
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>机顶盒品牌：</label><input type="text" id="brand" /><br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>机顶盒型号：</label><input type="text" id="model" /><br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>机  顶  盒  类  型 ：</label><input style="margin-left: 19px" type="radio" name="type" id="type0" />2k<input
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>机顶盒品牌：</label><input type="text" id="brand" /><br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>机顶盒型号：</label><input type="text" id="model" /><br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>机  顶  盒  类  型 ：</label><input style="margin-left: 19px" type="radio" name="type" id="type0" />2k<input
 					type="radio" name="type" id="type1" />4k<br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>是否支持 I P T V ：</label><input type="radio" name="iptv" id="isIptv0" />支持<input
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>是否支持 I P T V ：</label><input type="radio" name="iptv" id="isIptv0" />支持<input
 					type="radio" name="iptv" id="isIptv1" />不支持<br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>是否支持想家通话：</label><input type="radio" name="iscall" id="iscall0" />支持<input
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>是否支持想家通话：</label><input type="radio" name="iscall" id="iscall0" />支持<input
 					type="radio" name="iscall" id="iscall1" />不支持<br />
-			</div>
-			<div style="margin-left: 200px; margin-top: 30px">
-				<input type="button" value="提交" onclick="editsumbit()" /> <input
-					type="reset" value="取消" onclick="editcancle()" />
-			</div>
-		</form>
+				</div>
+				<div style="margin-left: 200px; margin-top: 30px">
+					<input type="button"style="width: 50px" value="提交" onclick="editsumbit()" /> <input
+					type="reset" style="width: 50px"value="取消" onclick="editcancle()" />
+				</div>
+			</form>
+		</div>
 	</div>
-	
 	<div id="del"> 
 	   <input type="text" id="mId" style="display: none;">
-	   
 	   <h2 style="font-style: oblique; margin-left: 50px; margin-top: 20px;"><img alt="" src="<%=path%>/images/jg.png">是否删除数据</h2>
 	  	<div style="margin-left: 180px; margin-top: 15px">
 			<input style="width: 45px" type="button" value="是" onclick="delsumbit()" /> 
@@ -236,7 +235,7 @@
     	$("#mId").val(id);
 	}
     function updateStb(id,brand,model,type,isiptv,iscall){
-    	document.getElementById("edit").style.display="block";
+    	document.getElementById("div").style.display="block";
     	$("#id").val(id);
     	$("#brand").val(brand);
     	$("#model").val(model);
@@ -260,7 +259,7 @@
     	
     }
     function editcancle(){
-    	document.getElementById("edit").style.display="none";
+    	document.getElementById("div").style.display="none";
     }
     function editsumbit() {
     	

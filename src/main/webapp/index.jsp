@@ -61,7 +61,9 @@
 						href="<%=path%>/address/showAddress">地区管理</a></li>
 						<li><a target="right" href="<%=path%>/itvstb/all">机顶盒管理</a></li>
 					<li><a target="right" href="#">公众号管理</a></li>
-					<li><a target="right" href="<%=path%>/admin/adminlist">登录管理</a></li>
+				<c:if test="${admin.mLevel==1 }">
+				<li><a target="right" href="<%=path%>/admin/adminlist">登录管理</a></li>
+				</c:if>
 				</ul>
 			</div>
 			<div class="span10 content-right">

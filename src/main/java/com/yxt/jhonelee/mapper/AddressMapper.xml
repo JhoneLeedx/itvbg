@@ -11,6 +11,7 @@
 
 	</resultMap>
 
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 
 	<select id="SelectAddress" resultType="Address" resultMap="AddressMap">
 		select id,name,code_value,pid from address where pid =#{mCodeValue}

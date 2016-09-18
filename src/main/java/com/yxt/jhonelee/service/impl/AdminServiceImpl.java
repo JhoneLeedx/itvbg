@@ -13,12 +13,13 @@ import com.yxt.jhonelee.service.AdminService;
 
 @Service
 @Transactional
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl implements AdminService {
 
 	@Resource
 	private ItvAdminDao dao;
-	public List<Admin> AllItvAdmin() {
-		return dao.AllItvAdmin();
+
+	public List<Admin> AllItvAdmin(int startPos,int pageSize) {
+		return dao.AllItvAdmin(startPos,pageSize);
 	}
 
 	public int updateAdmin(Admin admin) {
@@ -29,5 +30,16 @@ public class AdminServiceImpl implements AdminService{
 		return dao.LoginAdmin(mAdminName, mPass);
 	}
 
-	
+	public int AddAdmin(Admin admin) {
+		return dao.AddAdmin(admin);
+	}
+
+	public int getCount() {
+		return dao.getCount();
+	}
+
+	public int delAdmin(int mId) {
+		return dao.delAdmin(mId);
+	}
+
 }

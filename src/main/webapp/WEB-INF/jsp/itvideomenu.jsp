@@ -134,6 +134,7 @@
 		</c:choose>
 	</div>
 
+<div id="div">
 	<div id="edit">
 		<form>
 			<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
@@ -168,7 +169,8 @@
 			</div>
 		</form>
 	</div>
-
+</div>
+    <div id="divadd">
 	<div id="add">
 		<form>
 			<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">添加</h2>
@@ -198,6 +200,7 @@
 				<input type="reset" value="取消" onclick="cancleAdd()" tabindex="5" />
 			</div>
 		</form>
+	</div>
 	</div>
 	<script type="text/javascript">
 	
@@ -238,7 +241,7 @@
 		
 		//关闭编辑弹窗
 		function cancle(){
-			document.getElementById("edit").style.display="none";
+			document.getElementById("div").style.display="none";
 		}
 		//提交编辑后的结果
 		function sumbit(){
@@ -273,7 +276,7 @@
 		//显示编辑框数据
 		function edit(id,index,title,filespec,startpos,length,state) {
 			
-			document.getElementById("edit").style.display="block";
+			document.getElementById("div").style.display="block";
 			$("#id").val(id);
 			$("#indexs").val(index);
 			$("#titles").val(title);
@@ -288,11 +291,11 @@
 		}
 		//显示添加弹窗
 		function add(){
-			document.getElementById("add").style.display="block";
+			document.getElementById("divadd").style.display="block";
 		}
 		//关闭添加弹窗
 		function cancleAdd(){
-			document.getElementById("add").style.display="none";
+			document.getElementById("divadd").style.display="none";
 		}
 		//提交添加数据
 		function sumbitAdd(){
