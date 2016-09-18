@@ -24,7 +24,7 @@
 	<div class="box">
 		<!-- Box Head -->
 		<div class="box-head">
-			<button class="button" onclick="add()">添加</button>
+			<button style="margin-top: 7px;width: 80px" class="button" onclick="add()">添加</button>
 		</div>
 		<!-- End Box Head -->
 

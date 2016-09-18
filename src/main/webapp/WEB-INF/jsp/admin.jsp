@@ -21,7 +21,7 @@
 	<div class="box">
 		<!-- Box Head -->
 		<div class="box-head">
-			<button style="margin-top: 5px" class="button" onclick="addAdmin()">添加</button>
+			<button style="margin-top: 7px;width: 80px" class="button" onclick="addAdmin()">添加</button>
 		</div>
 		<!-- End Box Head -->
 
@@ -30,7 +30,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>序号</th>
 						<th>管理员名称</th>
 						<th>管理员密码</th>
 						<th>管理员级别</th>
@@ -291,7 +291,7 @@
 		async:true,
 		dataType : "text",
 		contentType : "application/x-www-form-urlencoded; charset=utf-8",
-		error : function() {
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("请与管理员联系");
 			},
 		success : function(data) {
