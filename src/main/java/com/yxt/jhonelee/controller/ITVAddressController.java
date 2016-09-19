@@ -55,17 +55,18 @@ public class ITVAddressController {
 
 		String errorMessage = "";
 
-		ITVAddress address = new ITVAddress();
-		address.setmAreaCode(areaCode);
+		ITVAddress address = service.SecOneItvAddress(areaCode);
 		address.setmShortName(shortName);
-		address.setmWXQrcodeImageURL(urlwxCode);
+		if(urlwxCode.equals("请选择")){
+		}else{
+			address.setmWXQrcodeImageURL(urlwxCode);
+		}
 		String[] a = addressCodeValue.split("@");
 		if (a.length >= 2) {
 			address.setmAddressId(Integer.parseInt(a[0]));
 			address.setmAddressCode(a[1]);
 		}
 		address.setmState(flag);
-
 		if (logo == null) {
 			errorMessage = "当前没有上传图片";
 		} else {
@@ -100,5 +101,23 @@ public class ITVAddressController {
 	@RequestMapping("/home")
 	public String showHome() {
 		return "home";
+	}
+	@RequestMapping("/del")
+	public void del(PrintWriter writer,@RequestParam(value="areacode")String areacode,
+			@RequestParam(value="state")int state){
+		int del = service.delAddress(areacode, state);
+		if(del>0){
+			if(state==1){
+				writer.write("启用成功");	
+			}else{
+				writer.write("禁用成功");	
+			}
+		}else{
+			if(state==1){
+				writer.write("启用失败");	
+			}else{
+				writer.write("禁用失败");	
+			}
+		}
 	}
 }

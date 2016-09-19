@@ -100,9 +100,20 @@ public class ItvVideoMenuController {
 			PrintWriter writer) {
 		int deupdate = service.DeleteVideoMenu(state, mId);
 		if (deupdate > 0) {
-			writer.write("禁用成功");
+			if(state==1){
+				writer.write("启用成功");
+			}else{
+				writer.write("禁用成功");
+			}
+			
+			
 		} else {
-			writer.write("禁用失败");
+			if(state==1){
+				writer.write("启用失败");
+			}else{
+				writer.write("禁用失败");
+			}
+			
 		}
 	}
 }

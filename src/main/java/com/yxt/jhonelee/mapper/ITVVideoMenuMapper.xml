@@ -14,7 +14,7 @@
 		<result property="mState" column="state" />
 		<result property="mCreatetime" column="create_time" />
 	</resultMap>
-
+<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
 	<select id="AllItvVideoMenu" resultMap="ItvVideoMap" resultType="ItvVideo">
 		select * from ITV_VIDEOMENU where area_cd = #{mAreaCode} limit #{startPos},#{pageSize}
 	</select>

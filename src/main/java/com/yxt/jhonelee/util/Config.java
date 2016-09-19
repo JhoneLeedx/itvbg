@@ -6,7 +6,7 @@ package com.yxt.jhonelee.util;
  */
 public class Config {
 
-	public static final String URL = "123.56.23.62";
-	public static final String LOCALURL = "localhost";
+	public static final String URL = "http://123.56.23.62";
+	public static final String LOCALURL = "http://localhost";
 	
 }

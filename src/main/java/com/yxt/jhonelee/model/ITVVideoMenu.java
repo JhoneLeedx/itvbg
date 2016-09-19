@@ -1,10 +1,16 @@
 package com.yxt.jhonelee.model;
 
+import java.io.Serializable;
 import java.util.Date;
+/**
+ * 
+ * @author JhoneLee
+ *  视频管理基类
+ *
+ */
+public class ITVVideoMenu implements Serializable{
 
-public class ITVVideoMenu {
-
-	
+	private static final long serialVersionUID = 1L;
 	private int mId;//视频主键id
 	private int mIndex;//排序id
 	private String mAreaCode;//地区标识编码id

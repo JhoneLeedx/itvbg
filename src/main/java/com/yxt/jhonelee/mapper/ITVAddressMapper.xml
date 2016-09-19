@@ -22,11 +22,12 @@
 	<select id="AllITVAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
 		select * from ITV_ADDRESS limit #{startPos},#{pageSize}
 	</select>
-	
+
 	<select id="getCount" resultType="int">
-	select count(id) from ITV_ADDRESS
+		select count(id) from
+		ITV_ADDRESS
 	</select>
-	
+
 	<update id="UpdateItvAddress" parameterType="ITVAddress">
 		update ITV_ADDRESS
 		<set>
@@ -59,6 +60,24 @@
 					is_full = 0
 				</otherwise>
 			</choose>
+		</set>
+		<where>
+			area_code = #{mAreaCode}
+		</where>
+	</update>
+
+	<select id="SecOneItvAddress" resultMap="ITVAddressMap"
+		resultType="ITVAddress">
+		select * from ITV_ADDRESS
+		<where>
+			area_code = #{mAreaCode}
+		</where>
+		limit 1
+	</select>
+	<update id="delAddress" parameterType="int">
+		update ITV_ADDRESS
+		<set>
+			state = #{mState}
 		</set>
 		<where>
 			area_code = #{mAreaCode}

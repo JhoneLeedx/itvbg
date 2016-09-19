@@ -24,7 +24,8 @@
 	<div class="box">
 		<!-- Box Head -->
 		<div class="box-head">
-			<button style="margin-top: 7px;width: 80px" class="button" onclick="add()">添加</button>
+			<button style="margin-top: 7px; width: 80px" class="button"
+				onclick="add()">添加</button>
 		</div>
 		<!-- End Box Head -->
 
@@ -64,12 +65,12 @@
 										禁用
 										</c:otherwise>
 									</c:choose></td>
-								<td ><c:choose>
+								<td><c:choose>
 										<c:when test="${menu.mState==1 }">
 											<a onclick="dele(${menu.mId},0)" class="ico del">禁用</a>
 										</c:when>
 										<c:otherwise>
-											<a onclick="qiyong(${menu.mId},1)" class="ico del">启用</a>
+											<a onclick="dele(${menu.mId},1)" class="ico del">启用</a>
 										</c:otherwise>
 									</c:choose> <a
 									onclick="edit(${menu.mId },${menu.mIndex },'${menu.mTitle }','${menu.mFileSpec }',${menu.mStartpos },${menu.mLength },${menu.mState })"
@@ -134,109 +135,117 @@
 		</c:choose>
 	</div>
 
-<div id="div">
-	<div id="edit">
-		<form>
-			<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
-			<div style="margin-left: 100px; margin-top: 30px">
-				<label>编号：</label><input type="text" readonly="readonly" id="id"
-					style="border: none; background: #f6f6f6;" /><br />
-			</div>
+	<div id="div">
+		<div id="edit">
+			<form>
+				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
+				<div style="margin-left: 100px; margin-top: 30px">
+					<label>编号：</label><input type="text" readonly="readonly" id="id"
+						style="border: none; background: #f6f6f6;" /><br />
+				</div>
 
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>排序 索引：</label><input type="text" id="indexs" /><br />
-			</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>排序 索引：</label><input type="text" id="indexs" /><br />
+				</div>
 
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>视频 名称：</label><input type="text" id="titles" /><br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>视频 链接：</label><input type="text" id="filespecs" /><br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>视频start：</label><input type="text" id="starttime" />（选填）<br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>视频 长度：</label><input type="text" id="slength" />（选填）<br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 5px">
-				<label>视频 状态：</label><input type="radio" name="state" id="state1" />启用<input
-					type="radio" name="state" id="state2" />禁用<br />
-			</div>
-			<div style="margin-left: 200px; margin-top: 5px">
-				<input type="button" value="提交" onclick="sumbit()" /> <input
-					type="reset" value="取消" onclick="cancle()" />
-			</div>
-		</form>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>视频 名称：</label><input type="text" id="titles" /><br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>视频 链接：</label><input type="text" id="filespecs" /><br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>视频start：</label><input type="text" id="starttime" />（选填）<br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>视频 长度：</label><input type="text" id="slength" />（选填）<br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 5px">
+					<label>视频 状态：</label><input type="radio" name="state" id="state1" />启用<input
+						type="radio" name="state" id="state2" />禁用<br />
+				</div>
+				<div style="margin-left: 200px; margin-top: 5px">
+					<input type="button" value="提交" onclick="sumbit()" /> <input
+						type="reset" value="取消" onclick="cancle()" />
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
-    <div id="divadd">
-	<div id="add">
-		<form>
-			<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">添加</h2>
-			<input type="text" id="codevalue" value="${codevalue }"
-				style="display: none;" />
-			<div style="padding-left: 120px; margin-top: 30px">
-				<label>排序 索引：</label><input type="text" id="index" />*<br />
-			</div>
-			<div style="margin-left: 120px; margin-top: 5px">
-				<label>视频 名称：</label><input type="text" id="title" />*<br />
-			</div>
-			<div style="margin-left: 120px; margin-top: 5px">
-				<label>视频 链接：</label><input type="text" id="filespec" />*<br />
-			</div>
-			<div style="margin-left: 120px; margin-top: 5px">
-				<label>视频start：</label><input type="text" id="start" />（选填）<br />
-			</div>
-			<div style="margin-left: 120px; margin-top: 5px">
-				<label>视频 长度：</label><input type="text" id="length" />（选填）<br />
-			</div>
-			<div style="margin-left: 120px; margin-top: 5px">
-				<label>视频 状态：</label><input type="radio" name="sta" id="sta1" />启用<input
-					type="radio" name="sta" id="sta0" />禁用<br />
-			</div>
-			<div style="margin-left: 220px; margin-top: 40px">
-				<input type="button" value="提交" onclick="sumbitAdd()" tabindex="5" />
-				<input type="reset" value="取消" onclick="cancleAdd()" tabindex="5" />
-			</div>
-		</form>
+	<div id="divadd">
+		<div id="add">
+			<form>
+				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">添加</h2>
+				<input type="text" id="codevalue" value="${codevalue }"
+					style="display: none;" />
+				<div style="padding-left: 120px; margin-top: 30px">
+					<label>排序 索引：</label><input type="text" id="index" />*<br />
+				</div>
+				<div style="margin-left: 120px; margin-top: 5px">
+					<label>视频 名称：</label><input type="text" id="title" />*<br />
+				</div>
+				<div style="margin-left: 120px; margin-top: 5px">
+					<label>视频 链接：</label><input type="text" id="filespec" />*<br />
+				</div>
+				<div style="margin-left: 120px; margin-top: 5px">
+					<label>视频start：</label><input type="text" id="start" />（选填）<br />
+				</div>
+				<div style="margin-left: 120px; margin-top: 5px">
+					<label>视频 长度：</label><input type="text" id="length" />（选填）<br />
+				</div>
+				<div style="margin-left: 120px; margin-top: 5px">
+					<label>视频 状态：</label><input type="radio" name="sta" id="sta1" />启用<input
+						type="radio" name="sta" id="sta0" />禁用<br />
+				</div>
+				<div style="margin-left: 220px; margin-top: 40px">
+					<input type="button" value="提交" onclick="sumbitAdd()" tabindex="5" />
+					<input type="reset" value="取消" onclick="cancleAdd()" tabindex="5" />
+				</div>
+			</form>
+		</div>
 	</div>
+	<div id="del">
+		<input type="text" id="mId" style="display: none;">
+		<input type="text" id="mState" style="display: none;">
+		<h2 style="font-style: oblique; margin-left: 50px; margin-top: 20px;">
+			<img alt="" src="<%=path%>/images/jg.png" style="vertical-align:middle;margin-right: 10px">是否禁用(启用)当前视频信息
+		</h2>
+		<div style="margin-left: 180px; margin-top: 15px">
+			<input style="width: 45px" type="button" value="是"
+				onclick="delVideo()" /> <input style="width: 45px" type="reset"
+				value="否" onclick="fouVideo()" />
+		</div>
 	</div>
-	<script type="text/javascript">
 	
+	
+</body>
+<script type="text/javascript">
+
+    function fouVideo() {
+    	document.getElementById("del").style.display="none";
+	}
+    function delVideo() {
+		var id = $("#mId").val();
+		var state = $("#mState").val();
+		$.ajax({
+			url:"<%=path%>/itvmenu/deletes",
+			data : {"id":id,"state":state},
+			ache : false,
+			dataType : "text",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+					alert("请与管理员联系");
+				},
+			success : function(data) {
+				alert(data);
+				location.reload();
+			}
+		});
+	}
 		function dele(id,state){
-			$.ajax({
-				url:"<%=path%>/itvmenu/deletes",
-				data : {"id":id,"state":state},
-				ache : false,
-				dataType : "text",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-						alert("请与管理员联系");
-					},
-				success : function(data) {
-					alert(data);
-					location.reload();
-				}
-			});
-		}
-		function qiyong(id,state){
-			$.ajax({
-				url:"<%=path%>/itvmenu/deletes",
-				data : {"id":id,"state":state},
-				ache : false,
-				dataType : "text",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-						alert("请与管理员联系");
-					},
-				success : function(data) {
-					alert("启用成功");
-					location.reload();
-				}
-			});
+			document.getElementById("del").style.display="block";
+			$("#mId").val(id);
+			$("#mState").val(state);
 		}
 		
 		//关闭编辑弹窗
@@ -355,5 +364,4 @@
 			}); 
 		}
 	</script>
-</body>
 </html>

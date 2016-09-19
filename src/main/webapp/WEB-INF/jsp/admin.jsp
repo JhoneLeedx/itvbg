@@ -150,7 +150,7 @@
 	<div id="del">
 		<input type="text" id="mId" style="display: none;">
 		<h2 style="font-style: oblique; margin-left: 50px; margin-top: 20px;">
-			<img alt="" src="<%=path%>/images/jg.png">是否删除管理员
+			<img alt="" src="<%=path%>/images/jg.png" style="vertical-align:middle;margin-right: 10px">是否删除管理员
 		</h2>
 		<div style="margin-left: 180px; margin-top: 15px">
 			<input style="width: 45px" type="button" value="是"

@@ -13,18 +13,28 @@ import com.yxt.jhonelee.service.ITVAddressService;
 
 @Transactional
 @Service
-public class ITVAddressServiceImpl implements ITVAddressService{
+public class ITVAddressServiceImpl implements ITVAddressService {
 
 	@Resource
-	private ITVAddressDao  dao;
-	public List<ITVAddress> AllITVAddress(int startPos,int pageSize) {
-		return dao.AllITVAddress(startPos,pageSize);
+	private ITVAddressDao dao;
+
+	public List<ITVAddress> AllITVAddress(int startPos, int pageSize) {
+		return dao.AllITVAddress(startPos, pageSize);
 	}
+
 	public Integer UpdateItvAddress(ITVAddress itvAddress) {
 		return dao.UpdateItvAddress(itvAddress);
 	}
+
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return dao.getCount();
+	}
+
+	public ITVAddress SecOneItvAddress(String mAreaCode) {
+		return dao.SecOneItvAddress(mAreaCode);
+	}
+
+	public int delAddress(String mAreaCode, int mState) {
+		return dao.delAddress(mAreaCode, mState);
 	}
 }
