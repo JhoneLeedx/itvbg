@@ -43,4 +43,19 @@ public class ItvStbServiceImpl implements ItvStbService {
 		return dao.updateSTB(itvstb);
 	}
 
+	public List<ItvSTB> vagueSelect(int startPos, int pageSize, String mCode) {
+		// TODO Auto-generated method stub
+		return dao.vagueSelect(startPos, pageSize, mCode);
+	}
+
+	public int vagueGetCount(String mCode) {
+		// TODO Auto-generated method stub
+		return dao.vagueGetCount(mCode);
+	}
+
+	public ItvSTB selectOneStb(int mId) {
+		// TODO Auto-generated method stub
+		return dao.selectOneStb(mId);
+	}
+
 }

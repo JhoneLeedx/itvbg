@@ -48,8 +48,11 @@ public class ITVAdminController {
 
 	@RequestMapping("/logout")
 	public void logout(PrintWriter writer, HttpSession session) {
-		session.removeAttribute("admin");
-		writer.write("成功");
+		if (session != null) {
+			session.invalidate(); // 使该Session失效
+			writer.write("成功");
+		}
+
 	}
 
 	@RequestMapping("/adminlist")

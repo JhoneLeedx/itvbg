@@ -23,17 +23,13 @@
 					<label for="user">用户名</label>
 				</p>
 				<p>
-					<input type="text" id="user" value="请输入用户名"
-						onBlur="if(this.value=='')this.value='请输入用户名'"
-						onFocus="if(this.value=='请输入用户名')this.value=''" />
+					<input type="text" id="user"   placeholder="请输入用户名"/>
 				</p>
 				<p>
 					<label for="password">密码</label>
 				</p>
 				<p>
-					<input type="password" id="password" value="password"
-						onBlur="if(this.value=='')this.value='password'"
-						onFocus="if(this.value=='password')this.value=''" />
+					<input type="password" id="password"   placeholder="请输入密码"/>
 				</p>
 				<p>
 					<input type="button" value="登录" onclick="submits()" />
@@ -49,6 +45,16 @@
 			console.log("submit");
 			var admin = $("#user").val();
 			var pass = $("#password").val();
+			if(admin==""){
+				alert("管理员账号不能为空");
+				return;
+			}
+			if(pass==""){
+				alert("管理员密码不能为空");
+				return;
+			}
+			
+			
 			$.ajax({
 			    data:{"admin":admin,"pass":pass},
 				url:"<%=path%>/admin/login",

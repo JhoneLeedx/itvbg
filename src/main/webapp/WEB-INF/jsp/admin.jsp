@@ -131,7 +131,7 @@
 					<label>管理员密码：</label><input type="text" id="pass" /><br />
 				</div>
 				<div style="margin-left: 100px; margin-top: 15px">
-					<label>管理员级别：</label> <input type="radio" name="level" id="level0">超级管理员
+					<label>管理员级别：</label> 
 					<input type="radio" name="level" id="level1">普通管理员 <br />
 				</div>
 				<div style="margin-left: 100px; margin-top: 15px"></div>
@@ -171,7 +171,7 @@
 				<label>管理员密码：</label><input type="text" id="Adminpass" /><br />
 			</div>
 			<div style="margin-left: 100px; margin-top: 15px">
-				<label>管理员级别：</label> <input type="radio" name="alevel" id="alevel0">超级管理员
+				<label>管理员级别：</label>
 				<input type="radio" name="alevel" id="alevel1">普通管理员 <br />
 			</div>
 			<div style="margin-left: 100px; margin-top: 15px"></div>
@@ -199,8 +199,8 @@
     	var name = $("#Adminname").val();
     	var pass = $("#Adminpass").val();
     	var level,type;
-    	if(document.getElementById("alevel0").checked){
-    		level=1;
+    	if(document.getElementById("alevel1").checked){
+    		level=2;
     	}else{
     		level=2;
     	}
@@ -232,8 +232,8 @@
 	var name = $("#name").val();
 	var pass = $("#pass").val();
 	var level,type;
-	if(document.getElementById("level0").checked){
-		level=1;
+	if(document.getElementById("level1").checked){
+		level=2;
 	}else{
 		level=2;
 	}
@@ -268,11 +268,12 @@
 	   }else{
 		   document.getElementById("level1").checked=true;
 	   }
-	   if(type==1){
-		   document.getElementById("type0").checked= true;
-	   }else{
-		   document.getElementById("type1").checked= true;
-	   }
+		 if(type==1){  
+			 document.getElementById("type0").checked= true;
+		 }else{
+			 document.getElementById("type1").checked= true;
+		 }
+	
 	   
    }
    function editqx() {

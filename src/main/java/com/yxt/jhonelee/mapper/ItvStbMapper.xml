@@ -8,25 +8,30 @@
 		<result property="mBrand" column="brand" />
 		<result property="mModel" column="model" />
 		<result property="mType" column="type" />
+		<result property="mSysInfoCode" column="sys_info_code" />
 		<result property="mSysInfo" column="sys_info" />
 		<result property="mIsIptv" column="is_iptv" />
 		<result property="mIsMediaCall" column="is_media_call" />
 	</resultMap>
+	<!--开启缓存 -->
 	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+	<!--分页查询 -->
 	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
 		select
-		id,brand,model,type,sys_info,is_iptv,is_media_call from ITV_STB limit
+		id,brand,model,type,sys_info_code,sys_info,is_iptv,is_media_call from
+		ITV_STB limit
 		#{startPos},#{pageSize}
 	</select>
-
+	<!--查询总数 -->
 	<select id="getCount" resultType="int">
 		select count(id) from ITV_STB
 	</select>
-
+	<!--删除操作 -->
 	<delete id="deleteSTB" parameterType="int">
 		delete from ITV_STB where
 		id = #{mId}
 	</delete>
+	<!--更新操作 -->
 	<update id="updateSTB" parameterType="ItvStb">
 		update ITV_STB
 		<set>
@@ -48,6 +53,27 @@
 		</where>
 	</update>
 
+	<select id="selectOneStb" resultMap="ItvStbMap" resultType="ItvStb">
+		select
+		id,brand,model,type,sys_info_code,sys_info,is_iptv,is_media_call from
+		ITV_STB
+		<where>
+			id = #{mId}
+		</where>
+		limit 1
+	</select>
 
+	<!-- 模糊查询 (分页) -->
+	<select id="vagueSelect" resultMap="ItvStbMap" resultType="ItvStb">
+		select
+		id,brand,model,type,sys_info_code,sys_info,is_iptv,is_media_call from
+		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') limit
+		#{startPos},#{pageSize}
+	</select>
+	<!--模糊查询总数 -->
+	<select id="vagueGetCount" resultType="int">
+		select count(id) from
+		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%')
+	</select>
 
 </mapper>

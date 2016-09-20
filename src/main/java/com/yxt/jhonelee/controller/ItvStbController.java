@@ -26,6 +26,11 @@ public class ItvStbController {
 	@Autowired
 	private ItvStbService service;
 
+	/**
+	 * 
+	 * @param request
+	 * @return 分页查询显示所有数据
+	 */
 	@RequestMapping("/all")
 	public String allStb(HttpServletRequest request) {
 		String pageNow = request.getParameter("pageNow");
@@ -41,7 +46,11 @@ public class ItvStbController {
 		request.setAttribute("page", page);
 		return "settopbox";
 	}
-
+    /**
+     * 
+     * @param id
+     * @param writer 删除操作
+     */
 	@RequestMapping("delStb")
 	public void delete(@RequestParam(value = "id") int id, PrintWriter writer) {
 
@@ -55,30 +64,67 @@ public class ItvStbController {
 		writer.write(result);
 	}
 
+	/**
+	 * 
+	 * @param writer
+	 * @param id
+	 * @param brand
+	 * @param model
+	 * @param type
+	 * @param isIptv
+	 * @param iscall  更新操作
+	 */
 	@RequestMapping("updateStb")
 	public void update(PrintWriter writer, @RequestParam(value = "id") int id,
 			@RequestParam(value = "brand") String brand, @RequestParam(value = "model") String model,
 			@RequestParam(value = "type") String type, @RequestParam(value = "isIptv") int isIptv,
 			@RequestParam(value = "iscall") int iscall) {
-		
-		ItvSTB itv = new ItvSTB();
-		itv.setmId(id);
-		itv.setmBrand(brand);
-		itv.setmModel(model);
-		itv.setmType(type);
-		itv.setmIsIptv(isIptv);
-		itv.setmIsMediaCall(iscall);
-		int update = service.updateSTB(itv);
 		String result = null;
-		if(update>0){
-			
-			result = "编辑成功";
+		ItvSTB itv = service.selectOneStb(id);
+		if (itv != null) {
+			itv.setmBrand(brand);
+			itv.setmModel(model);
+			itv.setmType(type);
+			itv.setmIsIptv(isIptv);
+			itv.setmIsMediaCall(iscall);
+			int update = service.updateSTB(itv);
+
+			if (update > 0) {
+
+				result = "编辑成功";
+			} else {
+				result = "编辑失败";
+			}
 		} else {
-			result = "编辑失败";
+			result = "当前不存在这个记录";
 		}
 		writer.write(result);
-		
-
 	}
 
+	/**
+	 * 
+	 * @param request
+	 * @return 返回模糊查询的结果集
+	 */
+	@RequestMapping("vague")
+	public String vagueSelect(HttpServletRequest request) {
+		String pageNow = request.getParameter("pageNow");
+		String mCode = request.getParameter("search");
+		int count = service.vagueGetCount(mCode);
+		Page page = null;
+		if (pageNow != null) {
+			page = new Page(count, Integer.parseInt(pageNow));
+		} else {
+			page = new Page(count, 1);
+		}
+		List<ItvSTB> list = service.vagueSelect(page.getStartPos(), page.getPageSize(), mCode);
+		if (list.size() > 0) {
+			request.setAttribute("code", mCode);
+			request.setAttribute("list", list);
+			request.setAttribute("page", page);
+			return "stbSearch";
+		} else {
+			return "redirect:/itvstb/all";
+		}
+	}
 }

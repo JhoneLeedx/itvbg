@@ -12,6 +12,7 @@ public class ItvSTB implements Serializable{
 	private String mBrand;
 	private String mModel;
 	private String mType;
+	private String mSysInfoCode;
 	private String mSysInfo;
 	private int mIsIptv;
 	private int mIsMediaCall;
@@ -38,6 +39,12 @@ public class ItvSTB implements Serializable{
 	}
 	public void setmType(String mType) {
 		this.mType = mType;
+	}
+	public String getmSysInfoCode() {
+		return mSysInfoCode;
+	}
+	public void setmSysInfoCode(String mSysInfoCode) {
+		this.mSysInfoCode = mSysInfoCode;
 	}
 	public String getmSysInfo() {
 		return mSysInfo;

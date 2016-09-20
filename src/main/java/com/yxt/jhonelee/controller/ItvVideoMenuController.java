@@ -70,7 +70,7 @@ public class ItvVideoMenuController {
 	}
 
 	@RequestMapping("/update")
-	public void updateVideo(@RequestParam(value = "id") int mId, @RequestParam(value = "state") int state,
+	public  void  updateVideo(@RequestParam(value = "id") int mId, @RequestParam(value = "state") int state,
 			@RequestParam(value = "title") String title, @RequestParam(value = "filespec") String filespec,
 			@RequestParam(value = "starttime") int time, @RequestParam(value = "length") int length,
 			@RequestParam(value="index")int mIndex,

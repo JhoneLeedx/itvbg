@@ -20,7 +20,11 @@ import com.yxt.jhonelee.model.ITVAddress;
 import com.yxt.jhonelee.service.ITVAddressService;
 import com.yxt.jhonelee.util.Config;
 import com.yxt.jhonelee.util.Page;
-
+/**
+ * 
+ * @author JhoneLee
+ *   地区管理控制器
+ */
 @RequestMapping("/address")
 @Controller
 public class ITVAddressController {
