@@ -15,7 +15,7 @@
 <body>
 	<div id="login">
 		<h2>
-			<span class="fontawesome-lock"></span>后台登录
+		后台登录
 		</h2>
 		<form>
 			<fieldset>
@@ -23,13 +23,13 @@
 					<label for="user">用户名</label>
 				</p>
 				<p>
-					<input type="text" id="user"   placeholder="请输入用户名"/>
+					<input type="text" id="user" placeholder="请输入用户名" />
 				</p>
 				<p>
 					<label for="password">密码</label>
 				</p>
 				<p>
-					<input type="password" id="password"   placeholder="请输入密码"/>
+					<input type="password" id="password" placeholder="请输入密码" />
 				</p>
 				<p>
 					<input type="button" value="登录" onclick="submits()" />
@@ -41,6 +41,14 @@
 	<!-- end login -->
 </body>
 <script type="text/javascript">
+
+    document.onkeydown=function(e){
+	  	var keycode=document.all?event.keyCode:e.which;
+	  	 	if(keycode==13){
+	  			 submits();
+	  			}
+	  		}
+
 		function submits() {
 			console.log("submit");
 			var admin = $("#user").val();
@@ -53,8 +61,6 @@
 				alert("管理员密码不能为空");
 				return;
 			}
-			
-			
 			$.ajax({
 			    data:{"admin":admin,"pass":pass},
 				url:"<%=path%>/admin/login",

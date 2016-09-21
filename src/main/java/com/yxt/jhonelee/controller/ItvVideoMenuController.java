@@ -77,17 +77,21 @@ public class ItvVideoMenuController {
 			PrintWriter writer) {
 
 		Date date = new Date();
-		ITVVideoMenu menu = new ITVVideoMenu();
-		menu.setmId(mId);
-		menu.setmFileSpec(filespec);
-		menu.setmIndex(mIndex);
-		menu.setmCreatetime(date);
-		menu.setmState(state);
-		menu.setmTitle(title);
-		menu.setmLength(length);
-		menu.setmStartpos(time);
+		ITVVideoMenu menu = service.QueryOneVideMenu(mId);
+		if(menu!=null){
+			menu.setmFileSpec(filespec);
+			menu.setmIndex(mIndex);
+			menu.setmCreatetime(date);
+			menu.setmState(state);
+			menu.setmTitle(title);
+			menu.setmLength(length);
+			menu.setmStartpos(time);
+		}else{
+			writer.write("不存在相关信息");
+			return;
+		}
+		
 		int update = service.UpdateVideoMenu(menu);
-
 		if (update > 0) {
 			writer.write("更新成功");
 		} else {
@@ -105,7 +109,6 @@ public class ItvVideoMenuController {
 			}else{
 				writer.write("禁用成功");
 			}
-			
 			
 		} else {
 			if(state==1){

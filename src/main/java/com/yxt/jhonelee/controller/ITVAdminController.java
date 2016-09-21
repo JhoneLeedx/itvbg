@@ -21,15 +21,11 @@ public class ITVAdminController {
 
 	@Autowired
 	private AdminService service;
+	
 
 	@RequestMapping(value = { "/login" })
 	public void login(PrintWriter writer, HttpSession session, @RequestParam(value = "admin") String admin,
 			@RequestParam(value = "pass") String pass) {
-
-		Admin a = (Admin) session.getAttribute("admin");
-		if (a != null) {
-			writer.write("账号已经登录");
-		} else {
 
 			Admin admins = service.LoginAdmin(admin, pass);
 			if (admins != null) {
@@ -43,8 +39,6 @@ public class ITVAdminController {
 				writer.write("不存在当前用户,可能原因账号或密码错误");
 			}
 		}
-
-	}
 
 	@RequestMapping("/logout")
 	public void logout(PrintWriter writer, HttpSession session) {

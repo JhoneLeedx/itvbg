@@ -39,4 +39,9 @@ public class ItvVideoMenuServiceImpl  implements ItvVideoMenuService{
 		return dao.getCount(codevalue);
 	}
 
+	public ITVVideoMenu QueryOneVideMenu(int mId) {
+		// TODO Auto-generated method stub
+		return dao.QueryOneVideMenu(mId);
+	}
+
 }

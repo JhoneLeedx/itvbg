@@ -185,7 +185,7 @@
 							name="wxCode" style="margin-left: 15px">
 							<option>请选择</option>
 							<option
-								value="http://123.56.23.62:8015/itvbg/images/upload/wx/yzg.jpg">医总管</option>
+								value="http://118.123.167.5:8990/itvbg/images/upload/wx/yzg.jpg">医总管</option>
 						</select> <img id="wxImg" alt="" src="" style="display: none;">
 					</div>
 					<div class="erCode" style="margin-left: 15px">
