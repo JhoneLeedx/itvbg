@@ -58,6 +58,7 @@
 			},
 			success : function(data) {
 				if(data=="right"){
+					 document.getElementById("code").style="width: 250px;";
 					 if(user==""||password==""){
 						 document.getElementById("sbtn").disabled=true;
 						 document.getElementById("sbtn").style.background="#D4D4D3";
@@ -66,6 +67,8 @@
 						 document.getElementById("sbtn").style.background="#80c1d4";
 				   }
 				}else if(data=="wrong"){
+					 $("#code").val("");
+					 document.getElementById("code").style="border:1px solid red;width: 250px;";
 					 document.getElementById("sbtn").disabled=true;
 					 document.getElementById("sbtn").style.background="#D4D4D3";
 				}

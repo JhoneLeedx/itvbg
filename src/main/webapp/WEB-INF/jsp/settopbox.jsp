@@ -24,7 +24,7 @@
 				<input type="text" id="search" name ="search" placeholder="请输入code值"
 					onblur="checkCode()"/>
 				<input type="submit"
-					style="margin-top: 5px; width: 80px; background-color: #dddddd"
+					style="margin-top: 5px; width: 80px; background: #D4D4D3" disabled="disabled"
 					class="button"  id="searchBtn" value="搜索">
 			</form>
 		</div>
@@ -304,7 +304,7 @@
     	var code = $("#search").val();
 	if(code==""){
 		document.getElementById("searchBtn").disabled=true;	
-		document.getElementById("searchBtn").style.background="#dddddd";	
+		document.getElementById("searchBtn").style.background="#D4D4D3";	
 		}else{
 			document.getElementById("searchBtn").disabled=false;
 			document.getElementById("searchBtn").style.background=null;
