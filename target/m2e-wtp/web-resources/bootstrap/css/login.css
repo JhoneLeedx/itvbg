@@ -30,7 +30,7 @@ input {
 	width: 500px;
 	position: absolute;
 	height:500px;
-	left: 50%;
+	left: 47%;
 	top: 40%;
 	margin: -100px 0 0 -150px
 }
@@ -74,16 +74,17 @@ input {
 	{
 	background-color: #eee;
 	color: #777;
+	margin-top:20px;
 	padding: 10px 10px;
 	width: 400px;
 }
 
 #login fieldset input[type="button"] {
-	background-color: #80c1d4;
+	background-color: #D4D4D3;
 	color: #fff;
 	display: block;
 	margin: 0 auto;
 	padding: 4px 0;
 	width: 100px;
-	margin-top: 80px;
+	margin-top: 40px;
 }

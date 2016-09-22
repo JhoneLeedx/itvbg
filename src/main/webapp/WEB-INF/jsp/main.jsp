@@ -263,7 +263,6 @@
 				},
 	           success: function(data) {  
 	        	   alert(data);
-	        	   canCel();
 	        	   location.reload();
 	              }
 		   });

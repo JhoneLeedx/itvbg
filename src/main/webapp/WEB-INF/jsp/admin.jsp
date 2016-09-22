@@ -15,8 +15,28 @@
 <link rel="stylesheet" href="<%=path%>/bootstrap/css/style.css" />
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+
+		var secs = 3; //倒计时的秒数
+		var URL;
+		function Load(url) {
+			URL = url;
+			for (var i = secs; i >= 0; i--) {
+				window.setTimeout('doUpdate(' + i + ')', (secs - i) * 1000);
+			}
+		}
+		function doUpdate(num) {
+			if (num == 0) {
+				window.parent.location = URL;
+			}
+		}
+</script>
+	
 </head>
 <body>
+
+   <c:choose>
+<c:when test="${!empty admin }">
 	<!-- Box -->
 	<div class="box">
 		<!-- Box Head -->
@@ -186,6 +206,15 @@
 		</form>
 	</div>
 	</div>
+	</c:when>
+	<c:otherwise>
+	<div style="margin: 20px;">
+					<a href="login.jsp">自动跳转未成功？请手动点击跳转</a>
+				</div>
+				<script type="text/javascript">Load("login.jsp");
+				</script>
+	</c:otherwise>
+	</c:choose>
 </body>
 <script type="text/javascript">
 
