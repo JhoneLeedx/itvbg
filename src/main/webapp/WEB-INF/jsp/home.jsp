@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background: #FFFAF0;height: 100%">
 
+<h1>欢迎！家庭医生后台管理</h1>
 </body>
 </html>

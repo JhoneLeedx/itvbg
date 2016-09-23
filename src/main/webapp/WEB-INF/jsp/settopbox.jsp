@@ -21,11 +21,10 @@
 		<!-- Box Head -->
 		<div class="box-head">
 			<form action="<%=path%>/itvstb/vague">
-				<input type="text" id="search" name ="search" placeholder="请输入code值"
-					onblur="checkCode()"/>
-				<input type="submit"
-					style="margin-top: 5px; width: 80px; background: #D4D4D3" disabled="disabled"
-					class="button"  id="searchBtn" value="搜索">
+				<input type="text" id="search" name="search" placeholder="请输入code值"
+					onblur="checkCode()" /> <input type="submit"
+					style="margin-top: 5px; width: 80px; background: #D4D4D3"
+					disabled="disabled" class="button" id="searchBtn" value="搜索">
 			</form>
 		</div>
 		<div class="table">
@@ -40,6 +39,7 @@
 						<th>系统信息</th>
 						<th>是否支持IPTV</th>
 						<th>是否支持想家通话</th>
+						<th>备注</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -111,8 +111,17 @@
 									    未填写
 						           </c:otherwise>
 									</c:choose></td>
+								<td><c:choose>
+										<c:when test="${!empty itvStb.mRemark}">
+									     ${itvStb.mRemark}
+										</c:when>
+										<c:otherwise>
+											未填写
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td><a
-									onclick="updateStb(${itvStb.mId},'${itvStb.mBrand }','${itvStb.mModel }','${itvStb.mType }',${itvStb.mIsIptv },${itvStb.mIsMediaCall })"
+									onclick="updateStb(${itvStb.mId},'${itvStb.mBrand }','${itvStb.mModel }','${itvStb.mType }',${itvStb.mIsIptv },${itvStb.mIsMediaCall },'${itvStb.mIptvId }','${itvStb.mIptvToken }','${itvStb.mRemark }')"
 									class="ico edit">编辑</a> <a onclick="deleteStb(${itvStb.mId})"
 									class="ico del">删除</a></td>
 							</tr>
@@ -168,28 +177,37 @@
 		<div id="edit">
 			<form>
 				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
-				<div style="margin-left: 100px; margin-top: 30px">
+				<div style="margin-left: 100px; margin-top: 10px">
 					<label>序号：</label><input type="text" readonly="readonly" id="id"
 						style="border: none; background: #f6f6f6;" /><br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>机顶盒品牌：</label><input type="text" id="brand" /><br />
+				<div style="margin-left: 100px; margin-top: 3px">
+					<label>机顶盒 品牌:</label><input type="text" id="brand" /><br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>机顶盒型号：</label><input type="text" id="model" /><br />
+				<div style="margin-left: 100px; margin-top: 3px">
+					<label>机顶盒 型号:</label><input type="text" id="model" /><br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>机顶盒类型：</label><input type="text" id="type" /><br />
+				<div style="margin-left: 100px; margin-top: 3px">
+					<label>机顶盒 类型:</label><input type="text" id="type" /><br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
+					<div style="margin-left: 100px; margin-top: 3px">
+					<label>iptv的  账号:</label><input type="text" id="iptvId" /><br />
+				</div>
+					<div style="margin-left: 100px; margin-top: 3px">
+					<label>iptv想家账号</label><input type="text" id="iptvToken" /><br />
+				</div>
+					<div style="margin-left: 100px; margin-top: 3px">
+					<label>机顶盒 备注:</label><input type="text" id="remark" placeholder="备注（是不是公司内部机顶盒？）"/><br />
+				</div>
+				<div style="margin-left: 100px; margin-top: 3px">
 					<label>是否支持 I P T V ：</label><input type="radio" name="iptv"
 						id="isIptv0" />支持<input type="radio" name="iptv" id="isIptv1" />不支持<br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
+				<div style="margin-left: 100px; margin-top: 3px">
 					<label>是否支持想家通话：</label><input type="radio" name="iscall"
 						id="iscall0" />支持<input type="radio" name="iscall" id="iscall1" />不支持<br />
 				</div>
-				<div style="margin-left: 200px; margin-top: 30px">
+				<div style="margin-left: 200px; margin-top: 20px">
 					<input type="button" style="width: 50px" value="提交"
 						onclick="editsumbit()" /> <input type="reset" style="width: 50px"
 						value="取消" onclick="editcancle()" />
@@ -239,12 +257,15 @@
     	document.getElementById("del").style.display="block";
     	$("#mId").val(id);
 	}
-    function updateStb(id,brand,model,type,isiptv,iscall){
+    function updateStb(id,brand,model,type,isiptv,iscall,iptvid,iptvtoken,remark){
     	document.getElementById("div").style.display="block";
     	$("#id").val(id);
     	$("#brand").val(brand);
     	$("#model").val(model);
     	$("#type").val(type);
+        $("#iptvId").val(iptvid);
+    	$("#iptvToken").val(iptvtoken);
+    	$("#remark").val(remark);
         if(isiptv==1){
         	document.getElementById("isIptv0").checked=true;
         } else{
@@ -265,6 +286,9 @@
     	var brand = $("#brand").val();
     	var model = $("#model").val();
     	var type=$("#type").val();
+    	var iptvid = $("#iptvId").val();
+    	var iptvtoken = $("#iptvToken").val();
+    	var remark = $("#remark").val();
         var isIptv;
         if(document.getElementById("isIptv0").checked){
         	isIptv = 1;
@@ -285,7 +309,7 @@
     		document.getElementById("brand").style="null";
     	}
     	 $.ajax({
-    		data:{"id":id,"brand":brand,"model":model,"type":type,"isIptv":isIptv,"iscall":iscall},
+    		data:{"id":id,"brand":brand,"model":model,"type":type,"isIptv":isIptv,"iscall":iscall,"iptvid":iptvid,"iptvtoken":iptvtoken,"remark":remark},
     		url:"<%=path%>/itvstb/updateStb",
     		ache:false,
     		async:true,

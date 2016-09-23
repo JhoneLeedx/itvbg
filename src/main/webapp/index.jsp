@@ -48,8 +48,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="nav col-lg-12 col-md-12"></div>
+		<div class="row" style="height: 40px">
 		</div>
 		<div class="row-fluid">
 			<div class="span2 content-left">

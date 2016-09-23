@@ -78,7 +78,8 @@ public class ItvStbController {
 	public void update(PrintWriter writer, @RequestParam(value = "id") int id,
 			@RequestParam(value = "brand") String brand, @RequestParam(value = "model") String model,
 			@RequestParam(value = "type") String type, @RequestParam(value = "isIptv") int isIptv,
-			@RequestParam(value = "iscall") int iscall) {
+			@RequestParam(value = "iscall") int iscall,@RequestParam(value = "iptvid") String iptvid,
+			@RequestParam(value = "iptvtoken") String iptvtoken,@RequestParam(value = "remark") String remark) {
 		String result = null;
 		ItvSTB itv = service.selectOneStb(id);
 		if (itv != null) {
@@ -87,8 +88,10 @@ public class ItvStbController {
 			itv.setmType(type);
 			itv.setmIsIptv(isIptv);
 			itv.setmIsMediaCall(iscall);
+			itv.setmIptvId(iptvid);
+			itv.setmIptvToken(iptvtoken);
+			itv.setmRemark(remark);
 			int update = service.updateSTB(itv);
-
 			if (update > 0) {
 
 				result = "编辑成功";

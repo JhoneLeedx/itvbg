@@ -8,6 +8,9 @@
 		<result property="mBrand" column="brand" />
 		<result property="mModel" column="model" />
 		<result property="mType" column="type" />
+		<result property="mIptvId" column="iptv_id"/>
+		<result property="mIptvToken" column="iptv_token"/>
+		<result property="mRemark" column="remark"/>
 		<result property="mSysInfoCode" column="sys_info_code" />
 		<result property="mSysInfo" column="sys_info" />
 		<result property="mIsIptv" column="is_iptv" />
@@ -18,7 +21,7 @@
 	<!--分页查询 -->
 	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
 		select
-		id,brand,model,type,sys_info_code,sys_info,is_iptv,is_media_call from
+		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
 		ITV_STB limit
 		#{startPos},#{pageSize}
 	</select>
@@ -44,9 +47,17 @@
 			<if test="mType!=null">
 				type = #{mType},
 			</if>
+			<if test="mIptvId!=null">
+			    iptv_id = #{mIptvId},
+			</if>
+			<if test="mIptvToken!=null">
+			    iptv_token = #{mIptvToken},
+			</if>
+			<if test="mRemark!=null">
+			    remark = #{mRemark},
+			</if>
 			is_iptv = #{mIsIptv},
-			is_media_call = #{mIsMediaCall}
-
+			is_media_call=#{mIsMediaCall}
 		</set>
 		<where>
 			id = #{mId}
@@ -55,7 +66,7 @@
 
 	<select id="selectOneStb" resultMap="ItvStbMap" resultType="ItvStb">
 		select
-		id,brand,model,type,sys_info_code,sys_info,is_iptv,is_media_call from
+		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
 		ITV_STB
 		<where>
 			id = #{mId}
@@ -66,7 +77,7 @@
 	<!-- 模糊查询 (分页) -->
 	<select id="vagueSelect" resultMap="ItvStbMap" resultType="ItvStb">
 		select
-		id,brand,model,type,sys_info_code,sys_info,is_iptv,is_media_call from
+		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
 		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') limit
 		#{startPos},#{pageSize}
 	</select>
