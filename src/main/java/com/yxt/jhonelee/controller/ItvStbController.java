@@ -4,12 +4,14 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.model.ItvSTB;
 import com.yxt.jhonelee.service.ItvStbService;
 import com.yxt.jhonelee.util.Page;
@@ -32,19 +34,24 @@ public class ItvStbController {
 	 * @return 分页查询显示所有数据
 	 */
 	@RequestMapping("/all")
-	public String allStb(HttpServletRequest request) {
-		String pageNow = request.getParameter("pageNow");
-		Page page = null;
-		int count = service.getCount();
-		if (pageNow != null) {
-			page = new Page(count, Integer.parseInt(pageNow));
-		} else {
-			page = new Page(count, 1);
+	public String allStb(HttpServletRequest request,HttpSession session) {
+		Admin admin =(Admin)session.getAttribute("admin");
+		if(admin!=null){
+			String pageNow = request.getParameter("pageNow");
+			Page page = null;
+			int count = service.getCount();
+			if (pageNow != null) {
+				page = new Page(count, Integer.parseInt(pageNow));
+			} else {
+				page = new Page(count, 1);
+			}
+			List<ItvSTB> list = service.AllItvStb(page.getStartPos(), page.getPageSize());
+			request.setAttribute("list", list);
+			request.setAttribute("page", page);
+			return "settopbox";
+		}else{
+			return "error";
 		}
-		List<ItvSTB> list = service.AllItvStb(page.getStartPos(), page.getPageSize());
-		request.setAttribute("list", list);
-		request.setAttribute("page", page);
-		return "settopbox";
 	}
     /**
      * 

@@ -78,20 +78,25 @@ public class ITVAdminController {
 	 * @return 返回到数据页面
 	 */
 	@RequestMapping("/adminlist")
-	public String Admin(HttpServletRequest request) {
-
-		String pageNow = request.getParameter("pageNow");
-		Page page = null;
-		int count = service.getCount();
-		if (pageNow != null) {
-			page = new Page(count, Integer.parseInt(pageNow));
-		} else {
-			page = new Page(count, 1);
+	public String Admin(HttpServletRequest request,HttpSession session) {
+		Admin admin =(Admin)session.getAttribute("admin");
+		if(admin!=null){
+			String pageNow = request.getParameter("pageNow");
+			Page page = null;
+			int count = service.getCount();
+			if (pageNow != null) {
+				page = new Page(count, Integer.parseInt(pageNow));
+			} else {
+				page = new Page(count, 1);
+			}
+			List<Admin> list = service.AllItvAdmin(page.getStartPos(), page.getPageSize());
+			request.setAttribute("list", list);
+			request.setAttribute("page", page);
+			return "/admin";
+		}else{
+			return "error";
 		}
-		List<Admin> list = service.AllItvAdmin(page.getStartPos(), page.getPageSize());
-		request.setAttribute("list", list);
-		request.setAttribute("page", page);
-		return "/admin";
+
 	}
 
 	/**

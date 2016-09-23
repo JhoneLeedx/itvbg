@@ -4,12 +4,15 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.model.ITVVideoMenu;
 import com.yxt.jhonelee.service.ItvVideoMenuService;
 import com.yxt.jhonelee.util.Page;
@@ -27,22 +30,25 @@ public class ItvVideoMenuController {
 
 	@RequestMapping("/allMenu")
 	public String AllVideoMenu(@RequestParam(value = "codevalue") String codevalue,
-			@RequestParam(value = "shortname") String shortname,@RequestParam(value = "pageNow") String pageNow, ModelMap map) {
-		
-		Page page = null;
-		int totalcount = service.getCount(codevalue);
-		if (pageNow != null) {
-			page = new Page(totalcount, Integer.parseInt(pageNow));
-		} else {
-			page = new Page(totalcount, 1);
+			@RequestParam(value = "shortname") String shortname,@RequestParam(value = "pageNow") String pageNow, ModelMap map,HttpSession session) {
+		Admin admin =(Admin)session.getAttribute("admin");
+		if(admin!=null){
+			Page page = null;
+			int totalcount = service.getCount(codevalue);
+			if (pageNow != null) {
+				page = new Page(totalcount, Integer.parseInt(pageNow));
+			} else {
+				page = new Page(totalcount, 1);
+			}
+			List<ITVVideoMenu> list = service.AllItvVideoMenu(codevalue,page.getStartPos(),page.getPageSize());
+			map.addAttribute("menuList", list);
+			map.addAttribute("shortName", shortname);
+			map.addAttribute("codevalue", codevalue);
+			map.addAttribute("page", page);
+			return "/itvideomenu";
+		}else{
+			return "error";
 		}
-		
-		List<ITVVideoMenu> list = service.AllItvVideoMenu(codevalue,page.getStartPos(),page.getPageSize());
-		map.addAttribute("menuList", list);
-		map.addAttribute("shortName", shortname);
-		map.addAttribute("codevalue", codevalue);
-		map.addAttribute("page", page);
-		return "/itvideomenu";
 	}
 
 	@RequestMapping("/insert")

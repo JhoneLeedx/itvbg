@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.model.ITVAddress;
 import com.yxt.jhonelee.service.ITVAddressService;
 import com.yxt.jhonelee.util.Config;
@@ -33,20 +35,25 @@ public class ITVAddressController {
 	private ITVAddressService service;
 
 	@RequestMapping("/showAddress")
-	public String getAddress(HttpServletRequest request) {
+	public String getAddress(HttpServletRequest request,HttpSession session) {
 
-		Page page = null;
-		String pageNow = request.getParameter("pageNow");
-		int totalcount = service.getCount();
-		if (pageNow != null) {
-			page = new Page(totalcount, Integer.parseInt(pageNow));
-		} else {
-			page = new Page(totalcount, 1);
+		Admin admin =(Admin)session.getAttribute("admin");
+		if(admin!=null){
+			Page page = null;
+			String pageNow = request.getParameter("pageNow");
+			int totalcount = service.getCount();
+			if (pageNow != null) {
+				page = new Page(totalcount, Integer.parseInt(pageNow));
+			} else {
+				page = new Page(totalcount, 1);
+			}
+			List<ITVAddress> list = service.AllITVAddress(page.getStartPos(),page.getPageSize());
+			request.setAttribute("list", list);
+			request.setAttribute("page", page);
+			return "/main";
+		}else{
+			return "error";
 		}
-		List<ITVAddress> list = service.AllITVAddress(page.getStartPos(),page.getPageSize());
-		request.setAttribute("list", list);
-		request.setAttribute("page", page);
-		return "/main";
 	}
 
 	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
