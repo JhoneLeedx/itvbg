@@ -78,7 +78,7 @@
 // 更换验证码
 $('#captchaImage').click(function() 
 {
-    $('#captchaImage').attr("src", "<%=basePath%>/admin/captcha?timestamp=" + (new Date()).valueOf());
+    $('#captchaImage').attr("src", "<%=basePath%>admin/captcha?timestamp=" + (new Date()).valueOf());
     c = $("#code").val("");
     document.getElementById("code").focus();
 }); 
@@ -86,7 +86,11 @@ $('#captchaImage').click(function()
     document.onkeydown=function(e){
 	  	var keycode=document.all?event.keyCode:e.which;
 	  	 	if(keycode==13){
-	  			 submits();
+	  	 		if(document.getElementById("sbtn").disabled){
+	  	 			
+	  	 		}else{
+	  	 		 submits();
+	  	 		}
 	  			}
 	  		}
 
