@@ -14,12 +14,18 @@
 <link rel="stylesheet" href="<%=path%>/bootstrap/css/style.css" />
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
 </head>
 <body>
 
 	<div class="box">
 		<div class="box-head">
-		<h2>模糊查询为${code}的结果</h2>
+			<form action="<%=path%>/itvstb/vague">
+				<input type="text" id="search" name="search" placeholder="请输入code值"/>
+				 <input type="submit" style="margin-top: 5px; width: 80px;" class="button" id="searchBtn"
+					value="搜索">
+			</form>
 		</div>
 		<div class="table">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -47,40 +53,35 @@
 						                 ${itvStb.mBrand }
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 								<td><c:choose>
 										<c:when test="${!empty itvStb.mModel }">
 						                 ${itvStb.mModel }
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 								<td><c:choose>
 										<c:when test="${!empty itvStb.mType }">
 						                 ${itvStb.mType }
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 								<td><c:choose>
 										<c:when test="${!empty itvStb.mSysInfoCode }">
 						                 ${itvStb.mSysInfoCode }
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 								<td><c:choose>
 										<c:when test="${!empty itvStb.mSysInfo }">
 						                 ${itvStb.mSysInfo }
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 
 								<td><c:choose>
@@ -91,8 +92,7 @@
 						                                            支持
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 								<td><c:choose>
 										<c:when test="${itvStb.mIsMediaCall==0 }">
@@ -102,18 +102,15 @@
 						                                            支持
 						            </c:when>
 										<c:otherwise>
-									    未填写
-						           </c:otherwise>
+										</c:otherwise>
 									</c:choose></td>
 								<td><c:choose>
 										<c:when test="${!empty itvStb.mRemark}">
 									     ${itvStb.mRemark}
 										</c:when>
 										<c:otherwise>
-											未填写
 										</c:otherwise>
-									</c:choose>
-								</td>
+									</c:choose></td>
 								<td><a
 									onclick="updateStb(${itvStb.mId},'${itvStb.mBrand }','${itvStb.mModel }','${itvStb.mType }',${itvStb.mIsIptv },${itvStb.mIsMediaCall },'${itvStb.mIptvId }','${itvStb.mIptvToken }','${itvStb.mRemark }')"
 									class="ico edit">编辑</a> <a onclick="deleteStb(${itvStb.mId})"
@@ -183,22 +180,25 @@
 						style="border: none; background: #f6f6f6;" /><br />
 				</div>
 				<div style="margin-left: 100px; margin-top: 3px">
-					<label>机顶盒 品牌:</label><input type="text" id="brand" /><br />
+					<label>机顶盒 品牌:</label><input type="text" id="brand"style="width: 182px" /><br />
 				</div>
 				<div style="margin-left: 100px; margin-top: 3px">
-					<label>机顶盒 型号:</label><input type="text" id="model" /><br />
+					<label>机顶盒 型号:</label><input type="text" id="model" style="width: 182px"/><br />
 				</div>
 				<div style="margin-left: 100px; margin-top: 3px">
-					<label>机顶盒 类型:</label><input type="text" id="type" /><br />
+					<label>机顶盒 类型:</label><input type="text" id="type" style="width: 182px"/><br />
 				</div>
-					<div style="margin-left: 100px; margin-top: 3px">
-					<label>iptv的  账号:</label><input type="text" id="iptvId" /><br />
+				<div style="margin-left: 100px; margin-top: 3px">
+					<label>iptv的 账号:</label><input type="text" id="iptvId" style="width: 182px"/><br />
 				</div>
-					<div style="margin-left: 100px; margin-top: 3px">
-					<label>iptv想家账号</label><input type="text" id="iptvToken" /><br />
+				<div style="margin-left: 100px; margin-top: 3px">
+					<label>iptv想家账号</label><input type="text" id="iptvToken" style="width: 182px"/><br />
 				</div>
-					<div style="margin-left: 100px; margin-top: 3px">
-					<label>机顶盒 备注:</label><input type="text" id="remark" placeholder="备注（是不是公司内部机顶盒？）"/><br />
+				<div style="margin-left: 100px; margin-top: 3px">
+					<label>机顶盒 备注:</label>
+					<textarea id="remark" placeholder="备注（是不是公司内部机顶盒？）"
+						style="height: 40px;width:182px; vertical-align: top;resize: none"></textarea>
+					<br />
 				</div>
 				<div style="margin-left: 100px; margin-top: 3px">
 					<label>是否支持 I P T V ：</label><input type="radio" name="iptv"
@@ -325,5 +325,6 @@
 			}
     	});  
 	}
+
 </script>
 </html>

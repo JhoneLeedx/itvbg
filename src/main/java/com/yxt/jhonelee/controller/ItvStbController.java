@@ -116,10 +116,13 @@ public class ItvStbController {
 	 * @param request
 	 * @return 返回模糊查询的结果集
 	 */
-	@RequestMapping("vague")
+	@RequestMapping("/vague")
 	public String vagueSelect(HttpServletRequest request) {
 		String pageNow = request.getParameter("pageNow");
 		String mCode = request.getParameter("search");
+		if(mCode==""){
+			return "redirect:/itvstb/all";
+		}
 		int count = service.vagueGetCount(mCode);
 		Page page = null;
 		if (pageNow != null) {

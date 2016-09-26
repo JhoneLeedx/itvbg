@@ -22,6 +22,7 @@ public class AdminServiceImpl implements AdminService {
 		return dao.AllItvAdmin(startPos,pageSize);
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	public int updateAdmin(Admin admin) {
 		return dao.updateAdmin(admin);
 	}

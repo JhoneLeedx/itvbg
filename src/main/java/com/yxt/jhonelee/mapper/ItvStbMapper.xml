@@ -22,7 +22,7 @@
 	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
 		select
 		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
-		ITV_STB limit
+		ITV_STB ORDER BY is_iptv desc,brand asc limit
 		#{startPos},#{pageSize}
 	</select>
 	<!--查询总数 -->
@@ -78,13 +78,13 @@
 	<select id="vagueSelect" resultMap="ItvStbMap" resultType="ItvStb">
 		select
 		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
-		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') limit
+		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') ORDER BY is_iptv desc,brand asc limit
 		#{startPos},#{pageSize}
 	</select>
 	<!--模糊查询总数 -->
-	<select id="vagueGetCount" resultType="int">
+	<select id="vagueGetCount" resultType="int" parameterType="String">
+	  <!--  <bind name="code" value="'%'+ mCode +'%'"/> -->
 		select count(id) from
-		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%')
+		ITV_STB where sys_info_code like  CONCAT('%',#{mCode},'%') 
 	</select>
-
 </mapper>
