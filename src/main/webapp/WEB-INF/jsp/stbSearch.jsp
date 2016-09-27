@@ -16,6 +16,15 @@
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
+<script type="text/javascript">
+	 var a = '<%=(String)request.getSession().getAttribute("error")%>' ;
+	 console.log(a);
+	 if(a!='null'){
+		 alert(a);
+	 }
+	 <%request.getSession().removeAttribute("error");%>
+	</script>
+	 
 </head>
 <body>
 

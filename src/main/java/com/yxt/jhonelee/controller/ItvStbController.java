@@ -121,6 +121,8 @@ public class ItvStbController {
 		String pageNow = request.getParameter("pageNow");
 		String mCode = request.getParameter("search");
 		if(mCode==""){
+			
+			request.getSession().setAttribute("error", "搜索为空");
 			return "redirect:/itvstb/all";
 		}
 		int count = service.vagueGetCount(mCode);
@@ -135,8 +137,10 @@ public class ItvStbController {
 			request.setAttribute("code", mCode);
 			request.setAttribute("list", list);
 			request.setAttribute("page", page);
+			request.getSession().setAttribute("error", "搜索成功");
 			return "stbSearch";
 		} else {
+			request.getSession().setAttribute("error", "搜索的结果不存在");
 			return "redirect:/itvstb/all";
 		}
 	}
