@@ -63,6 +63,7 @@
 				<c:if test="${admin.mLevel==1 }">
 				<li><a target="right" href="<%=path%>/admin/adminlist">登录管理</a></li>
 				</c:if>
+				<li><a target="right" href="<%=path%>/itvpic/itvpiclist">图片管理</a></li>
 				</ul>
 			</div>
 			<div class="span10 content-right">

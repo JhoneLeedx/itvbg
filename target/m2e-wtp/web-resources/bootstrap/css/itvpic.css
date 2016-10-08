@@ -1,0 +1,22 @@
+#head {
+	width: 100%;
+	height: 40px;
+}
+
+#head ul {
+	padding: 0;
+	margin: 0;
+}
+#head ul li {
+	float: left;
+	text-decoration: none;
+	padding: 5px;
+	margin: 0px 10px 0px 0px;
+	position: relative;
+}
+#head ul li a {
+	text-decoration: none;
+}
+#head ul li a:visited {
+	text-decoration: none;
+}

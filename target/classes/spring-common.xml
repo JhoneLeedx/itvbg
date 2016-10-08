@@ -15,9 +15,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	    <property name="url"
-			value="jdbc:mysql://company.99kst.com:8106/yxt?useUnicode=true&amp;characterEncoding=utf-8" />
-		<property name="username" value="yxt" />
-		<property name="password" value="Come1314" />
+			value="jdbc:mysql://company.99kst.com:3306/develop?useUnicode=true&amp;characterEncoding=utf-8" />
+		<property name="username" value="develop" />
+		<property name="password" value="yxt123" />
 		<!-- 云端数据库连接 -->
 		<!--   <property name="url" value="jdbc:mysql://172.16.0.246:3306/yxt?useUnicode=true&amp;characterEncoding=utf-8" 
 			/> <property name="username" value="yxt" /> <property name="password" value="yxt520119" 
