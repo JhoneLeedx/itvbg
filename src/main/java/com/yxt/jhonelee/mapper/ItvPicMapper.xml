@@ -10,14 +10,14 @@
 		<result property="mState" column="state" />
 		<result property="mType" column="type" />
 		<result property="mTelphone" column="telephone" />
-		<result property="mItvPic" column="pic_itv_file" />
+		<result property="mItvpic" column="pic_itv_file" />
 	</resultMap>
 	<select id="ItvPicList" resultMap="ItvPicMap" resultType="ItvPic">
 		select id,name,address,state,type,telephone,pic_itv_file from hospital
 	</select>
 
 	<update id="UpdateItvPic" parameterType="ItvPic">
-		update hospital set pic_itv_file = #{mItvPic} where id = #{mId}
+		update hospital set pic_itv_file = #{mItvpic} where id = #{mId}
 	</update>
 
 </mapper>

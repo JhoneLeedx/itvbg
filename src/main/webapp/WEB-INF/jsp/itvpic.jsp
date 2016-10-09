@@ -21,10 +21,10 @@
 <body>
 	<div id="head">
 		<ul>
-			<li onclick="checkTab(1)">普通医院</li>
-			<li onclick="checkTab(2)">社区卫生中心</li>
-			<li onclick="checkTab(3)">药店</li>
-			<li onclick="checkTab(4)">牵头医院</li>
+			<li><a onclick="checkTab(1)">指导医院</a></li>
+			<li><a onclick="checkTab(2)">社区卫生中心</a></li>
+			<li><a onclick="checkTab(3)">药店</a></li>
+			<li><a onclick="checkTab(4)">牵头医院</a></li>
 		</ul>
 	</div>
 	<div class="table" id="id1">
@@ -47,7 +47,9 @@
 								<td>${itvpic.mId }</td>
 								<td>${itvpic.mName }</td>
 								<td>${itvpic.mAddressName }</td>
-								<td>${itvpic.mItvpic }</td>
+								<td><c:if test="${!empty itvpic.mItvpic }">
+										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+									</c:if></td>
 								<td>${itvpic.mTelphone }</td>
 								<td><a
 									onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
@@ -79,10 +81,12 @@
 								<td>${itvpic.mId }</td>
 								<td>${itvpic.mName }</td>
 								<td>${itvpic.mAddressName }</td>
-								<td>${itvpic.mItvpic }</td>
+								<td><c:if test="${!empty itvpic.mItvpic }">
+										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+									</c:if></td>
 								<td>${itvpic.mTelphone }</td>
 								<td><a
-									onclick="edit(${itvpic.mId },'${itvpic.mName },${itvpic.mType }')"
+									onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
 									class="ico edit">编辑</a></td>
 							</tr>
 						</c:if>
@@ -112,10 +116,12 @@
 									<td>${itvpic.mId }</td>
 									<td>${itvpic.mName }</td>
 									<td>${itvpic.mAddressName }</td>
-									<td>${itvpic.mItvpic }</td>
+									<td><c:if test="${!empty itvpic.mItvpic }">
+											<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+										</c:if></td>
 									<td>${itvpic.mTelphone }</td>
 									<td><a
-										onclick="edit(${itvpic.mId },'${itvpic.mName },${itvpic.mType }')"
+										onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
 										class="ico edit">编辑</a></td>
 								</tr>
 							</c:when>
@@ -147,10 +153,12 @@
 								<td>${itvpic.mId }</td>
 								<td>${itvpic.mName }</td>
 								<td>${itvpic.mAddressName }</td>
-								<td>${itvpic.mItvpic }</td>
+								<td><c:if test="${!empty itvpic.mItvpic }">
+										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+									</c:if></td>
 								<td>${itvpic.mTelphone }</td>
 								<td><a
-									onclick="edit(${itvpic.mId },'${itvpic.mName },${itvpic.mType }')"
+									onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
 									class="ico edit">编辑</a></td>
 							</tr>
 						</c:if>
@@ -164,20 +172,23 @@
 			<form id="itvpicUpload" enctype="multipart/form-data">
 				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
 				<input style="display: none" type="text" name="type" id="type">
-				<div style="margin-left: 100px; margin-top: 10px">
-					<label>序号</label><input type="text" id="mid" name="id" /><br />
+				<div style="margin-left: 130px; margin-top: 30px">
+					<label>序号</label><input type="text" id="mid" name="id"
+						style="border: none; background: #f6f6f6; margin-left: 20px"
+						readonly="readonly" /><br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 10px">
-					<label>名称</label><input type="text" value="医院名称为：" id="name" /> <br />
+				<div style="margin-left: 130px; margin-top: 30px">
+					<label>名称</label><input type="text" value="医院名称为：" id="name"
+						style="border: none; background: #f6f6f6; margin-left: 20px"
+						readonly="readonly" class="same noBorder" /> <br />
 				</div>
-				<div style="margin-left: 100px; margin-top: 10px">
+				<div style="margin-left: 130px; margin-top: 30px">
 					<input type="file" name="itvpic" /><br />
 				</div>
-				<div style="margin-left: 200px; margin-top: 20px">
-					<input type="button" style="width: 50px" value="上传"
-						onclick="itvPicUpload()" /> 
-					<input type="reset"
-						style="width: 50px" value="取消" onclick="cancle()" />
+				<div style="margin-left: 180px; margin-top: 50px">
+					<input type="button" style="width: 70px" value="上传"
+						onclick="itvPicUpload()" /> <input type="reset"
+						style="width: 70px" value="取消" onclick="cancle()" />
 				</div>
 			</form>
 		</div>
@@ -197,15 +208,25 @@
 		document.getElementById("div").style.display = "block";
 		$("#mid").val(id);
 		$("#name").val(name);
-		$("type").val(type);
+		$("#type").val(type);
 	}
 	function itvPicUpload() {
           $("#itvpicUpload").ajaxSubmit({
-        	  
+			   url:"<%=path%>/itvpic/itvpicUpload",
+			   type:"post",
+			   dataType : "text",
+			   contentType: "application/x-www-form-urlencoded; charset=utf-8",  
+				error : function() {
+					alert("请与管理员联系");
+				},
+	           success: function(data) {  
+	        	   alert(data);
+	        	   location.reload();
+	              }
           });
 	}
 	function cancle() {
-		document.getElementById("div").style.display = "block";
+		document.getElementById("div").style.display = "none";
 	}
 </script>
 </html>
