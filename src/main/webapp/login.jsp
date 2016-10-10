@@ -5,14 +5,15 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>后台登录界面</title>
 <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" href="bootstrap/css/login.css" />
-<script language="JavaScript">
-function keyLogin(){
+<script>
+
+  function keyLogin(){
   if (event.keyCode==13){
 	  
 	  if(checkCode()){

@@ -9,7 +9,7 @@
 			+ path + "/";
 %>
 <c:set value="<%=path%>" var="path"></c:set>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -184,7 +184,7 @@
 					<label>视频 名称：</label><input type="text" id="title" />*<br />
 				</div>
 				<div style="margin-left: 120px; margin-top: 5px">
-					<label>视频 链接：</label><input type="text" id="filespec" />*<br />
+					<label>视频 链接：</label><input type="text" id="filespec" placeholder="请输入code值" />*<br />
 				</div>
 				<div style="margin-left: 120px; margin-top: 5px">
 					<label>视频start：</label><input type="text" id="start" />（选填）<br />
