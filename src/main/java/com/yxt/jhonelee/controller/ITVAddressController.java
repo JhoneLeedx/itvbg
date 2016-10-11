@@ -93,7 +93,7 @@ public class ITVAddressController {
 				FileUtils.writeByteArrayToFile(new File(logofile, logoname), logo.getBytes());
 		/*		String logourl = Config.CLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 						+ "/images/upload/logo/" + logoname;*/
-				String logourl = Config.CLOUDURL + ":" + request.getServerPort() + request.getContextPath()
+				String logourl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
 				+ "/images/upload/logo/" + logoname;
 				address.setmLogoIMageURL(logourl);
 

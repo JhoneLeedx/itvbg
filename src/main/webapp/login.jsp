@@ -13,8 +13,10 @@
 <link rel="stylesheet" href="bootstrap/css/login.css" />
 <script>
 
-  function keyLogin(){
-  if (event.keyCode==13){
+  function keyLogin(event){
+	  var e = event||window.event; 
+	  var currentKey = e.keyCode; 
+  if (currentKey==13){
 	  
 	  if(checkCode()){
 		  submits(); //调用登录按钮的登录事件
@@ -25,7 +27,7 @@
 }
 </script>
 </head>
-<body onkeydown="keyLogin();">
+<body onkeydown="keyLogin(event)">
 	<div id="login">
 		<h2>后台登录</h2>
 		<form>
