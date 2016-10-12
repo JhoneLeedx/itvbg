@@ -31,195 +31,233 @@
 			}
 		}
 </script>
-	
+
 </head>
 <body>
 
-   <c:choose>
-<c:when test="${!empty admin }">
-	<!-- Box -->
-	<div class="box">
-		<!-- Box Head -->
-		<div class="box-head">
-			<button style="margin-top: 7px;width: 80px" class="button" onclick="addAdmin()">添加</button>
-		</div>
-		<!-- End Box Head -->
+	<c:choose>
+		<c:when test="${!empty admin }">
+			<!-- Box -->
+			<div class="box">
+				<!-- Box Head -->
+				<div class="box-head">
+					<button style="margin-top: 7px; width: 80px" class="button"
+						onclick="addAdmin()">添加</button>
+				</div>
+				<!-- End Box Head -->
 
-		<!-- Table -->
-		<div class="table">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<thead>
-					<tr>
-						<th>序号</th>
-						<th>管理员名称</th>
-						<th>管理员密码</th>
-						<th>管理员级别</th>
-						<th>管理员类型</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${!empty list }">
-						<c:forEach items="${list }" var="menu">
+				<!-- Table -->
+				<div class="table">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<thead>
 							<tr>
-								<td>${menu.mId }</td>
-								<td>${menu.mAdminName }</td>
-								<td>${menu.mAdminPass }</td>
-								<td><c:choose>
-										<c:when test="${menu.mLevel==1 }">超级管理员</c:when>
-										<c:when test="${menu.mLevel!=1 }">普通管理员</c:when>
-									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${menu.mType==1 }">协同服务</c:when>
-										<c:when test="${menu.mType==2 }">Itv后台</c:when>
-									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${admin.mId==menu.mId }">
+								<th>序号</th>
+								<th>管理员名称</th>
+								<th>管理员密码</th>
+								<th>管理员级别</th>
+								<th>管理员类型</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${!empty list }">
+								<c:forEach items="${list }" var="menu">
+									<tr>
+										<td>${menu.mId }</td>
+										<td>${menu.mAdminName }</td>
+										<td>${menu.mAdminPass }</td>
+										<td><c:choose>
+												<c:when test="${menu.mLevel==1 }">超级管理员</c:when>
+												<c:when test="${menu.mLevel!=1 }">普通管理员</c:when>
+											</c:choose></td>
+										<td><c:choose>
+												<c:when test="${menu.mType==1 }">协同服务</c:when>
+												<c:when test="${menu.mType==2 }">Itv后台</c:when>
+											</c:choose></td>
+										<td><c:choose>
+												<c:when test="${admin.mId==menu.mId }">
 										当前管理员不允许操作
 										</c:when>
-										<c:otherwise>
-											<a
-												onclick="editAdmin(${menu.mId},'${menu.mAdminName }','${menu.mAdminPass }',${menu.mLevel },${menu.mType })"
-												class="ico edit">编辑</a>
-											<a onclick="deldiv(${menu.mId})" class="ico del">删除</a>
-										</c:otherwise>
-									</c:choose></td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
-		</div>
-		<!-- Table -->
-	</div>
-	<!-- End Box -->
-	<!-- 分页开始 -->
-	<div align="center" style="margin-top: 20px">
-		<c:choose>
-			<c:when test="${page.totalPageCount==0}">
-			</c:when>
-			<c:otherwise>
-				<div>
-					<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
-						${page.pageNow} 页</font> <a href="<%=path%>/admin/adminlist?pageNow=1">首页</a>
-					<c:choose>
-						<c:when test="${page.pageNow - 1 > 0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow - 1}">上一页</a>
-						</c:when>
-						<c:when test="${page.pageNow - 1 <= 0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=1">上一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 < page.totalPageCount}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow + 1}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
-							<a
-								href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">下一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">尾页</a>
-						</c:when>
-						<c:otherwise>
-							<a
-								href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">尾页</a>
-						</c:otherwise>
-					</c:choose>
+												<c:otherwise>
+													<a
+														onclick="editAdmin(${menu.mId},'${menu.mAdminName }','${menu.mAdminPass }',${menu.mLevel },${menu.mType })"
+														class="ico edit">编辑</a>
+													<a onclick="deldiv(${menu.mId})" class="ico del">删除</a>
+												</c:otherwise>
+											</c:choose></td>
+									</tr>
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table>
 				</div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-	<div id="div">
-		<div id="edit">
-			<form>
-				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
-				<div style="margin-left: 100px; margin-top: 30px">
-					<label>序号：</label><input type="text" readonly="readonly" id="id"
-						style="border: none; background: #f6f6f6;" /><br />
-				</div>
+				<!-- Table -->
+			</div>
+			<!-- End Box -->
+			<!-- 分页开始 -->
+			<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
+								${page.pageNow} 页</font> <a href="<%=path%>/admin/adminlist?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page.pageNow - 1 > 0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page.pageNow - 1 <= 0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 < page.totalPageCount}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
+									<a
+										href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div id="div">
+				<div id="edit">
+					<form>
+						<h2
+							style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
+						<div style="margin-left: 100px; margin-top: 30px">
+							<label>序号：</label><input type="text" readonly="readonly" id="id"
+								style="border: none; background: #f6f6f6;" /><br />
+						</div>
 
-				<div style="margin-left: 100px; margin-top: 15px">
-					<label>管理员名称：</label><input type="text" id="name" /><br />
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员名称：</label><input type="text" id="name" /><br />
+						</div>
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员密码：</label><input type="text" id="pass" /><br />
+						</div>
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员级别：</label> <input type="radio" name="level"
+								id="level1">普通管理员 <br />
+						</div>
+						<div style="margin-left: 100px; margin-top: 15px"></div>
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员类别：</label><input type="radio" name="type" id="type0" />IPTV协同服务<input
+								type="radio" name="type" id="type1" />IPTV后台管理<br />
+						</div>
+<!--  						<div  id="addressDiv" style="margin-left: 100px;">
+							<br /> 省:<select  id="province1"
+								style="margin-left: 15px;; margin-right: 15px"
+								onchange="findcity1()">
+								<option>请选择</option>
+							</select> 市: <select  id="city1" onchange="findtown1()"
+								style="margin-left: 15px; margin-right: 15px">
+								<option>请选择</option>
+							</select> 区: <select  id="town1"
+								name="addressCodeValue"
+								style="margin-left: 15px; margin-right: 15px">
+								<option>请选择</option>
+							</select>
+						</div>  -->
+						<div style="margin-left: 200px; margin-top: 50px">
+							<input style="width: 50px" type="button" value="提交"
+								onclick="editAdd()" /> <input style="width: 50px" type="reset"
+								value="取消" onclick="editqx()" />
+						</div>
+					</form>
 				</div>
-				<div style="margin-left: 100px; margin-top: 15px">
-					<label>管理员密码：</label><input type="text" id="pass" /><br />
+			</div>
+			<div id="del">
+				<input type="text" id="mId" style="display: none;">
+				<h2
+					style="font-style: oblique; margin-left: 50px; margin-top: 20px;">
+					<img alt="" src="<%=path%>/images/jg.png"
+						style="vertical-align: middle; margin-right: 10px">是否删除管理员
+				</h2>
+				<div style="margin-left: 180px; margin-top: 15px">
+					<input style="width: 45px" type="button" value="是"
+						onclick="delAdmin()" /> <input style="width: 45px" type="reset"
+						value="否" onclick="fouAdmin()" />
 				</div>
-				<div style="margin-left: 100px; margin-top: 15px">
-					<label>管理员级别：</label> 
-					<input type="radio" name="level" id="level1">普通管理员 <br />
-				</div>
-				<div style="margin-left: 100px; margin-top: 15px"></div>
-				<div style="margin-left: 100px; margin-top: 15px">
-					<label>管理员类别：</label><input type="radio" name="type" id="type0" />IPTV协同服务<input
-						type="radio" name="type" id="type1" />IPTV后台管理<br />
-				</div>
-				<div style="margin-left: 200px; margin-top: 50px">
-					<input style="width: 50px" type="button" value="提交"
-						onclick="editAdd()" /> <input style="width: 50px" type="reset"
-						value="取消" onclick="editqx()" />
-				</div>
-			</form>
-		</div>
-	</div>
-	<div id="del">
-		<input type="text" id="mId" style="display: none;">
-		<h2 style="font-style: oblique; margin-left: 50px; margin-top: 20px;">
-			<img alt="" src="<%=path%>/images/jg.png" style="vertical-align:middle;margin-right: 10px">是否删除管理员
-		</h2>
-		<div style="margin-left: 180px; margin-top: 15px">
-			<input style="width: 45px" type="button" value="是"
-				onclick="delAdmin()" /> <input style="width: 45px" type="reset"
-				value="否" onclick="fouAdmin()" />
-		</div>
-	</div>
+			</div>
 
-   <div id="divadd">
-	<div id="add">
-		<form>
-			<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">添加新的管理员</h2>
+			<div id="divadd">
+				<div id="add">
+					<form>
+						<h2
+							style="font-style: oblique; margin-left: 20px; margin-top: 10px">添加新的管理员</h2>
 
-			<div style="margin-left: 100px; margin-top: 45px">
-				<label>管理员名称：</label><input type="text" id="Adminname" /><br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 15px">
-				<label>管理员密码：</label><input type="text" id="Adminpass" /><br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 15px">
-				<label>管理员级别：</label>
-				<input type="radio" name="alevel" id="alevel1">普通管理员 <br />
-			</div>
-			<div style="margin-left: 100px; margin-top: 15px"></div>
-			<div style="margin-left: 100px; margin-top: 15px">
-				<label>管理员类别：</label><input type="radio" name="atype" id="atype0" />IPTV协同服务<input
-					type="radio" name="atype" id="atype1" />IPTV后台管理<br />
-			</div>
-			<div style="margin-left: 200px; margin-top: 50px">
-				<input style="width: 50px" type="button" value="提交" onclick="aadd()" />
-				<input style="width: 50px" type="reset" value="取消" onclick="aqx()" />
-			</div>
-		</form>
-	</div>
-	</div>
-	</c:when>
-	<c:otherwise>
-	<div style="margin: 20px;">
-					<a href="login.jsp">自动跳转未成功？请手动点击跳转</a>
+						<div style="margin-left: 100px; margin-top: 45px">
+							<label>管理员名称：</label><input type="text" id="Adminname" /><br />
+						</div>
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员密码：</label><input type="text" id="Adminpass" /><br />
+						</div>
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员级别：</label> <input type="radio" name="alevel"
+								id="alevel1">普通管理员 <br />
+						</div>
+						<div style="margin-left: 100px; margin-top: 15px"></div>
+						<div style="margin-left: 100px; margin-top: 15px">
+							<label>管理员类别：</label><input type="radio" name="atype" id="atype0" />IPTV协同服务<input
+								type="radio" name="atype" id="atype1" />IPTV后台管理<br />
+						</div>
+
+						<div id="address"  style="margin-left: 100px;">
+							<br /> 省:<select  id="province"
+								style="margin-left: 15px;; margin-right: 15px"
+								onchange="findcity()">
+								<option>请选择</option>
+							</select> 市: <select  id="city" onchange="findtown()"
+								style="margin-left: 15px; margin-right: 15px">
+								<option>请选择</option>
+							</select> 区: <select  id="town"
+								name="addressCodeValue"
+								style="margin-left: 15px; margin-right: 15px">
+								<option>请选择</option>
+							</select>
+						</div>
+						<div style="margin-left: 200px; margin-top: 50px">
+							<input style="width: 50px" type="button" value="提交"
+								onclick="aadd()" /> <input style="width: 50px" type="reset"
+								value="取消" onclick="aqx()" />
+						</div>
+					</form>
 				</div>
-				<script type="text/javascript">Load("login.jsp");
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div style="margin: 20px;">
+				<a href="login.jsp">自动跳转未成功？请手动点击跳转</a>
+			</div>
+			<script type="text/javascript">Load("login.jsp");
 				</script>
-	</c:otherwise>
+		</c:otherwise>
 	</c:choose>
 </body>
 <script type="text/javascript">
 
     function addAdmin() {
 		document.getElementById("divadd").style.display="block";
+		document.getElementById("atype1").checked= true;
+		findprovince();
+		return true;
 	}
     function aqx() {
     	document.getElementById("divadd").style.display="none";
@@ -227,6 +265,7 @@
     function aadd() {
     	var name = $("#Adminname").val();
     	var pass = $("#Adminpass").val();
+    	var town = $("#town").val();
     	var level,type;
     	if(document.getElementById("alevel1").checked){
     		level=2;
@@ -238,8 +277,21 @@
     	}else{
     		type=2;
     	}
+    	if(name==""){
+    		alert("没有填写名字");
+    		return;
+    	}
+     	if(pass==""){
+     		alert("没有填写密码");
+    		return;
+    	}
+     	if(town=="请选择"){
+     		alert("没有选择地区");
+    		return;
+    	}
+     	
     	$.ajax({
-    		data:{"name":name,"pass":pass,"level":level,"type":type},
+    		data:{"name":name,"pass":pass,"level":level,"type":type,"town":town},
     		url:"<%=path%>/admin/addAdmin",
 			ache:false,
 			async:true,
@@ -255,7 +307,6 @@
     	});
 	}
 
-
    function editAdd() {
 	var id = $("#id").val();
 	var name = $("#name").val();
@@ -266,13 +317,21 @@
 	}else{
 		level=2;
 	}
-	if( document.getElementById("type0").checked){
+	if( document.getElementById("type0").checked){	
 		type=1;
 	}else{
 		type=2;
 	}
+	if(name==""){
+		alert("没有填写名字");
+		return;
+	}
+ 	if(pass==""){
+ 		alert("没有填写密码");
+		return;
+	}
 	   $.ajax({
-			data:{"id":id,"name":name,"pass":pass,"level":level,"type":type},
+			data:{"id":id,"name":name,"pass":pass,"level":level,"type":type,"town":town},
 			url:"<%=path%>/admin/updateAdmin",
 			ache:false,
 			async:true,
@@ -333,5 +392,174 @@
    function fouAdmin() {
 	   document.getElementById("del").style.display="none";
    }
+   
+   function findprovince() {
+	   
+		var country = $("#country").val();
+		$.ajax({
+			data : {"codevalue":country},
+		    url:"<%=path%>/addresstll/alist",
+			ache : false,
+			dataType : "json",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+					alert("请与管理员联系");
+				},
+			success : function(data) {
+					var json = JSON.stringify(data);
+					var obj = jQuery.parseJSON(json);
+					var str = "<option>请选择</option>";
+					$("#province").html("");
+					for (var i=0;i<obj.length;i++) {
+						var address = obj[i];
+						str += "<option value='" +address.mCodeValue+ "'>"+address.mName+"</option>";
+					}
+					$("#province").append(str);
+					$("#city").html("");
+					$("#city").append("<option>请选择</option>");
+					$("#town").html("");
+					$("#town").append("<option>请选择</option>");
+				}
+			});
+		}
+	function findcity() {
+		var province = $("#province").val();
+		$.ajax({
+			data : {"codevalue":province},
+		    url:"<%=path%>/addresstll/alist",
+			ache : false,
+			dataType : "json",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+					alert("请与管理员联系");
+				},
+			success : function(data) {
+					var json = JSON.stringify(data);
+					var obj = jQuery.parseJSON(json);
+					var str = "<option>请选择</option>";
+					$("#city").html("");
+					for (var i=0;i<obj.length;i++) {
+						var address = obj[i];
+						str += "<option value='" +address.mCodeValue+ "'>"+address.mName+"</option>";
+					}
+					$("#city").append(str);
+					$("#town").html("");
+					$("#town").append("<option>请选择</option>");
+				}
+			});
+		}
+	function findtown() {
+		var city = $("#city").val();
+		$.ajax({
+			data : {"codevalue":city},
+		    url:"<%=path%>/addresstll/alist",
+						ache : false,
+						dataType : "json",
+						async : true,
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						error : function() {
+							alert("请与管理员联系");
+						},
+						success : function(data) {
+							var json = JSON.stringify(data);
+							var obj = jQuery.parseJSON(json);
+							var str = "<option>请选择</option>";
+							$("#town").html("");
+							for (var i = 0; i < obj.length; i++) {
+								var address = obj[i];
+								str += "<option value='"+address.mCodeValue+"'>" //现在用code_value标识，后期会改成id标识
+										+ address.mName + "</option>";
+							}
+							$("#town").append(str);
+						}
+					});
+		}
+   
+<%-- 	
+	   function findprovince1() {
+		   
+			var country = $("#country1").val();
+			$.ajax({
+				data : {"codevalue":country},
+			    url:"<%=path%>/addresstll/alist",
+				ache : false,
+				dataType : "json",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+						alert("请与管理员联系");
+					},
+				success : function(data) {
+						var json = JSON.stringify(data);
+						var obj = jQuery.parseJSON(json);
+						var str = "<option>请选择</option>";
+						$("#province1").html("");
+						for (var i=0;i<obj.length;i++) {
+							var address = obj[i];
+							str += "<option value='" +address.mCodeValue+ "'>"+address.mName+"</option>";
+						}
+						$("#province1").append(str);
+						$("#city1").html("");
+						$("#city1").append("<option>请选择</option>");
+						$("#town1").html("");
+						$("#town1").append("<option>请选择</option>");
+					}
+				});
+			}
+		function findcity1() {
+			var province = $("#province1").val();
+			$.ajax({
+				data : {"codevalue":province},
+			    url:"<%=path%>/addresstll/alist",
+				ache : false,
+				dataType : "json",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+						alert("请与管理员联系");
+					},
+				success : function(data) {
+						var json = JSON.stringify(data);
+						var obj = jQuery.parseJSON(json);
+						var str = "<option>请选择</option>";
+						$("#city1").html("");
+						for (var i=0;i<obj.length;i++) {
+							var address = obj[i];
+							str += "<option value='" +address.mCodeValue+ "'>"+address.mName+"</option>";
+						}
+						$("#city1").append(str);
+						$("#town1").html("");
+						$("#town1").append("<option>请选择</option>");
+					}
+				});
+			}
+		function findtown1() {
+			var city = $("#city1").val();
+			$.ajax({
+				data : {"codevalue":city},
+			    url:"<%=path%>/addresstll/alist",
+							ache : false,
+							dataType : "json",
+							async : true,
+							contentType : "application/x-www-form-urlencoded; charset=utf-8",
+							error : function() {
+								alert("请与管理员联系");
+							},
+							success : function(data) {
+								var json = JSON.stringify(data);
+								var obj = jQuery.parseJSON(json);
+								var str = "<option>请选择</option>";
+								$("#town1").html("");
+								for (var i = 0; i < obj.length; i++) {
+									var address = obj[i];
+									str += "<option value='"+address.mCodeValue+"'>" //现在用code_value标识，后期会改成id标识
+											+ address.mName + "</option>";
+								}
+								$("#town1").append(str);
+							}
+						});
+			} --%>
 </script>
 </html>

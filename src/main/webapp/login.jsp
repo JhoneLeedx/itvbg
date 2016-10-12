@@ -47,7 +47,7 @@
 						id="captchaImage" src="<%=basePath%>/admin/captcha" />
 				</p>
 				<p>
-					<input type="button"  id="sbtn"  disabled="disabled" value="登录" onclick="submits()" />
+					<input type="button"  id="sbtn"  value="登录" onclick="submits()" />
 				</p>
 			</fieldset>
 		</form>
@@ -76,20 +76,15 @@
 				if(data=="right"){
 					 document.getElementById("code").style="width: 250px;";
 					 if(user==""||password==""){
-						 document.getElementById("sbtn").disabled=true;
 						 document.getElementById("sbtn").style.background="#D4D4D3";
 						 flag =  true;
 				   }else{
-					     document.getElementById("sbtn").disabled=false;
-						 document.getElementById("sbtn").style.background="#80c1d4";
 						 flag =  false;
 				   }
 					 flag = true;
 				}else if(data=="wrong"){
 					 $("#code").val("");
 					 document.getElementById("code").style="border:1px solid red;width: 250px;";
-					 document.getElementById("sbtn").disabled=true;
-					 document.getElementById("sbtn").style.background="#D4D4D3";
 					 flag =  false;
 				}
 			}
@@ -104,37 +99,43 @@ $('#captchaImage').click(function()
     document.getElementById("code").focus();
 }); 
 		function submits() {
-			console.log("submit");
-			var admin = $("#user").val();
-			var pass = $("#password").val();
-			if(admin==""){
-				alert("管理员账号不能为空");
-				return;
-			}
-			if(pass==""){
-				alert("管理员密码不能为空");
-				return;
-			}
-			$.ajax({
-			    data:{"admin":admin,"pass":pass},
-				url:"<%=path%>/admin/login",
-			ache : false,
-			dataType : "text",
-			async : true,
-			contentType : "application/x-www-form-urlencoded; charset=utf-8",
-			error : function() {
-				alert("请与管理员联系");
-			},
-			success : function(data) {
-				if (data == "当前管理员不属于家庭医生后台管理，请重新输入") {
-					alert(data);
-				} else if (data == "不存在当前用户,可能原因账号或密码错误") {
-					alert(data);
-				} else {
-					location.href = "index.jsp"
+			
+			if(checkCode()){
+				console.log("submit");
+				var admin = $("#user").val();
+				var pass = $("#password").val();
+				if(admin==""){
+					alert("管理员账号不能为空");
+					return;
 				}
+				if(pass==""){
+					alert("管理员密码不能为空");
+					return;
+				}
+				$.ajax({
+				    data:{"admin":admin,"pass":pass},
+					url:"<%=path%>/admin/login",
+				ache : false,
+				dataType : "text",
+				async : true,
+				contentType : "application/x-www-form-urlencoded; charset=utf-8",
+				error : function() {
+					alert("请与管理员联系");
+				},
+				success : function(data) {
+					if (data == "当前管理员不属于家庭医生后台管理，请重新输入") {
+						alert(data);
+					} else if (data == "不存在当前用户,可能原因账号或密码错误") {
+						alert(data);
+					} else {
+						location.href = "index.jsp"
+					}
+				}
+			});	
+			}else{
+				alert("验证码错误");
 			}
-		});
+		
 	}
 </script>
 </html>

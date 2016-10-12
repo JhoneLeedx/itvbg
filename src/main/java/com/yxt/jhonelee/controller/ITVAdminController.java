@@ -126,14 +126,14 @@ public class ITVAdminController {
 	@RequestMapping("/updateAdmin")
 	public void update(@RequestParam(value = "id") int mId, @RequestParam(value = "name") String mName,
 			@RequestParam(value = "pass") String mPass, @RequestParam(value = "level") int mLevel,
-			@RequestParam(value = "type") int mType, PrintWriter writer) {
+			@RequestParam(value = "type") int mType,@RequestParam(value = "town") String towm, PrintWriter writer) {
 		Admin admin = new Admin();
 		admin.setmId(mId);
 		admin.setmAdminName(mName);
 		admin.setmAdminPass(mPass);
 		admin.setmLevel(mLevel);
 		admin.setmType(mType);
-
+        admin.setmPid(towm);
 		int up = service.updateAdmin(admin);
 		if (up > 0) {
 			writer.write("编辑成功");
@@ -154,13 +154,16 @@ public class ITVAdminController {
 	@RequestMapping("/addAdmin")
 	public void add(PrintWriter writer, @RequestParam(value = "name") String mName,
 			@RequestParam(value = "pass") String mPass, @RequestParam(value = "level") int mLevel,
-			@RequestParam(value = "type") int mType) {
+			@RequestParam(value = "type") int mType,@RequestParam(value = "town") String towm) {
 
 		Admin admin = new Admin();
 		admin.setmAdminName(mName);
 		admin.setmAdminPass(mPass);
 		admin.setmLevel(mLevel);
 		admin.setmType(mType);
+        if(!towm.equals("请选择")){
+        	admin.setmPid(towm);
+        }
 		int add = service.AddAdmin(admin);
 		if (add > 0) {
 			writer.write("添加成功");
