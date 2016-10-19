@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +57,7 @@ public class ITVAddressController {
 
 	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
 	public void uploadImage(@RequestParam(value = "logo", required = false) MultipartFile logo,
-			HttpServletRequest request, ModelMap map, @RequestParam(value = "areaCode") String areaCode,
+			HttpServletRequest request, @RequestParam(value = "areaCode") String areaCode,
 			@RequestParam(value = "shortName") String shortName,
 			@RequestParam(value = "addressCodeValue") String addressCodeValue,
 			@RequestParam(value = "wxCode") String urlwxCode, @RequestParam(value = "flag") int flag,
@@ -93,7 +92,7 @@ public class ITVAddressController {
 				FileUtils.writeByteArrayToFile(new File(logofile, logoname), logo.getBytes());
 		/*		String logourl = Config.CLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 						+ "/images/upload/logo/" + logoname;*/
-				String logourl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
+				String logourl = Config.CLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 				+ "/images/upload/logo/" + logoname;
 				address.setmLogoIMageURL(logourl);
 

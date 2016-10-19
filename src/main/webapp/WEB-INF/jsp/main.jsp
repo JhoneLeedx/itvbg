@@ -308,6 +308,7 @@
 	function showModify(code,name,shorname,state,id,logurl){
 		console.log(state);
 		document.getElementById("div").style.display="block";
+		showWxpublic();
 		if(id>0){
 			parentAddress(id);
 		}else{
@@ -443,5 +444,29 @@
 						}
 					});
 		}
+     
+     function showWxpublic() {
+ 		$.ajax({
+			url : "<%=path%>/itvwx/alllist",
+						ache : false,
+						dataType : "json",
+						async : true,
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						error : function() {
+							alert("请与管理员联系");
+						},
+						success : function(data) {
+							var json = JSON.stringify(data);
+							var obj = jQuery.parseJSON(json);
+							var str = "<option>请选择</option>";
+							$("#wxcode").html("");
+							for (var i=0;i<obj.length;i++) {
+								var wx = obj[i];
+								str += "<option value='" +wx.mWxUrl+ "'>"+wx.mName+"</option>";
+							}
+							$("#wxcode").append(str);
+						}
+					});
+	}
 	</script>
 </html>

@@ -30,6 +30,7 @@
 		<typeAlias type="com.yxt.jhonelee.model.ITVVideoMenu" alias="ItvVideo" />
 		<typeAlias type="com.yxt.jhonelee.model.ItvSTB" alias="ItvStb"/>
 		<typeAlias type="com.yxt.jhonelee.model.ItvPicture" alias="ItvPic"/>
+		<typeAlias type="com.yxt.jhonelee.model.ItvWxpublic" alias="ItvWxpublic"/>
 	</typeAliases>
 
 	<plugins>
@@ -46,6 +47,7 @@
 		<mapper resource="com/yxt/jhonelee/mapper/ITVVideoMenuMapper.xml" />
 		<mapper resource="com/yxt/jhonelee/mapper/ItvStbMapper.xml" />
 		<mapper resource="com/yxt/jhonelee/mapper/ItvPicMapper.xml"/>
+		<mapper resource="com/yxt/jhonelee/mapper/ItvWxpublicMapper.xml"/>
 	</mappers>
 </configuration>
 
