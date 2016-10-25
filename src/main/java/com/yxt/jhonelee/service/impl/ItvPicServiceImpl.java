@@ -18,12 +18,20 @@ public class ItvPicServiceImpl implements ItvPicService{
 	@Resource
 	private ItvPicDao dao;
 	
-	public List<ItvPicture> ItvPicList() {
-		return dao.ItvPicList();
-	}
+
 
 	public int UpdateItvPic(ItvPicture itvPicture) {
 		return dao.UpdateItvPic(itvPicture);
+	}
+
+	public List<ItvPicture> ItvPicList(int mType, int startPos, int pageSize) {
+		// TODO Auto-generated method stub
+		return dao.ItvPicList(mType, startPos, pageSize);
+	}
+
+	public int ItvPicListCount(int mType) {
+		// TODO Auto-generated method stub
+		return dao.ItvPicListCount(mType);
 	}
 
 }

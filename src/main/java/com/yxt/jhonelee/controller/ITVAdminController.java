@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.service.AdminService;
 import com.yxt.jhonelee.util.Page;
@@ -55,6 +56,7 @@ public class ITVAdminController {
 		} else {
 			writer.write("不存在当前用户,可能原因账号或密码错误");
 		}
+		//writer.println(new Gson().toJson(admins));
 	}
 
 	/**

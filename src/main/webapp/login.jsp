@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>后台登录界面</title>
+<title>登录界面</title>
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" href="bootstrap/css/login.css" />
 <script>

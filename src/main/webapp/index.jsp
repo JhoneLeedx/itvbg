@@ -10,7 +10,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>后台管理</title>
+<title>家庭医生数据管理后台</title>
+<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
 <script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css" />
@@ -47,28 +48,67 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" style="height: 40px"></div>
-				<div class="row-fluid">
-					<div class="span2 content-left">
-						<ul class="doctor">
-							<li><img src="images/list.png">数据管理列表</li>
-						</ul>
-						<ul class="doctorList">
-							<li><a target="right" href="<%=path%>/address/showAddress">地区管理</a></li>
-							<li><a target="right" href="<%=path%>/itvstb/all">机顶盒管理</a></li>
-							<li><a target="right" href="<%=path%>/itvwx/all">公众号管理</a></li>
-							<c:if test="${admin.mLevel==1 }">
-								<li><a target="right" href="<%=path%>/admin/adminlist">登录管理</a></li>
-							</c:if>
-							<li><a target="right" href="<%=path%>/itvpic/itvpiclist">图片管理</a></li>
-						</ul>
-					</div>
-					<div class="span10 content-right">
-						<iframe name="right"
-							src="<%=request.getContextPath()%>/address/home"></iframe>
+			</div>
+			<div class="row" style="height: 40px"></div>
+			
+				<div class="container-fluid content">
+					<div class="row-fluid">
+						<div class="span2 content-left">
+							<div class="accordion">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<h4
+											style="background-color: #2B89BC; padding: 10px; color: white;">
+											家庭医生数据管理列表</h4>
+									</div>
+								<ul>
+									<li><a target="right" href="<%=path%>/address/showAddress">地区管理</a></li>
+									<li><a target="right" href="<%=path%>/itvstb/all">机顶盒管理</a></li>
+									<li><a target="right" href="<%=path%>/itvwx/all">公众号管理</a></li>
+									<c:if test="${admin.mLevel==1 }">
+										<li><a target="right" href="<%=path%>/admin/adminlist">登录管理</a></li>
+									</c:if>
+									<li><a target="right" href="<%=path%>/itvpic/itvpiclist">图片管理</a></li>
+								</ul>
+								</div>
+							</div>
+						</div>
+						<div class="span10 content-right" style="overflow: hidden;">
+							<iframe name="right" src="<%=request.getContextPath()%>/address/home"
+								class="iframe"></iframe>
+						</div>
 					</div>
 				</div>
-			</div>
+		<%-- 	<div class="container-fluid content">
+				<div class="row-fluid">
+					<div class="span2 content-left">
+						<div class="accordion">
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<div style="background-color: #97C1D7; padding: 5px">
+										<h4>
+											<img src="images/list.png">数据管理列表
+										</h4>
+									</div>
+								</div>
+								<ul>
+									<li><a target="right" href="<%=path%>/address/showAddress">地区管理</a></li>
+									<li><a target="right" href="<%=path%>/itvstb/all">机顶盒管理</a></li>
+									<li><a target="right" href="<%=path%>/itvwx/all">公众号管理</a></li>
+									<c:if test="${admin.mLevel==1 }">
+										<li><a target="right" href="<%=path%>/admin/adminlist">登录管理</a></li>
+									</c:if>
+									<li><a target="right" href="<%=path%>/itvpic/itvpiclist">图片管理</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="span10 content-right" style="overflow: hidden;">
+						<iframe name="right"
+							src="<%=request.getContextPath()%>/address/home" class="iframe"></iframe>
+					</div>
+				</div>
+			</div> --%>
 		</c:when>
 		<c:otherwise>
 			<div style="margin: 20px;">
@@ -91,7 +131,6 @@
 				location.href = "login.jsp"
 			}
 		});
-
 	}
 </script>
 </html>

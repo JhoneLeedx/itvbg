@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yxt.jhonelee.model.ItvPicture;
 import com.yxt.jhonelee.service.ItvPicService;
 import com.yxt.jhonelee.util.Config;
+import com.yxt.jhonelee.util.Page;
 
 @RequestMapping("/itvpic")
 @Controller
@@ -34,8 +35,42 @@ public class ItvPicController {
 	@RequestMapping("/itvpiclist")
 	public String ItvPicList(HttpServletRequest request) {
 
-		List<ItvPicture> list = service.ItvPicList();
-		request.setAttribute("list", list);
+		
+		
+		String pageNow = request.getParameter("pageNow");
+		Page page1 = null;
+		Page page2 = null;
+		Page page3 = null;
+		Page page4 = null;
+		int count1 = service.ItvPicListCount(1);
+		int count2 = service.ItvPicListCount(2);
+		int count3 = service.ItvPicListCount(3);
+		int count4 = service.ItvPicListCount(10000);
+		if (pageNow != null) {
+			page1 = new Page(count1, Integer.parseInt(pageNow));
+			page2 = new Page(count2, Integer.parseInt(pageNow));
+			page3 = new Page(count3, Integer.parseInt(pageNow));
+			page4 = new Page(count4, Integer.parseInt(pageNow));
+		} else {
+			page1 = new Page(count1, 1);
+			page2 = new Page(count2, 1);
+			page3 = new Page(count3, 1);
+			page4 = new Page(count4, 1);
+		}
+
+		List<ItvPicture> list1 = service.ItvPicList(1,page1.getStartPos(),page1.getPageSize());
+		List<ItvPicture> list2 = service.ItvPicList(2,page2.getStartPos(),page2.getPageSize());
+		List<ItvPicture> list3 = service.ItvPicList(3,page3.getStartPos(),page3.getPageSize());
+		List<ItvPicture> list4 = service.ItvPicList(10000,page4.getStartPos(),page4.getPageSize());
+		
+		request.setAttribute("list1", list1);
+		request.setAttribute("list2", list2);
+		request.setAttribute("list3", list3);
+		request.setAttribute("list4", list4);
+        request.setAttribute("page1", page1);
+        request.setAttribute("page2", page2);
+        request.setAttribute("page3", page3);
+        request.setAttribute("page4", page4);
 		return "itvpic";
 	}
 

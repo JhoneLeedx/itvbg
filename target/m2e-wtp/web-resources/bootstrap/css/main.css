@@ -1,6 +1,7 @@
-* {
-	text-decoration: none;
-	list-style: none;
+
+body {
+	background-color: #eae5e5;
+	overflow: hidden;
 }
 
 .top {
@@ -27,6 +28,11 @@
 	line-height: 60px;
 	font-size: 20px;
 	color: #f1f1f1;
+}
+.content-left, .content-right {
+    border: 1px solid #d3d1d1;
+    background-color: #fff;
+    overflow: auto;
 }
 
 .btn {
@@ -69,6 +75,7 @@
 ul {
 	padding: 0;
 	border-right: 15px solid #f1f1f1;
+	height: 720px;
 }
 
 li {

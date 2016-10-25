@@ -40,26 +40,65 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${!empty list }">
-					<c:forEach items="${list }" var="itvpic">
-						<c:if test="${itvpic.mType==1 }">
+				<c:if test="${!empty list1 }">
+					<c:forEach items="${list1 }" var="itvpic1">
 							<tr>
-								<td>${itvpic.mId }</td>
-								<td>${itvpic.mName }</td>
-								<td>${itvpic.mAddressName }</td>
-								<td><c:if test="${!empty itvpic.mItvpic }">
-										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+								<td>${itvpic1.mId }</td>
+								<td>${itvpic1.mName }</td>
+								<td>${itvpic1.mAddressName }</td>
+								<td><c:if test="${!empty itvpic1.mItvpic }">
+										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic1.mType}&itvpic=${itvpic1.mItvpic}" style="width: 30px">
 									</c:if></td>
-								<td>${itvpic.mTelphone }</td>
+								<td>${itvpic1.mTelphone }</td>
 								<td><a
-									onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
+									onclick="edit(${itvpic1.mId },'${itvpic1.mName }',${itvpic1.mType })"
 									class="ico edit">编辑</a></td>
 							</tr>
-						</c:if>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
+					<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page1.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page1.totalPageCount} 页</font> <font size="2">第
+								${page1.pageNow} 页</font> <a href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page1.pageNow - 1 > 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page1.pageNow - 1 <= 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page1.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page1.pageNow + 1 < page1.totalPageCount}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page1.pageNow + 1 >= page1.totalPageCount}">
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page1.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
 	</div>
 	<div class="table" id="id2" style="display: none">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -74,26 +113,67 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${!empty list }">
-					<c:forEach items="${list }" var="itvpic">
-						<c:if test="${itvpic.mType==2 }">
+				<c:if test="${!empty list2 }">
+					<c:forEach items="${list2 }" var="itvpic2">
 							<tr>
-								<td>${itvpic.mId }</td>
-								<td>${itvpic.mName }</td>
-								<td>${itvpic.mAddressName }</td>
-								<td><c:if test="${!empty itvpic.mItvpic }">
-										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+								<td>${itvpic2.mId }</td>
+								<td>${itvpic2.mName }</td>
+								<td>${itvpic2.mAddressName }</td>
+								<td><c:if test="${!empty itvpic2.mItvpic }">
+										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic2.mType}&itvpic=${itvpic2.mItvpic}" style="width: 30px">
 									</c:if></td>
-								<td>${itvpic.mTelphone }</td>
+								<td>${itvpic2.mTelphone }</td>
 								<td><a
-									onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
+									onclick="edit(${itvpic2.mId },'${itvpic2.mName }',${itvpic2.mType })"
 									class="ico edit">编辑</a></td>
 							</tr>
-						</c:if>
+						
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
+					<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page2.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page2.totalPageCount} 页</font> <font size="2">第
+								${page2.pageNow} 页</font> <a href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page2.pageNow - 1 > 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page2.pageNow - 1 <= 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page2.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page2.pageNow + 1 < page2.totalPageCount}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page2.pageNow + 1 >= page2.totalPageCount}">
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page2.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		
 	</div>
 	<div class="table" id="id3" style="display: none">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -108,30 +188,65 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${!empty list }">
-					<c:forEach items="${list }" var="itvpic">
-						<c:choose>
-							<c:when test="${itvpic.mType==3 }">
+				<c:if test="${!empty list3 }">
+					<c:forEach items="${list3 }" var="itvpic3">
 								<tr>
-									<td>${itvpic.mId }</td>
-									<td>${itvpic.mName }</td>
-									<td>${itvpic.mAddressName }</td>
-									<td><c:if test="${!empty itvpic.mItvpic }">
-											<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+									<td>${itvpic3.mId }</td>
+									<td>${itvpic3.mName }</td>
+									<td>${itvpic3.mAddressName }</td>
+									<td><c:if test="${!empty itvpic3.mItvpic }">
+											<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic3.mType}&itvpic=${itvpic3.mItvpic}" style="width: 30px">
 										</c:if></td>
-									<td>${itvpic.mTelphone }</td>
+									<td>${itvpic3.mTelphone }</td>
 									<td><a
-										onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
+										onclick="edit(${itvpic3.mId },'${itvpic3.mName }',${itvpic3.mType })"
 										class="ico edit">编辑</a></td>
 								</tr>
-							</c:when>
-							<c:otherwise>
-							</c:otherwise>
-						</c:choose>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
+					<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page3.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page3.totalPageCount} 页</font> <font size="2">第
+								${page3.pageNow} 页</font> <a href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page3.pageNow - 1 > 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page3.pageNow - 1 <= 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page3.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page3.pageNow + 1 < page3.totalPageCount}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page3.pageNow + 1 >= page3.totalPageCount}">
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page3.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
 	</div>
 	<div class="table" id="id4" style="display: none">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -146,26 +261,65 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${!empty list }">
-					<c:forEach items="${list }" var="itvpic">
-						<c:if test="${itvpic.mType==10000 }">
+				<c:if test="${!empty list4 }">
+					<c:forEach items="${list4 }" var="itvpic4">
 							<tr>
-								<td>${itvpic.mId }</td>
-								<td>${itvpic.mName }</td>
-								<td>${itvpic.mAddressName }</td>
-								<td><c:if test="${!empty itvpic.mItvpic }">
-										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic.mType}&itvpic=${itvpic.mItvpic}" style="width: 30px">
+								<td>${itvpic4.mId }</td>
+								<td>${itvpic4.mName }</td>
+								<td>${itvpic4.mAddressName }</td>
+								<td><c:if test="${!empty itvpic4.mItvpic }">
+										<img alt="" src="<%=path %>/itvpic/showImage?type=${itvpic4.mType}&itvpic=${itvpic4.mItvpic}" style="width: 30px">
 									</c:if></td>
-								<td>${itvpic.mTelphone }</td>
+								<td>${itvpic4.mTelphone }</td>
 								<td><a
-									onclick="edit(${itvpic.mId },'${itvpic.mName }',${itvpic.mType })"
+									onclick="edit(${itvpic4.mId },'${itvpic4.mName }',${itvpic4.mType })"
 									class="ico edit">编辑</a></td>
 							</tr>
-						</c:if>
 					</c:forEach>
 				</c:if>
 			</tbody>
 		</table>
+					<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page4.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page4.totalPageCount} 页</font> <font size="2">第
+								${page4.pageNow} 页</font> <a href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page4.pageNow - 1 > 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page4.pageNow - 1 <= 0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page4.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page4.pageNow + 1 < page4.totalPageCount}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page4.pageNow + 1 >= page4.totalPageCount}">
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page4.totalPageCount==0}">
+									<a href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
 	</div>
 	<div id="div">
 		<div id="edit">
