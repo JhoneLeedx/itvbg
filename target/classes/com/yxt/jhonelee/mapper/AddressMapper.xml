@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.AddressDao">
+
+	<resultMap type="Address" id="AddressMap">
+		<id property="mId" column="id" />
+		<result property="mName" column="name" />
+		<result property="mCodeValue" column="code_value" />
+		<result property="mPid" column="pid" />
+
+	</resultMap>
+
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+
+	<select id="SelectAddress" resultType="Address" resultMap="AddressMap">
+		select id,name,code_value,pid from address where pid =#{mCodeValue}
+	</select>
+
+	<select id="SelectParentAddress" resultType="Address" resultMap="AddressMap">
+		SELECT id,name,code_value,pid FROM address WHERE code_value =(SELECT code_value FROM
+		address WHERE FIND_IN_SET(code_value,getAddressParentList (#{mId}))) limit 1
+	</select>
+     <select id="SelectOneAddress" resultType="Address" resultMap="AddressMap">
+		 select id,name,code_value,pid from address where id =#{mId} limit 1
+	</select>
+</mapper>

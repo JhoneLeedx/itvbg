@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.ItvAdminDao">
+
+	<resultMap type="ItvAdmin" id="ItvAdminMap">
+		<id property="mId" column="id" />
+		<result property="mAdminName" column="name" />
+		<result property="mAdminPass" column="pass" />
+		<result property="mLevel" column="level" />
+		<result property="mPid" column="pid" />
+		<result property="mType" column="sys_type" />
+	</resultMap>
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+	<select id="AllItvAdmin" resultMap="ItvAdminMap">
+		select * from ITV_ADMIN limit
+		#{startPos},#{pageSize}
+	</select>
+	<insert id="AddAdmin" parameterType="ItvAdmin">
+		insert into ITV_ADMIN
+		(name,pass,level,sys_type,pid)
+		values(#{mAdminName},#{mAdminPass},#{mLevel},#{mType},#{mPid})
+	</insert>
+	<update id="updateAdmin">
+		update ITV_ADMIN
+		<set>
+			<if test="mAdminName!=null">
+				name=#{mAdminName},
+			</if>
+			<if test="mAdminPass!=null">
+				pass=#{mAdminPass},
+			</if>
+			<if test="mLevel!=null">
+				level=#{mLevel},
+			</if>
+			<if test="mPid!=null">
+				pid=#{mPid},
+			</if>
+			sys_type=#{mType}
+		</set>
+		<where>
+			id= #{mId}
+		</where>
+	</update>
+	<select id="LoginAdmin" resultMap="ItvAdminMap" resultType="ItvAdmin">
+		select * from ITV_ADMIN where name = #{mAdminName} and pass = #{mPass}
+		limit 1
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(id) from ITV_ADMIN
+	</select>
+	<delete id="delAdmin" parameterType="int">
+		delete from ITV_ADMIN where
+		id = #{mId}
+	</delete>
+</mapper>

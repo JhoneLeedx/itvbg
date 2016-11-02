@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.ItvStbDao">
+
+	<resultMap type="ItvStb" id="ItvStbMap">
+		<id property="mId" column="id" />
+		<result property="mBrand" column="brand" />
+		<result property="mModel" column="model" />
+		<result property="mType" column="type" />
+		<result property="mIptvId" column="iptv_id"/>
+		<result property="mIptvToken" column="iptv_token"/>
+		<result property="mRemark" column="remark"/>
+		<result property="mSysInfoCode" column="sys_info_code" />
+		<result property="mSysInfo" column="sys_info" />
+		<result property="mIsIptv" column="is_iptv" />
+		<result property="mIsMediaCall" column="is_media_call" />
+	</resultMap>
+	<!--开启缓存 -->
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+	<!--分页查询 -->
+	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
+		select
+		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
+		ITV_STB ORDER BY is_iptv desc,brand asc limit
+		#{startPos},#{pageSize}
+	</select>
+	<!--查询总数 -->
+	<select id="getCount" resultType="int">
+		select count(id) from ITV_STB
+	</select>
+	<!--删除操作 -->
+	<delete id="deleteSTB" parameterType="int">
+		delete from ITV_STB where
+		id = #{mId}
+	</delete>
+	<!--更新操作 -->
+	<update id="updateSTB" parameterType="ItvStb">
+		update ITV_STB
+		<set>
+			<if test="mBrand!=null">
+				brand = #{mBrand},
+			</if>
+			<if test="mModel!=null">
+				model = #{mModel},
+			</if>
+			<if test="mType!=null">
+				type = #{mType},
+			</if>
+			<if test="mIptvId!=null">
+			    iptv_id = #{mIptvId},
+			</if>
+			<if test="mIptvToken!=null">
+			    iptv_token = #{mIptvToken},
+			</if>
+			<if test="mRemark!=null">
+			    remark = #{mRemark},
+			</if>
+			is_iptv = #{mIsIptv},
+			is_media_call=#{mIsMediaCall}
+		</set>
+		<where>
+			id = #{mId}
+		</where>
+	</update>
+
+	<select id="selectOneStb" resultMap="ItvStbMap" resultType="ItvStb">
+		select
+		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
+		ITV_STB
+		<where>
+			id = #{mId}
+		</where>
+		limit 1
+	</select>
+
+	<!-- 模糊查询 (分页) -->
+	<select id="vagueSelect" resultMap="ItvStbMap" resultType="ItvStb">
+		select
+		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
+		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') ORDER BY is_iptv desc,brand asc limit
+		#{startPos},#{pageSize}
+	</select>
+	<!--模糊查询总数 -->
+	<select id="vagueGetCount" resultType="int" parameterType="String">
+	  <!--  <bind name="code" value="'%'+ mCode +'%'"/> -->
+		select count(id) from
+		ITV_STB where sys_info_code like  CONCAT('%',#{mCode},'%') 
+	</select>
+</mapper>

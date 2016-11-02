@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.ItvWxpublicDao">
+	<resultMap type="ItvWxpublic" id="ItvWxMap">
+		<id property="mId" column="id" />
+		<result property="mName" column="name" />
+		<result property="mWxUrl" column="logo_image" />
+		<result property="mState" column="state" />
+		<result property="mCreateTime" column="create_time" />
+	</resultMap>
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+	<select id="SelectWx" resultMap="ItvWxMap" resultType="ItvWxpublic">
+		select
+		*from ITV_WX_PUBLIC limit #{startPos},#{pageSize}
+	</select>
+	<select id="selectWxCount" resultType="int">
+		select count(*) from
+		ITV_WX_PUBLIC
+	</select>
+	<select id="SelectWxall" resultMap="ItvWxMap" resultType="ItvWxpublic">
+		select * from ITV_WX_PUBLIC
+		<where>
+		 state=1
+		</where>
+	</select>
+
+	<insert id="AddWxpublic" parameterType="ItvWxpublic">
+		insert into ITV_WX_PUBLIC
+		(name,logo_image,state,create_time)
+		values(#{mName},#{mWxUrl},#{mState},#{mCreateTime})
+	</insert>
+
+	<select id="oneWxpublic" resultMap="ItvWxMap" resultType="ItvWxpublic">
+		select
+		* from ITV_WX_PUBLIC where id = #{mId}
+	</select>
+	<update id="updateWxState">
+		update ITV_WX_PUBLIC
+		<set>
+			state = #{mState}
+		</set>
+		<where>
+			id = #{mId}
+		</where>
+		limit 1
+	</update>
+	<update id="updateWx" parameterType="ItvWxpublic">
+		update ITV_WX_PUBLIC
+		<set>
+			state =#{mState},
+			name=#{mName},
+			logo_image=#{mWxUrl},
+			create_time=#{mCreateTime}
+		</set>
+		<where>
+			id = #{mId}
+		</where>
+	</update>
+
+</mapper>

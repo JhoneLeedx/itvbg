@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yxt.jhonelee.mapper.ItvPicDao">
+	<cache eviction="LRU" flushInterval="60000" size="1024" readOnly="false"></cache>
+	<resultMap type="ItvPic" id="ItvPicMap">
+		<id property="mId" column="id" />
+		<result property="mName" column="name" />
+		<result property="mAddressName" column="address" />
+		<result property="mState" column="state" />
+		<result property="mType" column="type" />
+		<result property="mTelphone" column="telephone" />
+		<result property="mItvpic" column="pic_itv_file" />
+	</resultMap>
+	<select id="ItvPicList" resultMap="ItvPicMap" resultType="ItvPic">
+		select id,name,address,state,type,telephone,pic_itv_file from hospital
+		<where>
+		type=#{mType}
+		</where>
+		limit #{startPos},#{pageSize}
+	</select>
+	
+		<select id="ItvPicListCount"  resultType="int">
+		select count(id) from hospital
+		<where>
+		type=#{mType}
+		</where>
+	</select>
+	
+
+	<update id="UpdateItvPic" parameterType="ItvPic">
+		update hospital set pic_itv_file = #{mItvpic} where id = #{mId}
+	</update>
+
+</mapper>
