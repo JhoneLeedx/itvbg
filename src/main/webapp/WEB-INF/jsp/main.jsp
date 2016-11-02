@@ -9,40 +9,59 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="from"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="<%=path%>/bootstrap/css/main.css" />
-<link rel="stylesheet" href="<%=path%>/bootstrap/css/modify.css" />
-<link rel="stylesheet" href="<%=path%>/bootstrap/css/style.css" />
 <script type="text/javascript"
-	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript"
-	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
+	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>	
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]-->
+<script type="text/javascript" src="<%=path%>/lib/html5.js"></script>
+<script type="text/javascript" src="<%=path%>/lib/respond.min.js"></script>
+<!-- [endif]-->
+<link rel="stylesheet" type="text/css" href="<%=path%>/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="<%=path%>/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]-->
+<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+
+<script type="text/javascript" src="<%=path%>/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="<%=path%>/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript" src="<%=path%>/static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script> 
+
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>地区编码</th>
-				<th>地区名称</th>
-				<th>地区简称</th>
-				<th>地区ID</th>
-				<th>微信公众号</th>
-				<th>Logo标识</th>
-				<th>状态(正常/禁用)</th>
-				<th>创建时间</th>
-				<th>信息完整</th>
-				<th>区域视频菜单</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${!empty list }">
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<thead>
+				<tr class="text-c">
+					
+					<th>地区编码</th>
+					<th>地区名称</th>
+					<th>地区简称</th>
+					<th>地区ID</th>
+					<th>微信公众号</th>
+					<th>Logo标识</th>
+					<th>状态(正常/禁用)</th>
+					<th>创建时间</th>
+					<th>信息完整</th>
+					<th>区域视频菜单</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${!empty list }">
 				<c:forEach items="${list }" var="itvaddress">
-					<tr>
+					<tr class="text-c">
 						<td>${itvaddress.mAreaCode }</td>
 						<td>${itvaddress.mAreaName }</td>
 						<td>${itvaddress.mShortName }</td>
@@ -81,25 +100,26 @@
 								<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 							</c:choose></td>
 						<td><c:if test="${itvaddress.mAddressCode!=''}">
-								<a
-									href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1"><button
-										class="button">视频菜单管理</button></a>
+								<a data-title="视频菜单管理" onclick="Hui_admin_tab(this)"
+									_href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1">
+										视频菜单管理</a>
 							</c:if></td>
-						<td><a class="ico edit"
-							onclick="showModify('${itvaddress.mAreaCode}','${itvaddress.mAreaName }','${itvaddress.mShortName }',${itvaddress.mState },${itvaddress.mAddressId },'${itvaddress.mLogoIMageURL }')">编辑</a>
+						<td>
+						<a title="编辑" onclick="showModify('编辑','<%=path%>/address/editAddress?id=${itvaddress.mId}')"><i class="Hui-iconfont">&#xe6df;</i>编辑</a>
 							<c:choose>
 								<c:when test="${itvaddress.mState==1 }">
-									<a class="ico del" onclick="disOropen('${itvaddress.mAreaCode}',0)">禁用</a>
+									<a  onclick="disOropen('${itvaddress.mAreaCode}',0)"><i class="Hui-iconfont">&#xe6e2;</i>禁用</a>
 								</c:when>
 								<c:otherwise>
-									<a class="ico del" onclick="disOropen('${itvaddress.mAreaCode}',1)">启用</a>
+									<a  onclick="disOropen('${itvaddress.mAreaCode}',1)"><i class="Hui-iconfont">&#xe6e2;</i>启用</a>
 								</c:otherwise>
 							</c:choose></td>
 					</tr>
 				</c:forEach>
 			</c:if>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
 	<!-- 分页开始 -->
 	<div align="center" style="margin-top: 20px">
 		<c:choose>
@@ -146,7 +166,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div id="div">
+	<%-- <div id="div">
 		<div id="modify">
 			<div class="mBox">
 				<form id="modifyForm" enctype="multipart/form-data">
@@ -219,9 +239,13 @@
 				onclick="delAddress()" /> <input style="width: 45px" type="reset"
 				value="否" onclick="fouAddress()" />
 		</div>
-	</div>
+	</div> --%>
 </body>
 <script type="text/javascript">
+   
+function showModify(title,url,w,h){
+	layer_show(title,url,w,h);
+}
    
     function disOropen(mAreaCode,state) {
 		document.getElementById("del").style.display="block";
@@ -305,7 +329,7 @@
 	function canCel(){
 		document.getElementById("div").style.display="none";
 	}
-	function showModify(code,name,shorname,state,id,logurl){
+/* 	function showModify(code,name,shorname,state,id,logurl){
 		console.log(state);
 		document.getElementById("div").style.display="block";
 		showWxpublic();
@@ -331,7 +355,7 @@
 			document.getElementById("flag0").checked =true;
 		}
 		
-	}
+	} */
 	function chooseWxcode(){
 		var url = document.getElementById("wxcode").value;
 		console.log(url);

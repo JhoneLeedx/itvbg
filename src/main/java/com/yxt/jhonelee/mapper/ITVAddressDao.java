@@ -17,5 +17,7 @@ public interface ITVAddressDao {
 
 	public ITVAddress SecOneItvAddress(String mAreaCode);
 	
+	public ITVAddress SecAddress(int mId);
+	
 	public int delAddress(@Param(value="mAreaCode")String mAreaCode,@Param(value="mState")int mState);
 }

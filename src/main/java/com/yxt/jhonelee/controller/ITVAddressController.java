@@ -109,7 +109,14 @@ public class ITVAddressController {
 		}
 		writer.write(errorMessage);
 	}
-
+	
+	@RequestMapping("/editAddress")
+	public String editAddress(@RequestParam(value="id")int id,HttpServletRequest request){
+		ITVAddress address = service.SecAddress(id);
+		request.setAttribute("address", address);
+		return "editaddress";
+	}
+	
 	@RequestMapping("/home")
 	public String showHome() {
 		return "home";

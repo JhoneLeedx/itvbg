@@ -8,52 +8,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>登录界面</title>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]-->
+<script type="text/javascript" src="lib/html5.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<!--  [endif]-->
+<link href="static/h-ui/css/H-ui.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="static/h-ui.admin/css/H-ui.login.css" rel="stylesheet"
+	type="text/css" />
+<link href="static/h-ui.admin/css/style.css" rel="stylesheet"
+	type="text/css" />
+<link href="lib/Hui-iconfont/1.0.7/iconfont.css" rel="stylesheet"
+	type="text/css" />
+<!--  [endif]-->
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
-<script type="text/javascript" src="bootstrap/js/jquery-1.9.1.min.js"></script>
-<link rel="stylesheet" href="bootstrap/css/login.css" />
-<script>
-
-  function keyLogin(event){
-	  var e = event||window.event; 
-	  var currentKey = e.keyCode; 
-  if (currentKey==13){
-	  
-	  if(checkCode()){
-		  submits(); //调用登录按钮的登录事件
-	  }else{
-		  console.log(""+checkCode()+"");
-	  }
-  }//回车键的键值为13
-}
-</script>
+<title>四川易讯通健康医疗技术发展有限公司</title>
 </head>
-<body onkeydown="keyLogin(event)">
-	<div id="login">
-		<h2>后台登录</h2>
-		<form>
-			<fieldset>
-
-				<p>
-					<input type="text" id="user" placeholder="请输入用户名"/>
-				</p>
-				<p>
-					<input type="password" id="password" placeholder="请输入密码"/>
-				</p>
-				<p>
-					<input type="text" id="code" placeholder="请输入验证码" size="6" 
-						 style="width: 250px;" />
-					<img
-						style="vertical-align: middle; width: 120px"
-						id="captchaImage" src="<%=basePath%>/admin/captcha" />
-				</p>
-				<p>
-					<input type="button"  id="sbtn"  value="登录" onclick="submits()" />
-				</p>
-			</fieldset>
-		</form>
+<body>
+<div class="header"><h3 style="color: white;font-style: oblique;margin-left: 30px">家庭医生后台管理系统</h3></div>
+	<div class="loginWraper">
+		<div id="loginform" class="loginBox">
+			<form class="form form-horizontal">
+				<div class="row cl">
+					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+					<div class="formControls col-xs-8">
+						<input id="user" name="user" type="text" placeholder="请输入用户名"
+							class="input-text size-L">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+					<div class="formControls col-xs-8">
+						<input id="password" name="password" type="password"
+							placeholder="密码" class="input-text size-L">
+					</div>
+				</div>
+				<div class="row cl">
+					<div class="formControls col-xs-8 col-xs-offset-3">
+						<input id="code" class="input-text size-L" type="text"
+							placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}"
+							onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:"
+							style="width: 150px;"> <img id="captchaImage"
+							src="<%=basePath%>/admin/captcha"> <a id="kanbuq"
+							onclick="check()">看不清，换一张</a>
+					</div>
+				</div>
+				<div class="row cl">
+					<div class="formControls col-xs-8 col-xs-offset-3"></div>
+				</div>
+				<div class="row cl">
+					<div class="formControls col-xs-8 col-xs-offset-3">
+						<input onclick="submits()" type="button"
+							class="btn btn-success radius size-L"
+							value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"> <input
+							name="" type="reset" class="btn btn-default radius size-L"
+							value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
-	<!-- end login -->
 </body>
 <script type="text/javascript">
 
@@ -75,9 +95,7 @@
 			},
 			success : function(data) {
 				if(data=="right"){
-					 document.getElementById("code").style="width: 250px;";
 					 if(user==""||password==""){
-						 document.getElementById("sbtn").style.background="#D4D4D3";
 						 flag =  true;
 				   }else{
 						 flag =  false;
@@ -85,7 +103,6 @@
 					 flag = true;
 				}else if(data=="wrong"){
 					 $("#code").val("");
-					 document.getElementById("code").style="border:1px solid red;width: 250px;";
 					 flag =  false;
 				}
 			}
@@ -93,12 +110,12 @@
 	 return flag;
 }
 // 更换验证码
-$('#captchaImage').click(function() 
-{
-    $('#captchaImage').attr("src", "<%=basePath%>admin/captcha?timestamp=" + (new Date()).valueOf());
-    c = $("#code").val("");
-    document.getElementById("code").focus();
-}); 
+function check() {
+	 $('#captchaImage').attr("src", "<%=basePath%>admin/captcha?timestamp=" + (new Date()).valueOf());
+	  c = $("#code").val("");
+	  document.getElementById("code").focus();
+}
+
 		function submits() {
 			
 			if(checkCode()){
@@ -116,27 +133,30 @@ $('#captchaImage').click(function()
 				$.ajax({
 				    data:{"admin":admin,"pass":pass},
 					url:"<%=path%>/admin/login",
-				ache : false,
-				dataType : "text",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-					alert("请与管理员联系");
-				},
-				success : function(data) {
-					if (data == "当前管理员不属于家庭医生后台管理，请重新输入") {
-						alert(data);
-					} else if (data == "不存在当前用户,可能原因账号或密码错误") {
-						alert(data);
-					} else {
-						location.href = "index.jsp"
-					}
-				}
-			});	
-			}else{
-				alert("验证码错误");
-			}
-		
+						ache : false,
+						dataType : "text",
+						async : true,
+						contentType : "application/x-www-form-urlencoded; charset=utf-8",
+						error : function() {
+							alert("请与管理员联系");
+						},
+						success : function(data) {
+							if (data == "当前管理员不属于家庭医生后台管理，请重新输入") {
+								alert(data);
+							} else if (data == "不存在当前用户,可能原因账号或密码错误") {
+								alert(data);
+							} else {
+								location.href = "index.jsp"
+							}
+						}
+					});
+		} else {
+			alert("验证码错误");
+		}
+
 	}
 </script>
+<div class="footer">四川易讯通健康医疗技术发展有限公司</div>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 </html>

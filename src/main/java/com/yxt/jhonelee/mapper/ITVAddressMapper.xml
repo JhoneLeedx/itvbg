@@ -83,4 +83,13 @@
 			area_code = #{mAreaCode}
 		</where>
 	</update>
+	
+	<select id="SecAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
+				select * from ITV_ADDRESS
+		<where>
+			id = #{mId}
+		</where>
+		limit 1
+	</select>
+	
 </mapper>

@@ -16,4 +16,6 @@ public interface ITVAddressService {
 	public ITVAddress SecOneItvAddress(String mAreaCode);
 	
 	public int delAddress(String mAreaCode,int mState);
+	
+	public ITVAddress SecAddress(int mId);
 }

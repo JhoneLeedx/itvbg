@@ -37,4 +37,9 @@ public class ITVAddressServiceImpl implements ITVAddressService {
 	public int delAddress(String mAreaCode, int mState) {
 		return dao.delAddress(mAreaCode, mState);
 	}
+
+	public ITVAddress SecAddress(int mId) {
+		// TODO Auto-generated method stub
+		return dao.SecAddress(mId);
+	}
 }
