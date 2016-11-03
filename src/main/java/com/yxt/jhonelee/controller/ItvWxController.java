@@ -158,4 +158,16 @@ public class ItvWxController {
 			writer.write("失败");
 		}
 	}
+	
+	@RequestMapping("addwx")
+	public String addWx(){
+		
+		return "addwx";
+	}
+	@RequestMapping("editwx")
+	public String editWx(@RequestParam(value="id")int mId,HttpServletRequest request){
+		ItvWxpublic itvwx = service.oneWxpublic(mId);
+		request.setAttribute("wx", itvwx);
+		return "editwx";
+	}
 }
