@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.service.AdminService;
+import com.yxt.jhonelee.util.Md5Util;
 import com.yxt.jhonelee.util.Page;
 import com.yxt.jhonelee.util.RandomNumUtil;
 
@@ -44,7 +45,8 @@ public class ITVAdminController {
 	public void login(PrintWriter writer, HttpSession session, @RequestParam(value = "admin") String admin,
 			@RequestParam(value = "pass") String pass) {
 
-		Admin admins = service.LoginAdmin(admin, pass);
+		String mpass = Md5Util.EncoderByMd5(pass);
+		Admin admins = service.LoginAdmin(admin, mpass);
 		if (admins != null) {
 			if (admins.getmType() == 2) {
 				session.setAttribute("admin", admins);
@@ -158,7 +160,8 @@ public class ITVAdminController {
 
 		Admin admin = new Admin();
 		admin.setmAdminName(mName);
-		admin.setmAdminPass(mPass);
+		String pass = Md5Util.EncoderByMd5(mPass);
+		admin.setmAdminPass(pass);
 		admin.setmLevel(mLevel);
 		admin.setmType(mType);
         if(!towm.equals("请选择")){
