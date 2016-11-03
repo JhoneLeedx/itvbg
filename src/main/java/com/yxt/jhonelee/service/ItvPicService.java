@@ -12,4 +12,6 @@ public interface ItvPicService {
 	public int ItvPicListCount(int mType);
 	
 	public int UpdateItvPic(ItvPicture itvPicture);
+	
+	public ItvPicture OneItvPic(int mId);
 }

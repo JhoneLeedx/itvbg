@@ -15,21 +15,29 @@
 	<select id="ItvPicList" resultMap="ItvPicMap" resultType="ItvPic">
 		select id,name,address,state,type,telephone,pic_itv_file from hospital
 		<where>
-		type=#{mType}
+			type=#{mType}
 		</where>
 		limit #{startPos},#{pageSize}
 	</select>
-	
-		<select id="ItvPicListCount"  resultType="int">
+
+	<select id="ItvPicListCount" resultType="int">
 		select count(id) from hospital
 		<where>
-		type=#{mType}
+			type=#{mType}
 		</where>
 	</select>
-	
 
 	<update id="UpdateItvPic" parameterType="ItvPic">
-		update hospital set pic_itv_file = #{mItvpic} where id = #{mId}
+		update hospital set
+		pic_itv_file = #{mItvpic} where id = #{mId}
 	</update>
+	
+	<select id="OneItvPic" resultMap="ItvPicMap" resultType="ItvPic">
+			select id,name,address,state,type,telephone,pic_itv_file from hospital
+		<where>
+			id=#{mId}
+		</where>
+		limit 1
+	</select>
 
 </mapper>

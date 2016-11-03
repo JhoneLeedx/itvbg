@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,5 +125,16 @@ public class ItvVideoMenuController {
 			}
 			
 		}
+	}
+	@RequestMapping("additv")
+	public String itvAdd(@RequestParam(value="codevalue")String codevalue,HttpServletRequest request){
+		request.setAttribute("codevalue", codevalue);
+		return "addvideo";
+	}
+	@RequestMapping("edititv")
+	public String itvEdit(@RequestParam(value="id")int mId,HttpServletRequest request){
+		ITVVideoMenu video = service.QueryOneVideMenu(mId);
+		request.setAttribute("video", video);
+		return "editvideo";
 	}
 }

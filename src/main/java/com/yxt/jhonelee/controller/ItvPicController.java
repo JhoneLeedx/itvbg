@@ -149,4 +149,10 @@ public class ItvPicController {
 			}
 		}
 	}
+	@RequestMapping("editpic")
+	public String editPic(HttpServletRequest request,@RequestParam(value="id")int mId){
+		ItvPicture picture = service.OneItvPic(mId);
+		request.setAttribute("itvpic", picture);
+		return "editpic";
+	}
 }

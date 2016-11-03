@@ -59,8 +59,7 @@
 				class="c-red">*</span>地区名称:</label>
 			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 				<input type="text" readonly="readonly" style="border: none"
-					class="input-text" value="${address.mAreaName }" placeholder=""
-					id="username" name="username">
+					class="input-text" value="${address.mAreaName }" placeholder="">
 			</div>
 		</div>
 		<div class="row cl">
@@ -165,8 +164,7 @@ function upload(){
 			},
            success: function(data) {  
         	   alert(data);
-        		var index = parent.layer.getFrameIndex(window.name);
-        		parent.layer.close(index);
+        	   window.parent.location.reload();
               }
 	   });
 }

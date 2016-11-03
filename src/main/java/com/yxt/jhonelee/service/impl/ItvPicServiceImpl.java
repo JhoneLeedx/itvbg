@@ -34,4 +34,9 @@ public class ItvPicServiceImpl implements ItvPicService{
 		return dao.ItvPicListCount(mType);
 	}
 
+	public ItvPicture OneItvPic(int mId) {
+		// TODO Auto-generated method stub
+		return dao.OneItvPic(mId);
+	}
+
 }

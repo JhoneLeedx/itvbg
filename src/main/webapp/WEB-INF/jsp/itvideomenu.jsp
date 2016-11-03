@@ -1,90 +1,123 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<c:set value="<%=path%>" var="path"></c:set>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="from"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="<%=path%>/bootstrap/css/style.css" />
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]-->
+<script type="text/javascript" src="<%=path%>/lib/html5.js"></script>
+<script type="text/javascript" src="<%=path%>/lib/respond.min.js"></script>
+<!-- [endif]-->
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/lib/Hui-iconfont/1.0.7/iconfont.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/lib/icheck/icheck.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]-->
+<script type="text/javascript"
+	src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js"></script>
+
+<script type="text/javascript" src="<%=path%>/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript"
+	src="<%=path%>/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="<%=path%>/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript"
+	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 
-	<!-- Box -->
-	<div class="box">
-		<!-- Box Head -->
-		<div class="box-head">
-			<button style="margin-top: 7px; width: 80px" class="button"
-				onclick="add()">添加</button>
-		</div>
-		<!-- End Box Head -->
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		地区管理 <span class="c-gray en">&gt;</span> 视频菜单管理 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<span class="l"><a class="btn btn-primary radius"
+			onclick="showAdd('添加视频资源','<%=path%>/itvmenu/additv?codevalue=${codevalue }')"
+			href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加视频资源</a></span>
+	</div>
+	<div class="mt-20">
+		<table
+			class="table table-border table-bordered table-bg table-hover table-sort">
+			<thead>
+				<tr class="text-c">
+					<th>编号</th>
+					<th>顺序</th>
+					<th>视频描述</th>
+					<th>视频链接</th>
+					<th>开始时间</th>
+					<th>视频长度</th>
+					<th>创建(更新)时间</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
 
-		<!-- Table -->
-		<div class="table">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<thead>
-					<tr>
-						<th>编号</th>
-						<th>顺序</th>
-						<th>视频描述</th>
-						<th>视频链接</th>
-						<th>开始时间</th>
-						<th>视频长度</th>
-						<th>创建(更新)时间</th>
-						<th>状态</th>
-						<th class="ac">操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:if test="${!empty menuList }">
-						<c:forEach items="${menuList }" var="menu">
-							<tr>
-								<td>${menu.mId }</td>
-								<td>${menu.mIndex }</td>
-								<td>${menu.mTitle }</td>
-								<td>${menu.mFileSpec }</td>
-								<td>${menu.mStartpos }</td>
-								<td>${menu.mLength }</td>
-								<td><fmt:formatDate value="${menu.mCreatetime }"
-										pattern="YYYY-MM-dd hh:mm:ss" /></td>
-								<td><c:choose>
-										<c:when test="${menu.mState==1 }">
+
+				<c:if test="${!empty menuList }">
+					<c:forEach items="${menuList }" var="menu">
+						<tr class="text-c">
+							<td>${menu.mId }</td>
+							<td>${menu.mIndex }</td>
+							<td>${menu.mTitle }</td>
+							<td>${menu.mFileSpec }</td>
+							<td>${menu.mStartpos }</td>
+							<td>${menu.mLength }</td>
+							<td><fmt:formatDate value="${menu.mCreatetime }"
+									pattern="YYYY-MM-dd hh:mm:ss" /></td>
+							<td><c:choose>
+									<c:when test="${menu.mState==1 }">
 										正常
 										</c:when>
-										<c:otherwise>
+									<c:otherwise>
 										禁用
 										</c:otherwise>
-									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${menu.mState==1 }">
-											<a onclick="dele(${menu.mId},0)" class="ico del">禁用</a>
-										</c:when>
-										<c:otherwise>
-											<a onclick="dele(${menu.mId},1)" class="ico del">启用</a>
-										</c:otherwise>
-									</c:choose> <a
-									onclick="edit(${menu.mId },${menu.mIndex },'${menu.mTitle }','${menu.mFileSpec }',${menu.mStartpos },${menu.mLength },${menu.mState })"
-									class="ico edit">编辑</a></td>
-							</tr>
+								</c:choose></td>
+							<td><a
+								onclick="showEdit('添加视频资源','<%=path%>/itvmenu/edititv?id=${menu.mId}')"><i
+									class="Hui-iconfont">&#xe6df;</i>编辑</a> <c:choose>
+									<c:when test="${menu.mState==1 }">
+										<a onclick="dele(${menu.mId},0)"><i class="Hui-iconfont">&#xe6e2;</i>禁用</a>
+									</c:when>
+									<c:otherwise>
+										<a onclick="dele(${menu.mId},1)"><i class="Hui-iconfont">&#xe6e2;</i>启用</a>
+									</c:otherwise>
+								</c:choose></td>
+						</tr>
+					</c:forEach>
+				</c:if>
 
-						</c:forEach>
-					</c:if>
-				</tbody>
-			</table>
-		</div>
-		<!-- Table -->
+			</tbody>
+		</table>
 	</div>
-	<!-- End Box -->
 	<!-- 分页开始 -->
 	<div align="center" style="margin-top: 20px">
 		<c:choose>
@@ -134,98 +167,28 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-
-	<div id="div">
-		<div id="edit">
-			<form>
-				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">编辑</h2>
-				<div style="margin-left: 100px; margin-top: 30px">
-					<label>编号：</label><input type="text" readonly="readonly" id="id"
-						style="border: none; background: #f6f6f6;" /><br />
-				</div>
-
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>排序 索引：</label><input type="text" id="indexs" /><br />
-				</div>
-
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>视频 名称：</label><input type="text" id="titles" /><br />
-				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>视频 链接：</label><input type="text" id="filespecs" /><br />
-				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>视频start：</label><input type="text" id="starttime" />（选填）<br />
-				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>视频 长度：</label><input type="text" id="slength" />（选填）<br />
-				</div>
-				<div style="margin-left: 100px; margin-top: 5px">
-					<label>视频 状态：</label><input type="radio" name="state" id="state1" />启用<input
-						type="radio" name="state" id="state2" />禁用<br />
-				</div>
-				<div style="margin-left: 200px; margin-top: 5px">
-					<input type="button" value="提交" onclick="sumbit()" /> <input
-						type="reset" value="取消" onclick="cancle()" />
-				</div>
-			</form>
-		</div>
-	</div>
-	<div id="divadd">
-		<div id="add">
-			<form>
-				<h2 style="font-style: oblique; margin-left: 20px; margin-top: 10px">添加</h2>
-				<input type="text" id="codevalue" value="${codevalue }"
-					style="display: none;" />
-				<div style="padding-left: 120px; margin-top: 30px">
-					<label>排序 索引：</label><input type="text" id="index" />*<br />
-				</div>
-				<div style="margin-left: 120px; margin-top: 5px">
-					<label>视频 名称：</label><input type="text" id="title" />*<br />
-				</div>
-				<div style="margin-left: 120px; margin-top: 5px">
-					<label>视频 链接：</label><input type="text" id="filespec" placeholder="请输入code值" />*<br />
-				</div>
-				<div style="margin-left: 120px; margin-top: 5px">
-					<label>视频start：</label><input type="text" id="start" />（选填）<br />
-				</div>
-				<div style="margin-left: 120px; margin-top: 5px">
-					<label>视频 长度：</label><input type="text" id="length" />（选填）<br />
-				</div>
-				<div style="margin-left: 120px; margin-top: 5px">
-					<label>视频 状态：</label><input type="radio" name="sta" id="sta1" />启用<input
-						type="radio" name="sta" id="sta0" />禁用<br />
-				</div>
-				<div style="margin-left: 220px; margin-top: 40px">
-					<input type="button" value="提交" onclick="sumbitAdd()" tabindex="5" />
-					<input type="reset" value="取消" onclick="cancleAdd()" tabindex="5" />
-				</div>
-			</form>
-		</div>
-	</div>
-	<div id="del">
-		<input type="text" id="mId" style="display: none;">
-		<input type="text" id="mState" style="display: none;">
-		<h2 style="font-style: oblique; margin-left: 50px; margin-top: 20px;">
-			<img alt="" src="<%=path%>/images/jg.png" style="vertical-align:middle;margin-right: 10px">是否禁用(启用)当前视频信息
-		</h2>
-		<div style="margin-left: 180px; margin-top: 15px">
-			<input style="width: 45px" type="button" value="是"
-				onclick="delVideo()" /> <input style="width: 45px" type="reset"
-				value="否" onclick="fouVideo()" />
-		</div>
-	</div>
-	
-	
 </body>
 <script type="text/javascript">
-
-    function fouVideo() {
-    	document.getElementById("del").style.display="none";
+	function showEdit(title,url,w,h) {
+		layer_show(title,url,w,h);
 	}
-    function delVideo() {
-		var id = $("#mId").val();
-		var state = $("#mState").val();
+
+
+	function showAdd(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+	function dele(id,state){
+		if(state==0){
+			layer.confirm('确认要禁用吗？',function(index){
+				delVideo(id,state)
+			});
+		}else{
+			layer.confirm('确认要启用吗？',function(index){
+				delVideo(id,state)
+			});
+		}
+	}
+    function delVideo(id,state) {
 		$.ajax({
 			url:"<%=path%>/itvmenu/deletes",
 			data : {"id":id,"state":state},
@@ -242,126 +205,5 @@
 			}
 		});
 	}
-		function dele(id,state){
-			document.getElementById("del").style.display="block";
-			$("#mId").val(id);
-			$("#mState").val(state);
-		}
-		
-		//关闭编辑弹窗
-		function cancle(){
-			document.getElementById("div").style.display="none";
-		}
-		//提交编辑后的结果
-		function sumbit(){
-			var id = $("#id").val();
-			var index = $("#indexs").val();
-			var title =	$("#titles").val();
-			var filespec = 	$("#filespecs").val();
-			var starttime =	$("#starttime").val();
-			var length =	$("#slength").val();
-			var state = 0;
-		if(document.getElementById("state1").checked){
-			state = 1;
-		}else{
-			state = 0;
-		}
-			$.ajax({
-				url:"<%=path%>/itvmenu/update",
-				data : {"id":id,"state":state,"index":index,"title":title,"filespec":filespec,"starttime":starttime,"length":length},
-				ache : false,
-				dataType : "text",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-						alert("请与管理员联系");
-					},
-				success : function(data) {
-					alert("编辑成功");
-					location.reload();
-				}
-			}); 
-		}
-		//显示编辑框数据
-		function edit(id,index,title,filespec,startpos,length,state) {
-			
-			document.getElementById("div").style.display="block";
-			$("#id").val(id);
-			$("#indexs").val(index);
-			$("#titles").val(title);
-			$("#filespecs").val(filespec);
-			$("#starttime").val(startpos);
-			$("#slength").val(length);
-			if(state==1){
-				document.getElementById("state1").checked = true;
-			}else{
-				document.getElementById("state2").checked = true;
-			}
-		}
-		//显示添加弹窗
-		function add(){
-			document.getElementById("divadd").style.display="block";
-		}
-		//关闭添加弹窗
-		function cancleAdd(){
-			document.getElementById("divadd").style.display="none";
-		}
-		//提交添加数据
-		function sumbitAdd(){
-			var codevalue = $("#codevalue").val();
-			var index = $("#index").val();
-			var title =	$("#title").val();
-			var filespec = 	$("#filespec").val();
-			
-			if(index==""){
-				document.getElementById("index").style="border:1px solid red";
-			  return;	
-			}else{
-				document.getElementById("index").style="null";
-			}
-			if(title==""){
-				document.getElementById("title").style="border:1px solid red";
-				  return;
-			}else{
-				document.getElementById("title").style="null";
-			}
-			if(filespec==""){
-				document.getElementById("filespec").style="border:1px solid red";
-				  return;
-			}else{
-				document.getElementById("filespec").style="null";
-			}
-			
-			var starttime =	$("#start").val();
-			if(starttime==""){
-				starttime = 0;
-			}
-			var length = $("#length").val();
-			
-			if(length==""){
-				length = 1;
-			}
-	    var state = 0;
-		if(document.getElementById("sta1").checked){
-			state = 1;
-		}else{
-			state = 0;
-		}
-			$.ajax({
-				url:"<%=path%>/itvmenu/insert",
-				data : {"codevalue":codevalue,"state":state,"index":index,"title":title,"filespec":filespec,"starttime":starttime,"length":length},
-				ache : false,
-				dataType : "text",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-						alert("请与管理员联系");
-					},
-				success : function(data) {
-					alert("添加成功");
-					location.reload();
-				}
-			}); 
-		}
-	</script>
+</script>
 </html>
