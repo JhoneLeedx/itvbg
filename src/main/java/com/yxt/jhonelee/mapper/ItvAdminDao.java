@@ -19,4 +19,6 @@ public interface ItvAdminDao {
      public int getCount();//获得总数
      
      public int delAdmin(int mId);//删除id的数据
+     
+     public Admin OneAdmin(int mId);
 }

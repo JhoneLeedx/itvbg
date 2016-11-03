@@ -76,7 +76,7 @@ public class ITVAdminController {
 	 * @return 返回到数据页面
 	 */
 	@RequestMapping("/adminlist")
-	public String Admin(HttpServletRequest request,HttpSession session) {
+	public String AdminList(HttpServletRequest request,HttpSession session) {
 		Admin admin =(Admin)session.getAttribute("admin");
 		if(admin!=null){
 			String pageNow = request.getParameter("pageNow");
@@ -126,13 +126,12 @@ public class ITVAdminController {
 	 */
 	@RequestMapping("/updateAdmin")
 	public void update(@RequestParam(value = "id") int mId, @RequestParam(value = "name") String mName,
-			@RequestParam(value = "pass") String mPass, @RequestParam(value = "level") int mLevel,
+			@RequestParam(value = "pass") String mPass, 
 			@RequestParam(value = "type") int mType,@RequestParam(value = "town") String towm, PrintWriter writer) {
-		Admin admin = new Admin();
+		Admin admin = service.OneAdmin(mId);
 		admin.setmId(mId);
 		admin.setmAdminName(mName);
 		admin.setmAdminPass(mPass);
-		admin.setmLevel(mLevel);
 		admin.setmType(mType);
         admin.setmPid(towm);
 		int up = service.updateAdmin(admin);
@@ -203,5 +202,18 @@ public class ITVAdminController {
 		}else{
 			writer.write("wrong");
 		}
+	}
+	
+	
+	@RequestMapping("showAddAdmin")
+	public String addAdmin(){
+		
+		return "addadmin";
+	}
+	@RequestMapping("showEditAdmin")
+	public String editAdimn(@RequestParam(value="id")int mId,HttpServletRequest request){
+		Admin  admin = service.OneAdmin(mId);
+		request.setAttribute("admins", admin);
+		return "editadmin";
 	}
 }

@@ -55,4 +55,18 @@ public class AddressTLLController {
 		String json = gson.toJson(list);
 		writer.write(json);
 	}
+	
+	@RequestMapping("parentsAddress")
+	public void getParentAddress(@RequestParam(value="codevalue")String mCodeValue,PrintWriter writer){
+		Address townAddress = service.SelectOneAddress(mCodeValue);
+		Address cityAddress = service.SelectParentAddress(townAddress.getmId());
+		Address provinceAddress = service.SelectParentAddress(cityAddress.getmId());
+		List<Address> list = new ArrayList<Address>();
+		list.add(provinceAddress);
+		list.add(cityAddress);
+	    list.add(townAddress);
+		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		writer.write(json);
+	}
 }

@@ -10,4 +10,5 @@ public interface AddressService {
 	
 	public Address SelectParentAddress(int mId);
 	public Address SelectOneAddress(int mId);
+	public Address SelectOneAddress(String mCodeValue);
 }

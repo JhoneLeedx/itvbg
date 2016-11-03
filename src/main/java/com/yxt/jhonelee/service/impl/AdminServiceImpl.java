@@ -43,4 +43,9 @@ public class AdminServiceImpl implements AdminService {
 		return dao.delAdmin(mId);
 	}
 
+	public Admin OneAdmin(int mId) {
+		// TODO Auto-generated method stub
+		return dao.OneAdmin(mId);
+	}
+
 }

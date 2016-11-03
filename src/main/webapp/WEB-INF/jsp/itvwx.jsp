@@ -185,29 +185,5 @@
 			}
 		});
 	}
-<%-- 
-
-
-	function editWxp() {
-		 $("#edititvwx").ajaxSubmit({
-			   url:"<%=path%>/itvwx/update",
-			type : 'post',
-			dataType : "text",
-			contentType : "application/x-www-form-urlencoded; charset=utf-8",
-			error : function() {
-				alert("请与管理员联系");
-			},
-			success : function(data) {
-				alert(data);
-				location.reload();
-			}
-		});
-	}
-
-	function deldiv(id, state) {
-		$("#del").show();
-		$("#dmId").val(id);
-		$("#dmState").val(state);
-	} --%>
 </script>
 </html>

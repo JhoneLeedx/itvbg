@@ -24,4 +24,8 @@
      <select id="SelectOneAddress" resultType="Address" resultMap="AddressMap">
 		 select id,name,code_value,pid from address where id =#{mId} limit 1
 	</select>
+	
+	     <select id="SelectOAddress" resultType="Address" resultMap="AddressMap">
+		 select id,name,code_value,pid from address where code_value =#{mCodeValue} limit 1
+	</select>
 </mapper>

@@ -54,4 +54,8 @@
 		delete from ITV_ADMIN where
 		id = #{mId}
 	</delete>
+	<select id="OneAdmin" resultMap="ItvAdminMap" resultType="ItvAdmin">
+		select * from itv_admin where id = #{mId} limit 1
+	</select>
+	
 </mapper>

@@ -28,5 +28,9 @@ public class AddressServiceImpl implements AddressService {
 	public Address SelectOneAddress(int mId) {
 		return dao.SelectOneAddress(mId);
 	}
+	public Address SelectOneAddress(String mCodeValue) {
+		// TODO Auto-generated method stub
+		return dao.SelectOAddress(mCodeValue);
+	}
 
 }

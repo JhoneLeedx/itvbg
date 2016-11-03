@@ -17,4 +17,6 @@ public interface AdminService {
 	public int getCount();
 	
 	public int delAdmin(int mId);
+	
+	 public Admin OneAdmin(int mId);
 }
