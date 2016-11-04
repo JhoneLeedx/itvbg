@@ -22,7 +22,7 @@
 	<select id="AllItvStb" resultMap="ItvStbMap" resultType="ItvStb">
 		select
 		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
-		ITV_STB ORDER BY is_iptv desc,brand asc limit
+		ITV_STB ORDER BY is_iptv desc,brand desc limit
 		#{startPos},#{pageSize}
 	</select>
 	<!--查询总数 -->
@@ -78,7 +78,7 @@
 	<select id="vagueSelect" resultMap="ItvStbMap" resultType="ItvStb">
 		select
 		id,brand,model,type,iptv_id,iptv_token,remark,sys_info_code,sys_info,is_iptv,is_media_call from
-		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') ORDER BY is_iptv desc,brand asc limit
+		ITV_STB where sys_info_code like CONCAT('%',#{mCode},'%') ORDER BY is_iptv desc,brand desc limit
 		#{startPos},#{pageSize}
 	</select>
 	<!--模糊查询总数 -->

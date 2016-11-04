@@ -121,7 +121,7 @@
 									<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
 								</c:choose></td>
 							<td><c:if test="${itvaddress.mAddressCode!=''}">
-									<a data-title="视频菜单管理" onclick="Hui_admin_tab(this)"
+									<a data-title="视频菜单管理" onclick="Hui_admin_tab(this)" class="btn btn-primary radius"
 										_href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1">
 										视频菜单管理</a>
 								</c:if></td>
