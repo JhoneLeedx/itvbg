@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.service.AdminService;
+import com.yxt.jhonelee.util.CreateImageCode;
 import com.yxt.jhonelee.util.Md5Util;
 import com.yxt.jhonelee.util.Page;
-import com.yxt.jhonelee.util.RandomNumUtil;
 
 /**
  * @time 2016年9月22日10:53:33
@@ -181,12 +181,10 @@ public class ITVAdminController {
 	 */
 	@RequestMapping("/captcha")
 	@ResponseBody
-	public void captcha(HttpServletRequest request, HttpServletResponse response) {
+	public void captcha(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
 		try {
-			RandomNumUtil.outputCaptcha(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
+			CreateImageCode.getCode3(request, response);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
