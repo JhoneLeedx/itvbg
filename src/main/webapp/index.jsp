@@ -54,7 +54,6 @@
 
 </head>
 <body>
-
 	<c:choose>
 		<c:when test="${!empty admin }">
 			<header class="navbar-wrapper">

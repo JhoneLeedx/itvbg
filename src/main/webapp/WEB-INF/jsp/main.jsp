@@ -47,147 +47,152 @@
 
 <title>Insert title here</title>
 </head>
-<body>
-	<nav class="breadcrumb">
-		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		地区管理 <span class="c-gray en">&gt;</span> 地区管理 <a
-			class="btn btn-success radius r"
-			style="line-height: 1.6em; margin-top: 3px"
-			href="javascript:location.replace(location.href);" title="刷新"><i
-			class="Hui-iconfont">&#xe68f;</i></a>
-	</nav>
-	<div class="mt-20">
-		<table
-			class="table table-border table-bordered table-bg table-hover table-sort">
-			<thead>
-				<tr class="text-c">
-
-					<th>地区编码</th>
-					<th>地区名称</th>
-					<th>地区简称</th>
-					<th>地区ID</th>
-					<th>微信公众号</th>
-					<th>Logo标识</th>
-					<th>状态(正常/禁用)</th>
-					<th>创建时间</th>
-					<th>信息完整</th>
-					<th>区域视频菜单</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${!empty list }">
-					<c:forEach items="${list }" var="itvaddress">
+<c:choose>
+	<c:when test="${!empty admin }">
+		<body>
+			<nav class="breadcrumb">
+				<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+				地区管理 <span class="c-gray en">&gt;</span> 地区管理 <a
+					class="btn btn-success radius r"
+					style="line-height: 1.6em; margin-top: 3px"
+					href="javascript:location.replace(location.href);" title="刷新"><i
+					class="Hui-iconfont">&#xe68f;</i></a>
+			</nav>
+			<div class="mt-20">
+				<table
+					class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
 						<tr class="text-c">
-							<td>${itvaddress.mAreaCode }</td>
-							<td>${itvaddress.mAreaName }</td>
-							<td>${itvaddress.mShortName }</td>
-							<td><c:choose>
-									<c:when test="${itvaddress.mAddressId>0 }">
+
+							<th>地区编码</th>
+							<th>地区名称</th>
+							<th>地区简称</th>
+							<th>地区ID</th>
+							<th>微信公众号</th>
+							<th>Logo标识</th>
+							<th>状态(正常/禁用)</th>
+							<th>创建时间</th>
+							<th>信息完整</th>
+							<th>区域视频菜单</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${!empty list }">
+							<c:forEach items="${list }" var="itvaddress">
+								<tr class="text-c">
+									<td>${itvaddress.mAreaCode }</td>
+									<td>${itvaddress.mAreaName }</td>
+									<td>${itvaddress.mShortName }</td>
+									<td><c:choose>
+											<c:when test="${itvaddress.mAddressId>0 }">
 						${itvaddress.mAddressId }
 						</c:when>
-									<c:otherwise>
+											<c:otherwise>
 						不存在
 						</c:otherwise>
-								</c:choose></td>
-							<td><c:choose>
-									<c:when test="${!empty itvaddress.mWXQrcodeImageURL }">
-										<img alt="" src="${itvaddress.mWXQrcodeImageURL }"
-											style="width: 50px">
-									</c:when>
-									<c:otherwise>
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${!empty itvaddress.mWXQrcodeImageURL }">
+												<img alt="" src="${itvaddress.mWXQrcodeImageURL }"
+													style="width: 50px">
+											</c:when>
+											<c:otherwise>
 						不存在
 						</c:otherwise>
-								</c:choose></td>
-							<td><c:choose>
-									<c:when test="${!empty itvaddress.mLogoIMageURL }">
-										<img alt="" src="${itvaddress.mLogoIMageURL }"
-											style="width: 50px">
-									</c:when>
-									<c:otherwise>
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${!empty itvaddress.mLogoIMageURL }">
+												<img alt="" src="${itvaddress.mLogoIMageURL }"
+													style="width: 50px">
+											</c:when>
+											<c:otherwise>
 						不存在
 						</c:otherwise>
-								</c:choose></td>
-							<td><c:choose>
-									<c:when test="${itvaddress.mState==1 }">正常</c:when>
-									<c:when test="${itvaddress.mState==0 }">禁用</c:when>
-								</c:choose></td>
-							<td><fmt:formatDate value="${itvaddress.mCreateTime }"
-									pattern="YYYY-MM-dd hh:mm:ss" /></td>
-							<td><c:choose>
-									<c:when test="${itvaddress.mIsFull==1 }">完整</c:when>
-									<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
-								</c:choose></td>
-							<td><c:if test="${itvaddress.mAddressCode!=''}">
-									<a data-title="视频菜单管理" onclick="Hui_admin_tab(this)" class="btn btn-primary radius"
-										_href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1">
-										视频菜单管理</a>
-								</c:if></td>
-							<td><a title="编辑"
-								onclick="showModify('编辑','<%=path%>/address/editAddress?id=${itvaddress.mId}')"><i
-									class="Hui-iconfont">&#xe6df;</i>编辑</a> <c:choose>
-									<c:when test="${itvaddress.mState==1 }">
-										<a onclick="disOropen('${itvaddress.mAreaCode}',0)"><i
-											class="Hui-iconfont">&#xe6e2;</i>禁用</a>
-									</c:when>
-									<c:otherwise>
-										<a onclick="disOropen('${itvaddress.mAreaCode}',1)"><i
-											class="Hui-iconfont">&#xe6e2;</i>启用</a>
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
-		</table>
-	</div>
-	<!-- 分页开始 -->
-	<div align="center" style="margin-top: 20px">
-		<c:choose>
-			<c:when test="${page.totalPageCount==0}">
-			</c:when>
-			<c:otherwise>
-				<div>
-					<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
-						${page.pageNow} 页</font> <a
-						href="<%=path%>/address/showAddress?pageNow=1">首页</a>
-					<c:choose>
-						<c:when test="${page.pageNow - 1 > 0}">
-							<a
-								href="<%=path%>/address/showAddress?pageNow=${page.pageNow - 1}">上一页</a>
-						</c:when>
-						<c:when test="${page.pageNow - 1 <= 0}">
-							<a href="<%=path%>/address/showAddress?pageNow=1">上一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a href="<%=path%>/address/showAddress?pageNow=${page.pageNow}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 < page.totalPageCount}">
-							<a
-								href="<%=path%>/address/showAddress?pageNow=${page.pageNow + 1}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
-							<a
-								href="<%=path%>/address/showAddress?pageNow=${page.totalPageCount}">下一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a href="<%=path%>/address/showAddress?pageNow=${page.pageNow}">尾页</a>
-						</c:when>
-						<c:otherwise>
-							<a
-								href="<%=path%>/address/showAddress?pageNow=${page.totalPageCount}">尾页</a>
-						</c:otherwise>
-					</c:choose>
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${itvaddress.mState==1 }">正常</c:when>
+											<c:when test="${itvaddress.mState==0 }">禁用</c:when>
+										</c:choose></td>
+									<td><fmt:formatDate value="${itvaddress.mCreateTime }"
+											pattern="YYYY-MM-dd hh:mm:ss" /></td>
+									<td><c:choose>
+											<c:when test="${itvaddress.mIsFull==1 }">完整</c:when>
+											<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
+										</c:choose></td>
+									<td><c:if test="${itvaddress.mAddressCode!=''}">
+											<a data-title="视频菜单管理" onclick="Hui_admin_tab(this)"
+												class="btn btn-primary radius"
+												_href="<%=path%>/itvmenu/allMenu?codevalue=${itvaddress.mAddressCode}&shortname=${itvaddress.mShortName}&pageNow=1">
+												视频菜单管理</a>
+										</c:if></td>
+									<td><a title="编辑"
+										onclick="showModify('编辑','<%=path%>/address/editAddress?id=${itvaddress.mId}')"><i
+											class="Hui-iconfont">&#xe6df;</i>编辑</a> <c:choose>
+											<c:when test="${itvaddress.mState==1 }">
+												<a onclick="disOropen('${itvaddress.mAreaCode}',0)"><i
+													class="Hui-iconfont">&#xe6e2;</i>禁用</a>
+											</c:when>
+											<c:otherwise>
+												<a onclick="disOropen('${itvaddress.mAreaCode}',1)"><i
+													class="Hui-iconfont">&#xe6e2;</i>启用</a>
+											</c:otherwise>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页开始 -->
+			<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
+								${page.pageNow} 页</font> <a
+								href="<%=path%>/address/showAddress?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page.pageNow - 1 > 0}">
+									<a
+										href="<%=path%>/address/showAddress?pageNow=${page.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page.pageNow - 1 <= 0}">
+									<a href="<%=path%>/address/showAddress?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a href="<%=path%>/address/showAddress?pageNow=${page.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 < page.totalPageCount}">
+									<a
+										href="<%=path%>/address/showAddress?pageNow=${page.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
+									<a
+										href="<%=path%>/address/showAddress?pageNow=${page.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a href="<%=path%>/address/showAddress?pageNow=${page.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/address/showAddress?pageNow=${page.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
 
-				</div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-</body>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</body>
+	</c:when>
+</c:choose>
 <script type="text/javascript">
    
 	function showModify(title,url,w,h){
@@ -206,7 +211,8 @@
 	}
     function delAddress(areacode,state) {
 		$.ajax({
-			url:"<%=path%>/address/del",
+			url:"<%=path%>
+	/address/del",
 			data : {
 				"areacode" : areacode,
 				"state" : state

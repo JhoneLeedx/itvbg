@@ -33,99 +33,104 @@
 	rel="stylesheet" type="text/css" />
 </head>
 <c:choose>
-	<c:when test="${! empty admins.mPid }">
-		<body onload="parentAddress(${admins.mPid})">
+	<c:when test="${!empty admin }">
+
+		<c:choose>
+			<c:when test="${! empty admins.mPid }">
+				<body onload="parentAddress(${admins.mPid})">
+			</c:when>
+			<c:otherwise>
+				<body onload="findprovince()">
+			</c:otherwise>
+		</c:choose>
+		<div class="page-container">
+			<form class="form form-horizontal" id="form-article-add">
+
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span
+						class="c-red">*</span>序号：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" id="id"
+							value="${admins.mId }" style="border: none" readonly="readonly">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span
+						class="c-red">*</span>管理员名称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" id="name"
+							value="${admins.mAdminName }">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span
+						class="c-red">*</span>管理员密码：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text" id="pass"
+							value="${admins.mAdminPass }">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span
+						class="c-red">*</span>管理员类别：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<c:choose>
+							<c:when test="${admins.mType==1 }">
+								<div class="radio-box">
+									<input name="atype" id=type0 type="radio" checked="checked">
+									<label for="sex-1">IPTV协同服务</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" name="atype" id="type1"> <label
+										for="sex-2">IPTV后台管理</label>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="radio-box">
+									<input name="atype" id=type0 type="radio"> <label
+										for="sex-1">IPTV协同服务</label>
+								</div>
+								<div class="radio-box">
+									<input type="radio" name="atype" id="type1" checked="checked">
+									<label for="sex-2">IPTV后台管理</label>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span
+						class="c-red">*</span>所在城市：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						省:<select class="address same" id="province"
+							style="margin-left: 15px;; margin-right: 15px"
+							onchange="findcity()">
+							<option>请选择</option>
+						</select> 市: <select class="address same" id="city" onchange="findtown()"
+							style="margin-left: 15px; margin-right: 15px">
+							<option>请选择</option>
+						</select> 区: <select class="address same" id="town" name="addressCodeValue"
+							style="margin-left: 15px; margin-right: 15px">
+							<option>请选择</option>
+						</select>
+					</div>
+				</div>
+				<div class="row cl">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+						<button onClick="editAdd()" class="btn btn-primary radius"
+							type="button">
+							<i class="Hui-iconfont">&#xe632;</i> 提交
+						</button>
+						<button onClick="layer_close();" class="btn btn-default radius"
+							type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		</body>
 	</c:when>
-	<c:otherwise>
-		<body onload="findprovince()">
-	</c:otherwise>
 </c:choose>
-<div class="page-container">
-	<form class="form form-horizontal" id="form-article-add">
-
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span
-				class="c-red">*</span>序号：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" id="id" value="${admins.mId }"
-					style="border: none" readonly="readonly">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span
-				class="c-red">*</span>管理员名称：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" id="name"
-					value="${admins.mAdminName }">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span
-				class="c-red">*</span>管理员密码：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" id="pass"
-					value="${admins.mAdminPass }">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span
-				class="c-red">*</span>管理员类别：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<c:choose>
-					<c:when test="${admins.mType==1 }">
-						<div class="radio-box">
-							<input name="atype" id=type0 type="radio" checked="checked">
-							<label for="sex-1">IPTV协同服务</label>
-						</div>
-						<div class="radio-box">
-							<input type="radio" name="atype" id="type1"> <label
-								for="sex-2">IPTV后台管理</label>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="radio-box">
-							<input name="atype" id=type0 type="radio"> <label
-								for="sex-1">IPTV协同服务</label>
-						</div>
-						<div class="radio-box">
-							<input type="radio" name="atype" id="type1" checked="checked">
-							<label for="sex-2">IPTV后台管理</label>
-						</div>
-					</c:otherwise>
-				</c:choose>
-
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span
-				class="c-red">*</span>所在城市：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				省:<select class="address same" id="province"
-					style="margin-left: 15px;; margin-right: 15px"
-					onchange="findcity()">
-					<option>请选择</option>
-				</select> 市: <select class="address same" id="city" onchange="findtown()"
-					style="margin-left: 15px; margin-right: 15px">
-					<option>请选择</option>
-				</select> 区: <select class="address same" id="town" name="addressCodeValue"
-					style="margin-left: 15px; margin-right: 15px">
-					<option>请选择</option>
-				</select>
-			</div>
-		</div>
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="editAdd()" class="btn btn-primary radius"
-					type="button">
-					<i class="Hui-iconfont">&#xe632;</i> 提交
-				</button>
-				<button onClick="layer_close();" class="btn btn-default radius"
-					type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-			</div>
-		</div>
-	</form>
-</div>
-</body>
 <script type="text/javascript"
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">

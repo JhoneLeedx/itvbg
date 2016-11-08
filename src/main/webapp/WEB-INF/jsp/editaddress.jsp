@@ -33,123 +33,125 @@
 <title>Insert title here</title>
 </head>
 <c:choose>
-	<c:when test="${address.mAddressId>0 }">
-		<body onload="parentAddress(${address.mAddressId})">
+	<c:when test="${!empty admin }">
+		<c:choose>
+			<c:when test="${address.mAddressId>0 }">
+				<body onload="parentAddress(${address.mAddressId})">
+			</c:when>
+			<c:otherwise>
+				<body onload="findprovince()">
+			</c:otherwise>
+		</c:choose>
+		<article class="page-container">
+			<form class="form form-horizontal" enctype="multipart/form-data"
+				id="modifyForm">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span
+						class="c-red">*</span>地区编码:</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" readonly="readonly" style="border: none"
+							class="input-text" value="${address.mAreaCode }" placeholder=""
+							name="areaCode">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span
+						class="c-red">*</span>地区名称:</label>
+					<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+						<input type="text" readonly="readonly" style="border: none"
+							class="input-text" value="${address.mAreaName }" placeholder="">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span
+						class="c-red">*</span>简称：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" class="input-text"
+							value="${address.mShortName }" placeholder="" name="shortName">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3"><span
+						class="c-red">*</span>所在城市：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						省:<select class="address same" id="province"
+							style="margin-left: 15px;; margin-right: 15px"
+							onchange="findcity()">
+							<option>请选择</option>
+						</select> 市: <select class="address same" id="city" onchange="findtown()"
+							style="margin-left: 15px; margin-right: 15px">
+							<option>请选择</option>
+						</select> 区: <select class="address same" id="town" name="addressCodeValue"
+							style="margin-left: 15px; margin-right: 15px">
+							<option>请选择</option>
+						</select>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">logo图片：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span class="btn-upload form-group"> <input id="logo_url"
+							name="logo" type="file" accept=".gif,.png,.jpg"
+							style="margin-left: 15px" value="asda" />
+						</span>
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">微信公众号：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span class="select-box"> <select class="select" size="1"
+							id="wxcode" name="wxCode">
+								<option>请选择</option>
+								<option
+									value="http://118.123.167.5:8990/itvbg/images/upload/wx/yzg.jpg">医总管</option>
+						</select>
+						</span>
+					</div>
+				</div>
+				<div class="row cl">
+					<c:choose>
+						<c:when test="${address.mState==1 }">
+							<label class="form-label col-xs-4 col-sm-3">状态值：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<div class="radio-box">
+									<input name="flag" type="radio" value="1" id="flag1" checked>
+									<label for="sex-1">正常</label>
+								</div>
+								<div class="radio-box">
+									<input name="flag" type="radio" value="0" id="flag0"> <label
+										for="sex-2">禁用</label>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<label class="form-label col-xs-4 col-sm-3">状态值：</label>
+							<div class="formControls col-xs-8 col-sm-9">
+								<div class="radio-box">
+									<input name="flag" type="radio" value="1" id="flag1"> <label
+										for="sex-1">正常</label>
+								</div>
+								<div class="radio-box">
+									<input name="flag" type="radio" value="0" id="flag0" checked>
+									<label for="sex-2">禁用</label>
+								</div>
+							</div>
+						</c:otherwise>
+
+					</c:choose>
+				</div>
+				<div class="row cl">
+					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+						<input class="btn btn-primary radius" id="sub" type="button"
+							value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="upload()" />
+					</div>
+				</div>
+			</form>
+		</article>
+		</body>
 	</c:when>
-	<c:otherwise>
-		<body onload="findprovince()">
-	</c:otherwise>
 </c:choose>
-<article class="page-container">
-	<form class="form form-horizontal" enctype="multipart/form-data"
-		id="modifyForm">
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span
-				class="c-red">*</span>地区编码:</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" readonly="readonly" style="border: none"
-					class="input-text" value="${address.mAreaCode }" placeholder=""
-					name="areaCode">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span
-				class="c-red">*</span>地区名称:</label>
-			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
-				<input type="text" readonly="readonly" style="border: none"
-					class="input-text" value="${address.mAreaName }" placeholder="">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span
-				class="c-red">*</span>简称：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="${address.mShortName }"
-					placeholder="" name="shortName">
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3"><span
-				class="c-red">*</span>所在城市：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				省:<select class="address same" id="province"
-					style="margin-left: 15px;; margin-right: 15px"
-					onchange="findcity()">
-					<option>请选择</option>
-				</select> 市: <select class="address same" id="city" onchange="findtown()"
-					style="margin-left: 15px; margin-right: 15px">
-					<option>请选择</option>
-				</select> 区: <select class="address same" id="town" name="addressCodeValue"
-					style="margin-left: 15px; margin-right: 15px">
-					<option>请选择</option>
-				</select>
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">logo图片：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<span class="btn-upload form-group"> <input id="logo_url"
-					name="logo" type="file" accept=".gif,.png,.jpg"
-					style="margin-left: 15px" value="asda" />
-				</span>
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-3">微信公众号：</label>
-			<div class="formControls col-xs-8 col-sm-9">
-				<span class="select-box"> <select class="select" size="1" 
-					id="wxcode" name="wxCode">
-						<option>请选择</option>
-						<option
-							value="http://118.123.167.5:8990/itvbg/images/upload/wx/yzg.jpg">医总管</option>
-				</select>
-				</span>
-			</div>
-		</div>
-		<div class="row cl">
-			<c:choose>
-				<c:when test="${address.mState==1 }">
-				<label class="form-label col-xs-4 col-sm-3">状态值：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<div class="radio-box">
-							<input name="flag" type="radio" value="1" id="flag1" checked>
-							<label for="sex-1">正常</label>
-						</div>
-						<div class="radio-box">
-							<input name="flag" type="radio" value="0" id="flag0"> <label
-								for="sex-2">禁用</label>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-				<label class="form-label col-xs-4 col-sm-3">状态值：</label>
-					<div class="formControls col-xs-8 col-sm-9">
-						<div class="radio-box">
-							<input name="flag" type="radio" value="1" id="flag1"> <label
-								for="sex-1">正常</label>
-						</div>
-						<div class="radio-box">
-							<input name="flag" type="radio" value="0" id="flag0" checked>
-							<label for="sex-2">禁用</label>
-						</div>
-					</div>
-				</c:otherwise>
-
-			</c:choose>
-		</div>
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-				<input class="btn btn-primary radius" id="sub" type="button"
-					value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="upload()" />
-			</div>
-		</div>
-	</form>
-</article>
-</body>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">
-
-
 
 function upload(){
 	   $("#modifyForm").ajaxSubmit({

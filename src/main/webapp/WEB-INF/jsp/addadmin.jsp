@@ -32,77 +32,82 @@
 <link href="<%=path%>/lib/webuploader/0.1.5/webuploader.css"
 	rel="stylesheet" type="text/css" />
 </head>
-<body onload="findprovince()">
-	<div class="page-container">
-		<form class="form form-horizontal" id="form-article-add">
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>管理员名称：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" id="Adminname">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>管理员密码：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" class="input-text" id="Adminpass">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>管理员级别：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<div class="radio-box">
-						<input name="sta" name="alevel" type="radio" checked="checked"
-							id="alevel1"> <label for="sex-1">普通管理员</label>
+<c:choose>
+	<c:when test="${!empty admin }">
+		<body onload="findprovince()">
+			<div class="page-container">
+				<form class="form form-horizontal" id="form-article-add">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span
+							class="c-red">*</span>管理员名称：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" id="Adminname">
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span
-					class="c-red">*</span>管理员类别：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<div class="radio-box">
-						<input name="atype" id="atype0" type="radio" checked="checked">
-						<label for="sex-1">IPTV协同服务</label>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span
+							class="c-red">*</span>管理员密码：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" id="Adminpass">
+						</div>
 					</div>
-					<div class="radio-box">
-						<input type="radio" name="atype" id="atype1"> <label
-							for="sex-2">IPTV后台管理</label>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span
+							class="c-red">*</span>管理员级别：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<div class="radio-box">
+								<input name="sta" name="alevel" type="radio" checked="checked"
+									id="alevel1"> <label for="sex-1">普通管理员</label>
+							</div>
+						</div>
 					</div>
-				</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2"><span
+							class="c-red">*</span>管理员类别：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<div class="radio-box">
+								<input name="atype" id="atype0" type="radio" checked="checked">
+								<label for="sex-1">IPTV协同服务</label>
+							</div>
+							<div class="radio-box">
+								<input type="radio" name="atype" id="atype1"> <label
+									for="sex-2">IPTV后台管理</label>
+							</div>
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3"><span
+							class="c-red">*</span>所在城市：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							省:<select class="address same" id="province"
+								style="margin-left: 15px;; margin-right: 15px"
+								onchange="findcity()">
+								<option>请选择</option>
+							</select> 市: <select class="address same" id="city" onchange="findtown()"
+								style="margin-left: 15px; margin-right: 15px">
+								<option>请选择</option>
+							</select> 区: <select class="address same" id="town"
+								name="addressCodeValue"
+								style="margin-left: 15px; margin-right: 15px">
+								<option>请选择</option>
+							</select>
+						</div>
+					</div>
+					<div class="row cl">
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+							<button onClick="aadd()" class="btn btn-primary radius"
+								type="button">
+								<i class="Hui-iconfont">&#xe632;</i> 提交
+							</button>
+							<button onClick="layer_close();" class="btn btn-default radius"
+								type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span
-					class="c-red">*</span>所在城市：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					省:<select class="address same" id="province"
-						style="margin-left: 15px;; margin-right: 15px"
-						onchange="findcity()">
-						<option>请选择</option>
-					</select> 市: <select class="address same" id="city" onchange="findtown()"
-						style="margin-left: 15px; margin-right: 15px">
-						<option>请选择</option>
-					</select> 区: <select class="address same" id="town" name="addressCodeValue"
-						style="margin-left: 15px; margin-right: 15px">
-						<option>请选择</option>
-					</select>
-				</div>
-			</div>
-			<div class="row cl">
-				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-					<button onClick="aadd()" class="btn btn-primary radius"
-						type="button">
-						<i class="Hui-iconfont">&#xe632;</i> 提交
-					</button>
-					<button onClick="layer_close();" class="btn btn-default radius"
-						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-				</div>
-			</div>
-		</form>
-	</div>
-</body>
+		</body>
+	</c:when>
+</c:choose>
 <script type="text/javascript"
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">
@@ -213,26 +218,26 @@
 			$.ajax({
 				data : {"codevalue":city},
 			    url:"<%=path%>/addresstll/alist",
-				ache : false,
-				dataType : "json",
-				async : true,
-				contentType : "application/x-www-form-urlencoded; charset=utf-8",
-				error : function() {
-					alert("请与管理员联系");
-				},
-				success : function(data) {
-					var json = JSON.stringify(data);
-					var obj = jQuery.parseJSON(json);
-					var str = "<option>请选择</option>";
-					$("#town").html("");
-					for (var i = 0; i < obj.length; i++) {
-						var address = obj[i];
-						str += "<option value='"+address.mCodeValue+"'>" //现在用code_value标识，后期会改成id标识
-								+ address.mName + "</option>";
-					}
-					$("#town").append(str);
+			ache : false,
+			dataType : "json",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+				alert("请与管理员联系");
+			},
+			success : function(data) {
+				var json = JSON.stringify(data);
+				var obj = jQuery.parseJSON(json);
+				var str = "<option>请选择</option>";
+				$("#town").html("");
+				for (var i = 0; i < obj.length; i++) {
+					var address = obj[i];
+					str += "<option value='"+address.mCodeValue+"'>" //现在用code_value标识，后期会改成id标识
+							+ address.mName + "</option>";
 				}
-			});
-		}
+				$("#town").append(str);
+			}
+		});
+	}
 </script>
 </html>

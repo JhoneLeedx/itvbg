@@ -48,107 +48,111 @@
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
-	<nav class="breadcrumb">
-		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		管理员管理 <span class="c-gray en">&gt;</span>管理员列表 <a
-			class="btn btn-success radius r"
-			style="line-height: 1.6em; margin-top: 3px"
-			href="javascript:location.replace(location.href);" title="刷新"><i
-			class="Hui-iconfont">&#xe68f;</i></a>
-	</nav>
-	<div class="cl pd-5 bg-1 bk-gray mt-20">
-		<span class="l"><a class="btn btn-primary radius"
-			onclick="showAdd('添加管理员','<%=path%>/admin/showAddAdmin')"
-			href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>添加管理员</a></span>
-	</div>
-	<div class="mt-20">
-		<table
-			class="table table-border table-bordered table-bg table-hover table-sort">
-			<thead>
-				<tr class="text-c">
-					<th>序号</th>
-					<th>管理员名称</th>
-					<th>管理员密码</th>
-					<th>管理员级别</th>
-					<th>管理员类型</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${!empty list }">
-					<c:forEach items="${list }" var="menu">
+<c:choose>
+	<c:when test="${!empty admin }">
+		<body>
+			<nav class="breadcrumb">
+				<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+				管理员管理 <span class="c-gray en">&gt;</span>管理员列表 <a
+					class="btn btn-success radius r"
+					style="line-height: 1.6em; margin-top: 3px"
+					href="javascript:location.replace(location.href);" title="刷新"><i
+					class="Hui-iconfont">&#xe68f;</i></a>
+			</nav>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l"><a class="btn btn-primary radius"
+					onclick="showAdd('添加管理员','<%=path%>/admin/showAddAdmin')"
+					href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>添加管理员</a></span>
+			</div>
+			<div class="mt-20">
+				<table
+					class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
 						<tr class="text-c">
-							<td>${menu.mId }</td>
-							<td>${menu.mAdminName }</td>
-							<td>${menu.mAdminPass }</td>
-							<td><c:choose>
-									<c:when test="${menu.mLevel==1 }">超级管理员</c:when>
-									<c:when test="${menu.mLevel!=1 }">普通管理员</c:when>
-								</c:choose></td>
-							<td><c:choose>
-									<c:when test="${menu.mType==1 }">协同服务</c:when>
-									<c:when test="${menu.mType==2 }">Itv后台</c:when>
-								</c:choose></td>
-							<td><c:choose>
-									<c:when test="${admin.mId==menu.mId }">
+							<th>序号</th>
+							<th>管理员名称</th>
+							<th>管理员密码</th>
+							<th>管理员级别</th>
+							<th>管理员类型</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${!empty list }">
+							<c:forEach items="${list }" var="menu">
+								<tr class="text-c">
+									<td>${menu.mId }</td>
+									<td>${menu.mAdminName }</td>
+									<td>${menu.mAdminPass }</td>
+									<td><c:choose>
+											<c:when test="${menu.mLevel==1 }">超级管理员</c:when>
+											<c:when test="${menu.mLevel!=1 }">普通管理员</c:when>
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${menu.mType==1 }">协同服务</c:when>
+											<c:when test="${menu.mType==2 }">Itv后台</c:when>
+										</c:choose></td>
+									<td><c:choose>
+											<c:when test="${admin.mId==menu.mId }">
 										当前管理员不允许操作
 										</c:when>
-									<c:otherwise>
-										<a
-											onclick="editAdmin('编辑管理员','<%=path%>/admin/showEditAdmin?id=${menu.mId }')"><i
-											class="Hui-iconfont">&#xe6df;</i>编辑</a>
-										<a onclick="deldiv(${menu.mId})"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
-		</table>
-	</div>
-	<div align="center" style="margin-top: 20px">
-		<c:choose>
-			<c:when test="${page.totalPageCount==0}">
-			</c:when>
-			<c:otherwise>
-				<div>
-					<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
-						${page.pageNow} 页</font> <a href="<%=path%>/admin/adminlist?pageNow=1">首页</a>
-					<c:choose>
-						<c:when test="${page.pageNow - 1 > 0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow - 1}">上一页</a>
-						</c:when>
-						<c:when test="${page.pageNow - 1 <= 0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=1">上一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 < page.totalPageCount}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow + 1}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
-							<a
-								href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">下一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">尾页</a>
-						</c:when>
-						<c:otherwise>
-							<a
-								href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">尾页</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-</body>
+											<c:otherwise>
+												<a
+													onclick="editAdmin('编辑管理员','<%=path%>/admin/showEditAdmin?id=${menu.mId }')"><i
+													class="Hui-iconfont">&#xe6df;</i>编辑</a>
+												<a onclick="deldiv(${menu.mId})"><i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+											</c:otherwise>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</tbody>
+				</table>
+			</div>
+			<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
+								${page.pageNow} 页</font> <a href="<%=path%>/admin/adminlist?pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page.pageNow - 1 > 0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page.pageNow - 1 <= 0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 < page.totalPageCount}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
+									<a
+										href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a href="<%=path%>/admin/adminlist?pageNow=${page.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/admin/adminlist?pageNow=${page.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</body>
+	</c:when>
+</c:choose>
 <script type="text/javascript">
 
 	function showAdd(title,url,w,h) {

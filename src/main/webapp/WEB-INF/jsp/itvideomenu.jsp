@@ -46,126 +46,129 @@
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <title>Insert title here</title>
 </head>
-<body>
-
-	<nav class="breadcrumb">
-		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
-		地区管理 <span class="c-gray en">&gt;</span>视频菜单管理 <a
-			class="btn btn-success radius r"
-			style="line-height: 1.6em; margin-top: 3px"
-			href="javascript:location.replace(location.href);" title="刷新"><i
-			class="Hui-iconfont">&#xe68f;</i></a>
-	</nav>
-	<div class="cl pd-5 bg-1 bk-gray mt-20">
-		<span class="l"><a class="btn btn-primary radius"
-			onclick="showAdd('添加视频资源','<%=path%>/itvmenu/additv?codevalue=${codevalue }')"
-			href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加视频资源</a></span>
-	</div>
-	<div class="mt-20">
-		<table
-			class="table table-border table-bordered table-bg table-hover table-sort">
-			<thead>
-				<tr class="text-c">
-					<th>编号</th>
-					<th>顺序</th>
-					<th>视频描述</th>
-					<th>视频链接</th>
-					<th>开始时间</th>
-					<th>视频长度</th>
-					<th>创建(更新)时间</th>
-					<th>状态</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-
-
-				<c:if test="${!empty menuList }">
-					<c:forEach items="${menuList }" var="menu">
+<c:choose>
+	<c:when test="${!empty admin }">
+		<body>
+			<nav class="breadcrumb">
+				<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+				地区管理 <span class="c-gray en">&gt;</span>视频菜单管理 <a
+					class="btn btn-success radius r"
+					style="line-height: 1.6em; margin-top: 3px"
+					href="javascript:location.replace(location.href);" title="刷新"><i
+					class="Hui-iconfont">&#xe68f;</i></a>
+			</nav>
+			<div class="cl pd-5 bg-1 bk-gray mt-20">
+				<span class="l"><a class="btn btn-primary radius"
+					onclick="showAdd('添加视频资源','<%=path%>/itvmenu/additv?codevalue=${codevalue }')"
+					href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加视频资源</a></span>
+			</div>
+			<div class="mt-20">
+				<table
+					class="table table-border table-bordered table-bg table-hover table-sort">
+					<thead>
 						<tr class="text-c">
-							<td>${menu.mId }</td>
-							<td>${menu.mIndex }</td>
-							<td>${menu.mTitle }</td>
-							<td>${menu.mFileSpec }</td>
-							<td>${menu.mStartpos }</td>
-							<td>${menu.mLength }</td>
-							<td><fmt:formatDate value="${menu.mCreatetime }"
-									pattern="YYYY-MM-dd hh:mm:ss" /></td>
-							<td><c:choose>
-									<c:when test="${menu.mState==1 }">
+							<th>编号</th>
+							<th>顺序</th>
+							<th>视频描述</th>
+							<th>视频链接</th>
+							<th>开始时间</th>
+							<th>视频长度</th>
+							<th>创建(更新)时间</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+						<c:if test="${!empty menuList }">
+							<c:forEach items="${menuList }" var="menu">
+								<tr class="text-c">
+									<td>${menu.mId }</td>
+									<td>${menu.mIndex }</td>
+									<td>${menu.mTitle }</td>
+									<td>${menu.mFileSpec }</td>
+									<td>${menu.mStartpos }</td>
+									<td>${menu.mLength }</td>
+									<td><fmt:formatDate value="${menu.mCreatetime }"
+											pattern="YYYY-MM-dd hh:mm:ss" /></td>
+									<td><c:choose>
+											<c:when test="${menu.mState==1 }">
 										正常
 										</c:when>
-									<c:otherwise>
+											<c:otherwise>
 										禁用
 										</c:otherwise>
-								</c:choose></td>
-							<td><a
-								onclick="showEdit('添加视频资源','<%=path%>/itvmenu/edititv?id=${menu.mId}')"><i
-									class="Hui-iconfont">&#xe6df;</i>编辑</a> <c:choose>
-									<c:when test="${menu.mState==1 }">
-										<a onclick="dele(${menu.mId},0)"><i class="Hui-iconfont">&#xe6e2;</i>禁用</a>
-									</c:when>
-									<c:otherwise>
-										<a onclick="dele(${menu.mId},1)"><i class="Hui-iconfont">&#xe6e2;</i>启用</a>
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-					</c:forEach>
-				</c:if>
+										</c:choose></td>
+									<td><a
+										onclick="showEdit('添加视频资源','<%=path%>/itvmenu/edititv?id=${menu.mId}')"><i
+											class="Hui-iconfont">&#xe6df;</i>编辑</a> <c:choose>
+											<c:when test="${menu.mState==1 }">
+												<a onclick="dele(${menu.mId},0)"><i class="Hui-iconfont">&#xe6e2;</i>禁用</a>
+											</c:when>
+											<c:otherwise>
+												<a onclick="dele(${menu.mId},1)"><i class="Hui-iconfont">&#xe6e2;</i>启用</a>
+											</c:otherwise>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
+						</c:if>
 
-			</tbody>
-		</table>
-	</div>
-	<!-- 分页开始 -->
-	<div align="center" style="margin-top: 20px">
-		<c:choose>
-			<c:when test="${page.totalPageCount==0}">
-			</c:when>
-			<c:otherwise>
-				<div>
-					<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
-						${page.pageNow} 页</font> <a
-						href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=1">首页</a>
-					<c:choose>
-						<c:when test="${page.pageNow - 1 > 0}">
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow - 1}">上一页</a>
-						</c:when>
-						<c:when test="${page.pageNow - 1 <= 0}">
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=1">上一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 < page.totalPageCount}">
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow + 1}">下一页</a>
-						</c:when>
-						<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.totalPageCount}">下一页</a>
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${page.totalPageCount==0}">
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow}">尾页</a>
-						</c:when>
-						<c:otherwise>
-							<a
-								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.totalPageCount}">尾页</a>
-						</c:otherwise>
-					</c:choose>
+					</tbody>
+				</table>
+			</div>
+			<!-- 分页开始 -->
+			<div align="center" style="margin-top: 20px">
+				<c:choose>
+					<c:when test="${page.totalPageCount==0}">
+					</c:when>
+					<c:otherwise>
+						<div>
+							<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
+								${page.pageNow} 页</font> <a
+								href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=1">首页</a>
+							<c:choose>
+								<c:when test="${page.pageNow - 1 > 0}">
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow - 1}">上一页</a>
+								</c:when>
+								<c:when test="${page.pageNow - 1 <= 0}">
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=1">上一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 < page.totalPageCount}">
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow + 1}">下一页</a>
+								</c:when>
+								<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.totalPageCount}">下一页</a>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${page.totalPageCount==0}">
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.pageNow}">尾页</a>
+								</c:when>
+								<c:otherwise>
+									<a
+										href="<%=path%>/itvmenu/allMenu?codevalue=${codevalue }&shortname=${shortName }&pageNow=${page.totalPageCount}">尾页</a>
+								</c:otherwise>
+							</c:choose>
 
-				</div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-</body>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</body>
+	</c:when>
+</c:choose>
 <script type="text/javascript">
 	function showEdit(title,url,w,h) {
 		layer_show(title,url,w,h);

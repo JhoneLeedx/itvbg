@@ -32,66 +32,73 @@
 	href="<%=path%>/static/h-ui.admin/css/style.css" />
 <title>Insert title here</title>
 </head>
-<body>
-	<article class="page-container">
-		<form class="form form-horizontal" enctype="multipart/form-data"
-			id="itvpicUpload">
-			<input style="display: none" type="text" name="type" value="${itvpic.mType }" id="type">
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span
-					class="c-red">*</span>序号</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<input type="text" readonly="readonly" style="border: none"
-						class="input-text" value="${itvpic.mId }" placeholder=""
-						id="mid" name="id">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3"><span
-					class="c-red">*</span>医院名称:</label>
-				<div class="formControls col-xs-8 col-sm-9 skin-minimal">
-					<input type="text" readonly="readonly" style="border: none"
-						class="input-text" value="${itvpic.mName }" placeholder=""
-						id="name">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-3">医院图片：</label>
-				<div class="formControls col-xs-8 col-sm-9">
-					<span class="btn-upload form-group"> <input id="itvpic"
-						name="itvpic"  type="file" accept=".gif,.png,.jpg"
-						style="margin-left: 15px" value="asda" />
-					</span>
-				</div>
-			</div>
-			<div class="row cl">
-				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-					<input class="btn btn-primary radius" id="sub" type="button"
-						value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="itvPicUpload()" />
-					<button onClick="layer_close();" class="btn btn-default radius"
-						type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-				</div>
-			</div>
-		</form>
-	</article>
-</body>
-<script type="text/javascript" src="<%=path %>/static/h-ui.admin/js/H-ui.admin.js"></script>
+<c:choose>
+	<c:when test="${!empty admin }">
+		<body>
+			<article class="page-container">
+				<form class="form form-horizontal" enctype="multipart/form-data"
+					id="itvpicUpload">
+					<input style="display: none" type="text" name="type"
+						value="${itvpic.mType }" id="type">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3"><span
+							class="c-red">*</span>序号</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" readonly="readonly" style="border: none"
+								class="input-text" value="${itvpic.mId }" placeholder=""
+								id="mid" name="id">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3"><span
+							class="c-red">*</span>医院名称:</label>
+						<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+							<input type="text" readonly="readonly" style="border: none"
+								class="input-text" value="${itvpic.mName }" placeholder=""
+								id="name">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">医院图片：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<span class="btn-upload form-group"> <input id="itvpic"
+								name="itvpic" type="file" accept=".gif,.png,.jpg"
+								style="margin-left: 15px" value="asda" />
+							</span>
+						</div>
+					</div>
+					<div class="row cl">
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+							<input class="btn btn-primary radius" id="sub" type="button"
+								value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="itvPicUpload()" />
+							<button onClick="layer_close();" class="btn btn-default radius"
+								type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				</form>
+			</article>
+		</body>
+	</c:when>
+</c:choose>
+<script type="text/javascript"
+	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">
 
 function itvPicUpload() {
     $("#itvpicUpload").ajaxSubmit({
-		   url:"<%=path%>/itvpic/itvpicUpload",
-		   type:"post",
-		   dataType : "text",
-		   contentType: "application/x-www-form-urlencoded; charset=utf-8",  
+		   url:"<%=path%>
+	/itvpic/itvpicUpload",
+			type : "post",
+			dataType : "text",
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
 			error : function() {
 				alert("请与管理员联系");
 			},
-         success: function(data) {  
-      	   alert(data);
-      	 window.parent.location.reload();
-            }
-    });
-}
+			success : function(data) {
+				alert(data);
+				window.parent.location.reload();
+			}
+		});
+	}
 </script>
 </html>
