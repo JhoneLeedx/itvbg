@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -80,7 +81,9 @@ public class ITVAddressController {
 		if (logo == null) {
 			errorMessage = "当前没有上传图片";
 		} else {
-			String logoname = logo.getOriginalFilename();
+			//String logoname = logo.getOriginalFilename();
+			int logoint = logo.getOriginalFilename().lastIndexOf(".");
+			String logotype = logo.getOriginalFilename().substring(logoint);
 			String savePath = request.getSession().getServletContext().getRealPath("images");
 			File logofile = new File(savePath, "upload/logo");
 			if (!logofile.exists() && !logofile.isDirectory()) {
@@ -88,12 +91,12 @@ public class ITVAddressController {
 				logofile.mkdir();
 			}
 			try {
-
-				FileUtils.writeByteArrayToFile(new File(logofile, logoname), logo.getBytes());
+				String file_ture_name = UUID.randomUUID().toString().replaceAll("\\-", "") + logotype;
+				FileUtils.writeByteArrayToFile(new File(logofile, file_ture_name), logo.getBytes());
 		/*		String logourl = Config.CLOUDURL + ":" + request.getServerPort() + request.getContextPath()
-						+ "/images/upload/logo/" + logoname;*/
+						+ "/images/upload/logo/" + file_ture_name;*/
 				String logourl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
-				+ "/images/upload/logo/" + logoname;
+				+ "/images/upload/logo/" + file_ture_name;
 				address.setmLogoIMageURL(logourl);
 
 			} catch (IOException e) {

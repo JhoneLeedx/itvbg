@@ -46,6 +46,7 @@
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="<%=path%>/bootstrap/js/nextpage.js"></script>
 <title>Insert title here</title>
 </head>
 <c:choose>
@@ -163,51 +164,28 @@
 					</tbody>
 				</table>
 			</div>
+			
 			<!-- 分页开始 -->
-			<div align="center" style="margin-top: 20px">
+ 			<div align="center" style="margin-top: 20px">
 				<c:choose>
 					<c:when test="${page.totalPageCount==0}">
 					</c:when>
 					<c:otherwise>
-						<div>
-							<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
-								${page.pageNow} 页</font> <a href="<%=path%>/itvstb/all?pageNow=1">首页</a>
-							<c:choose>
-								<c:when test="${page.pageNow - 1 > 0}">
-									<a href="<%=path%>/itvstb/all?pageNow=${page.pageNow - 1}">上一页</a>
-								</c:when>
-								<c:when test="${page.pageNow - 1 <= 0}">
-									<a href="<%=path%>/itvstb/all?pageNow=1">上一页</a>
-								</c:when>
-							</c:choose>
-							<c:choose>
-								<c:when test="${page.totalPageCount==0}">
-									<a href="<%=path%>/itvstb/all?pageNow=${page.pageNow}">下一页</a>
-								</c:when>
-								<c:when test="${page.pageNow + 1 < page.totalPageCount}">
-									<a href="<%=path%>/itvstb/all?pageNow=${page.pageNow + 1}">下一页</a>
-								</c:when>
-								<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
-									<a href="<%=path%>/itvstb/all?pageNow=${page.totalPageCount}">下一页</a>
-								</c:when>
-							</c:choose>
-							<c:choose>
-								<c:when test="${page.totalPageCount==0}">
-									<a href="<%=path%>/itvstb/all?pageNow=${page.pageNow}">尾页</a>
-								</c:when>
-								<c:otherwise>
-									<a href="<%=path%>/itvstb/all?pageNow=${page.totalPageCount}">尾页</a>
-								</c:otherwise>
-							</c:choose>
-
-						</div>
+						<div class="NexPage" id="NexPage"></div>
 					</c:otherwise>
 				</c:choose>
-			</div>
+			</div> 
 		</body>
 	</c:when>
 </c:choose>
 <script type="text/javascript">
+	NexPage.init({
+    	Div : "NexPage",
+   	 	total : ${page.totalPageCount },
+    	showPage : ${page.totalPageCount},
+    	currentPage : ${page.pageNow}, 
+		href : "<%=path%>/itvstb/all?pageNow="
+		})
 	function updateStb(title,url,w,h) {
 		layer_show(title,url,w,h);
 	}

@@ -48,6 +48,8 @@
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
+<script type="text/javascript" 
+	src="<%=path%>/bootstrap/js/nextpage.js"></script>
 <title>Insert title here</title>
 </head>
 <c:choose>
@@ -114,37 +116,7 @@
 					<c:when test="${page.totalPageCount==0}">
 					</c:when>
 					<c:otherwise>
-						<div>
-							<font size="2">共 ${page.totalPageCount} 页</font> <font size="2">第
-								${page.pageNow} 页</font> <a href="<%=path%>/itvwx/all?pageNow=1">首页</a>
-							<c:choose>
-								<c:when test="${page.pageNow - 1 > 0}">
-									<a href="<%=path%>/itvwx/all?pageNow=${page.pageNow - 1}">上一页</a>
-								</c:when>
-								<c:when test="${page.pageNow - 1 <= 0}">
-									<a href="<%=path%>/itvwx/all?pageNow=1">上一页</a>
-								</c:when>
-							</c:choose>
-							<c:choose>
-								<c:when test="${page.totalPageCount==0}">
-									<a href="<%=path%>/itvwx/all?pageNow=${page.pageNow}">下一页</a>
-								</c:when>
-								<c:when test="${page.pageNow + 1 < page.totalPageCount}">
-									<a href="<%=path%>/itvwx/all?pageNow=${page.pageNow + 1}">下一页</a>
-								</c:when>
-								<c:when test="${page.pageNow + 1 >= page.totalPageCount}">
-									<a href="<%=path%>/itvwx/all?pageNow=${page.totalPageCount}">下一页</a>
-								</c:when>
-							</c:choose>
-							<c:choose>
-								<c:when test="${page.totalPageCount==0}">
-									<a href="<%=path%>/itvwx/all?pageNow=${page.pageNow}">尾页</a>
-								</c:when>
-								<c:otherwise>
-									<a href="<%=path%>/itvwx/all?pageNow=${page.totalPageCount}">尾页</a>
-								</c:otherwise>
-							</c:choose>
-						</div>
+						<div id="nextPage" class="NexPage"></div>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -152,7 +124,15 @@
 	</c:when>
 </c:choose>
 <script type="text/javascript">
-
+	
+NexPage.init({
+	Div : "nextPage",
+	total : ${page.totalPageCount },
+	showPage : ${page.totalPageCount},
+	currentPage : ${page.pageNow}, 
+	href : "<%=path%>/itvwx/all?pageNow="
+	})
+	
 	function showAdd(title,url,w,h) {
 		layer_show(title,url,w,h);
 	}

@@ -7,7 +7,8 @@
         };
         var defaults = {
             total : 10,
-            showPage : 9
+            showPage : 9,
+            currentPage : 1
         };
         var nexPage;
         var allA = [];
@@ -22,18 +23,19 @@
         }
         function addCss(){
             var nod = document.createElement('style'),
-                    str = "#NexPage{font-size: 13px;font-family: ΢微软雅黑;font-weight: 400;height: 32px;;}" +
-                            "#NexPage ul,#NexPage li{list-style: none;margin: 0;padding : 0;}" +
-                            "#NexPage .otherBtns{float: left;height: inherit;}" +
-                            "#NexPage .btn{padding: 0px 8px;float: left;display: block;height: 30px;" +
+                    str = ".NexPage{display: table; margin: 0 0 0 auto;font-size: 10px;font-family:微软雅黑;font-weight: 400;height: 32px;}" +
+                            ".NexPage *{float:left}" +
+                            ".NexPage ul,.NexPage li{list-style: none;margin: 0;padding : 0;}" +
+                            ".NexPage .otherBtns{height: inherit;}" +
+                            ".NexPage .btn{padding: 0px 6px;display: block;height: 30px;" +
                             "line-height: 30px;text-align: center;cursor: pointer;border-radius: 2px;text-decoration: none;" +
                             "user-select: none;transition: all 0.2s;background-color: rgb(255, 255, 255);margin: 0px 3px;color: rgb(0, 0, 0);border: 1px solid rgb(221, 221, 221);}" +
-                            "#NexPage .centerBtns .btn,#NexPage .centerBtns .btn-current{width: 23px;font-weight: 400;}" +
-                            "#NexPage .btn-current{padding: 0px 8px;float: left;display: block;height: 30px;line-height: 30px;text-align: center;" +
+                            ".NexPage .centerBtns .btn,.NexPage .centerBtns .btn-current{width: 23px;font-weight: 400;}" +
+                            ".NexPage .btn-current{padding: 0px 8px;display: block;height: 30px;line-height: 30px;text-align: center;" +
                             "cursor: pointer;border-radius: 2px;text-decoration: none;user-select: none;margin: 0px 3px;background-color: rgb(247, 152, 152);" +
                             "color: rgb(255, 255, 255);border: 1px solid rgb(247, 152, 152);}" +
-                            "#NexPage .btn:hover{background-color: rgb(37, 221, 61);color: rgb(225, 225, 225);border: 1px solid rgb(221, 221, 221);}" +
-                            "#NexPage .jump-input{width: 60px;float: left;height: 28px;outline: none;text-align: center;border-radius: 2px;" +
+                            ".NexPage .btn:hover{background-color: rgb(37, 221, 61);color: rgb(225, 225, 225);border: 1px solid rgb(221, 221, 221);}" +
+                            ".NexPage .jump-input{width: 60px;height: 28px;outline: none;text-align: center;border-radius: 2px;" +
                             "border: 1px solid rgb(221, 221, 221);margin: 0px 3px;color: rgb(0, 0, 0);line-height: 29px;}";
             nod.type='text/css';
             if(nod.styleSheet){         //ie下
@@ -57,9 +59,10 @@
         }
         function init(data){
             Data = data;
+            if(!Data.showPage || !Data.total) return "error";
             addCss();
             pageListInit();
-            changePageNum(GetQueryString("pageNum") || 1);
+            changePageNum(Data.currentPage || defaults.currentPage);
             //绑定点击事件
             for(var k = 0, l = allA.length; k < l; k++){
                 allA[k].onclick = function(){
@@ -77,7 +80,6 @@
             }
         }
         function btnClick(str){
-            console.log(str)
             var currentPage = nexPage.getElementsByClassName("btn-current")[0].innerText;
             var currentPageNum = parseInt(currentPage);
             console.log(currentPageNum)
@@ -101,15 +103,12 @@
                 default:
                     currentPageNum = str;
             }
-            console.log(currentPageNum)
             changePageNum(currentPageNum);
             changePage(currentPageNum);
         }
         function changePageNum(num){
-            console.log("当前" + num);
             var median = Math.floor(Data.showPage/2);
             var firstPageNum;
-            console.log("median "+median);
             if(num <= median){
                 firstPageNum = 1;
             }else if(num > median && num <= (Data.total - median)){
@@ -156,15 +155,10 @@
             }
         }
         function changePage(pageNum){
-            window.location.href = Data .href + pageNum;
+            window.location.href = Data.href + pageNum;
         }
         return{
-            init : init
+            init : init,
+            GetQueryString : GetQueryString
         }
     })();
-    NexPage.init({
-        Div : "NexPage",
-        total : 18,
-        showPage : 9,
-	href : ""
-    })

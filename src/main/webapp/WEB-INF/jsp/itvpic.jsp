@@ -44,6 +44,8 @@
 <script type="text/javascript" src="<%=path%>/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" 
+	src="<%=path%>/bootstrap/js/nextpage.js"></script>
 <title>Insert title here</title>
 </head>
 <c:choose>
@@ -103,44 +105,7 @@
 								<c:when test="${page1.totalPageCount==0}">
 								</c:when>
 								<c:otherwise>
-									<div>
-										<font size="2">共 ${page1.totalPageCount} 页</font> <font
-											size="2">第 ${page1.pageNow} 页</font> <a
-											href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
-										<c:choose>
-											<c:when test="${page1.pageNow - 1 > 0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow - 1}">上一页</a>
-											</c:when>
-											<c:when test="${page1.pageNow - 1 <= 0}">
-												<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page1.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow}">下一页</a>
-											</c:when>
-											<c:when test="${page1.pageNow + 1 < page1.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow + 1}">下一页</a>
-											</c:when>
-											<c:when test="${page1.pageNow + 1 >= page1.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.totalPageCount}">下一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page1.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.pageNow}">尾页</a>
-											</c:when>
-											<c:otherwise>
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page1.totalPageCount}">尾页</a>
-											</c:otherwise>
-										</c:choose>
-									</div>
+									<div class="NexPage" id="nextPage1"></div>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -178,7 +143,6 @@
 													<i class="Hui-iconfont">&#xe6df;</i>编辑
 											</a></td>
 										</tr>
-
 									</c:forEach>
 								</c:if>
 							</tbody>
@@ -188,44 +152,7 @@
 								<c:when test="${page2.totalPageCount==0}">
 								</c:when>
 								<c:otherwise>
-									<div>
-										<font size="2">共 ${page2.totalPageCount} 页</font> <font
-											size="2">第 ${page2.pageNow} 页</font> <a
-											href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
-										<c:choose>
-											<c:when test="${page2.pageNow - 1 > 0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow - 1}">上一页</a>
-											</c:when>
-											<c:when test="${page2.pageNow - 1 <= 0}">
-												<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page2.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow}">下一页</a>
-											</c:when>
-											<c:when test="${page2.pageNow + 1 < page2.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow + 1}">下一页</a>
-											</c:when>
-											<c:when test="${page2.pageNow + 1 >= page2.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.totalPageCount}">下一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page2.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.pageNow}">尾页</a>
-											</c:when>
-											<c:otherwise>
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page2.totalPageCount}">尾页</a>
-											</c:otherwise>
-										</c:choose>
-									</div>
+									<div class="NexPage" id="nextPage2"></div>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -247,8 +174,6 @@
 								</tr>
 							</thead>
 							<tbody>
-
-
 								<c:if test="${!empty list3 }">
 									<c:forEach items="${list3 }" var="itvpic3">
 										<tr class="text-c">
@@ -275,44 +200,7 @@
 								<c:when test="${page3.totalPageCount==0}">
 								</c:when>
 								<c:otherwise>
-									<div>
-										<font size="2">共 ${page3.totalPageCount} 页</font> <font
-											size="2">第 ${page3.pageNow} 页</font> <a
-											href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
-										<c:choose>
-											<c:when test="${page3.pageNow - 1 > 0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow - 1}">上一页</a>
-											</c:when>
-											<c:when test="${page3.pageNow - 1 <= 0}">
-												<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page3.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow}">下一页</a>
-											</c:when>
-											<c:when test="${page3.pageNow + 1 < page3.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow + 1}">下一页</a>
-											</c:when>
-											<c:when test="${page3.pageNow + 1 >= page3.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.totalPageCount}">下一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page3.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.pageNow}">尾页</a>
-											</c:when>
-											<c:otherwise>
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page3.totalPageCount}">尾页</a>
-											</c:otherwise>
-										</c:choose>
-									</div>
+									<div class="NexPage" id="nextPage3"></div>	
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -334,7 +222,6 @@
 								</tr>
 							</thead>
 							<tbody>
-
 								<c:if test="${!empty list4 }">
 									<c:forEach items="${list4 }" var="itvpic4">
 										<tr class="text-c">
@@ -361,49 +248,11 @@
 								<c:when test="${page4.totalPageCount==0}">
 								</c:when>
 								<c:otherwise>
-									<div>
-										<font size="2">共 ${page4.totalPageCount} 页</font> <font
-											size="2">第 ${page4.pageNow} 页</font> <a
-											href="<%=path%>/itvpic/itvpiclist?pageNow=1">首页</a>
-										<c:choose>
-											<c:when test="${page4.pageNow - 1 > 0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow - 1}">上一页</a>
-											</c:when>
-											<c:when test="${page4.pageNow - 1 <= 0}">
-												<a href="<%=path%>/itvpic/itvpiclist?pageNow=1">上一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page4.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow}">下一页</a>
-											</c:when>
-											<c:when test="${page4.pageNow + 1 < page4.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow + 1}">下一页</a>
-											</c:when>
-											<c:when test="${page4.pageNow + 1 >= page4.totalPageCount}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.totalPageCount}">下一页</a>
-											</c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${page4.totalPageCount==0}">
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.pageNow}">尾页</a>
-											</c:when>
-											<c:otherwise>
-												<a
-													href="<%=path%>/itvpic/itvpiclist?pageNow=${page4.totalPageCount}">尾页</a>
-											</c:otherwise>
-										</c:choose>
-									</div>
+									<div class="NexPage" id="nextPage4"></div>	
 								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</body>
@@ -423,6 +272,7 @@
 <script type="text/javascript"
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">
+
 $(function(){
 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
@@ -433,6 +283,43 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
+	function pageOne() {
+		NexPage.init({
+			Div : "nextPage1",
+			total : ${page1.totalPageCount },
+			showPage : ${page1.totalPageCount},
+			currentPage : ${page1.pageNow}, 
+			href : "<%=path%>/itvpic/itvpiclist?pageNow="
+			})
+	}
+	
+	function pageTwo() {
+		NexPage.init({
+			Div : "nextPage2",
+			total : ${page2.totalPageCount },
+			showPage : ${page2.totalPageCount},
+			currentPage : ${page2.pageNow}, 
+			href : "<%=path%>/itvpic/itvpiclist?pageNow="
+			})
+	}
+	function pageThree() {
+		NexPage.init({
+			Div : "nextPage3",
+			total : ${page3.totalPageCount },
+			showPage : ${page3.totalPageCount},
+			currentPage : ${page3.pageNow}, 
+			href : "<%=path%>/itvpic/itvpiclist?pageNow="
+			})
+	}
+	function pageFour() {
+		NexPage.init({
+			Div : "nextPage4",
+			total : ${page4.totalPageCount },
+			showPage : ${page4.totalPageCount},
+			currentPage : ${page4.pageNow}, 
+			href : "<%=path%>/itvpic/itvpiclist?pageNow="
+			})
+	}
 
 	function edit(title,url,w,h){
 		layer_show(title,url,w,h);
