@@ -283,7 +283,7 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
-	function pageOne() {
+
 		NexPage.init({
 			Div : "nextPage1",
 			total : ${page1.totalPageCount },
@@ -291,9 +291,8 @@ $(function(){
 			currentPage : ${page1.pageNow}, 
 			href : "<%=path%>/itvpic/itvpiclist?pageNow="
 			})
-	}
-	
-	function pageTwo() {
+
+
 		NexPage.init({
 			Div : "nextPage2",
 			total : ${page2.totalPageCount },
@@ -301,8 +300,8 @@ $(function(){
 			currentPage : ${page2.pageNow}, 
 			href : "<%=path%>/itvpic/itvpiclist?pageNow="
 			})
-	}
-	function pageThree() {
+
+
 		NexPage.init({
 			Div : "nextPage3",
 			total : ${page3.totalPageCount },
@@ -310,8 +309,8 @@ $(function(){
 			currentPage : ${page3.pageNow}, 
 			href : "<%=path%>/itvpic/itvpiclist?pageNow="
 			})
-	}
-	function pageFour() {
+
+
 		NexPage.init({
 			Div : "nextPage4",
 			total : ${page4.totalPageCount },
@@ -319,7 +318,7 @@ $(function(){
 			currentPage : ${page4.pageNow}, 
 			href : "<%=path%>/itvpic/itvpiclist?pageNow="
 			})
-	}
+	
 
 	function edit(title,url,w,h){
 		layer_show(title,url,w,h);

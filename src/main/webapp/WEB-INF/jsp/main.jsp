@@ -116,7 +116,7 @@
 											<c:when test="${itvaddress.mState==0 }">禁用</c:when>
 										</c:choose></td>
 									<td><fmt:formatDate value="${itvaddress.mCreateTime }"
-											pattern="YYYY-MM-dd hh:mm:ss" /></td>
+											pattern="YYYY-MM-dd" /></td>
 									<td><c:choose>
 											<c:when test="${itvaddress.mIsFull==1 }">完整</c:when>
 											<c:when test="${itvaddress.mIsFull==0 }">信息不完整</c:when>
