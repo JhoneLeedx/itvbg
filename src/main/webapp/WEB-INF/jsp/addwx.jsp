@@ -87,6 +87,7 @@
 <script type="text/javascript">
 	
 	function wxadd() {
+		
 	   $("#additvwx").ajaxSubmit({
 		   url:"<%=path%>/itvwx/add",
 			type : 'post',

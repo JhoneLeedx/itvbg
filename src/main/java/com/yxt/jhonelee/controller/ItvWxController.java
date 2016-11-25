@@ -67,13 +67,20 @@ public class ItvWxController {
 	public void Add(@RequestParam(value = "wxurl", required = false) MultipartFile wxurl, HttpServletRequest request,
 			@RequestParam(value = "mName") String mName, @RequestParam(value = "state") int state, PrintWriter writer) {
 		ItvWxpublic wxpublic = new ItvWxpublic();
+		
+		if(mName.equals("")){
+			writer.write("没有输入公众号名称");
+			return;
+		}
 		wxpublic.setmName(mName);
 		wxpublic.setmState(state);
 		Date date = new Date();
 		wxpublic.setmCreateTime(date);
 		String errorMessage = "";
 		if (wxurl == null) {
-			errorMessage = "当前没有上传图片";
+			errorMessage = "当前没有上传公众号图片";
+			writer.write(errorMessage);
+			return;
 		} else {
 			int wxint = wxurl.getOriginalFilename().lastIndexOf(".");
 			String wxtype = wxurl.getOriginalFilename().substring(wxint);
@@ -86,7 +93,7 @@ public class ItvWxController {
 			try {
 				String file_ture_name = UUID.randomUUID().toString().replaceAll("\\-", "") + wxtype;
 				FileUtils.writeByteArrayToFile(new File(wxfile, file_ture_name), wxurl.getBytes());
-				String wxUrl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
+				String wxUrl = Config.YANSHICLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 						+ "/images/upload/wx/" + file_ture_name;
 				wxpublic.setmWxUrl(wxUrl);
 			} catch (IOException e) {
@@ -124,7 +131,7 @@ public class ItvWxController {
 				try {
 					String file_ture_name = UUID.randomUUID().toString().replaceAll("\\-", "") + wxtype;
 					FileUtils.writeByteArrayToFile(new File(wxfile, file_ture_name), wxurl.getBytes());
-					String wxUrl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
+					String wxUrl = Config.YANSHICLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 							+ "/images/upload/wx/" + file_ture_name;
 					pWxpublic.setmWxUrl(wxUrl);
 				} catch (IOException e) {
