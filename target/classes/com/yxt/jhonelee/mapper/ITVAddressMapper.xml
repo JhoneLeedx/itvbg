@@ -83,13 +83,21 @@
 			area_code = #{mAreaCode}
 		</where>
 	</update>
-	
+
 	<select id="SecAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
-				select * from ITV_ADDRESS
+		select * from ITV_ADDRESS
 		<where>
 			id = #{mId}
 		</where>
 		limit 1
 	</select>
-	
+	<update id="delAddressLogo" parameterType="int">
+		update ITV_ADDRESS
+		<set>
+			logo_image= ""
+		</set>
+		<where>
+			id = #{mId}
+		</where>
+	</update>
 </mapper>

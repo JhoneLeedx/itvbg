@@ -152,8 +152,4 @@ public class ITVAddressController {
 			writer.write("图片删除成功失败");	
 		}
 	}
-	@RequestMapping("/updelogo")
-	public String updelogo(){
-		return "error";
-	}
 }
