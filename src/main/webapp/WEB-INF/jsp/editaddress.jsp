@@ -180,7 +180,7 @@ function delLogo(mId) {
 				},
 			success : function(data) {
 					alert(data);
-					location.reload();
+					window.parent.location.reload();
 				}
 			});
 	});
