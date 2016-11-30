@@ -42,4 +42,9 @@ public class ITVAddressServiceImpl implements ITVAddressService {
 		// TODO Auto-generated method stub
 		return dao.SecAddress(mId);
 	}
+
+	public int delAddressLogo(int mId) {
+		// TODO Auto-generated method stub
+		return dao.delAddressLogo(mId);
+	}
 }

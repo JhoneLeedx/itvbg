@@ -18,4 +18,6 @@ public interface ITVAddressService {
 	public int delAddress(String mAreaCode,int mState);
 	
 	public ITVAddress SecAddress(int mId);
+	
+	public int delAddressLogo(int mId);
 }

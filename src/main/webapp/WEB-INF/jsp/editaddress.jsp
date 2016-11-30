@@ -96,6 +96,17 @@
 						</span>
 					</div>
 				</div>
+				<!-- 添加logo图片显示和删除功能 -->
+				<div class="row cl">
+					<div class="formControls col-xs-8 col-sm-9">
+						<c:if test="${address.mLogoIMageURL!='' }">
+						<img alt="" src="${address.mLogoIMageURL}" style="margin-left: 100px;margin-right: 20px"/>
+						<a onclick="delLogo(${address.mId})">
+						<i class="Hui-iconfont">&#xe6e2;</i>删除</a>
+						</c:if>
+					</div>
+				</div>
+				
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">微信公众号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
@@ -151,7 +162,29 @@
 	</c:when>
 </c:choose>
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="<%=path%>/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript">
+
+function delLogo(mId) {
+	
+	layer.confirm('确认要logo图片删除吗？',function(index){
+		$.ajax({
+			data : {"id":mId},
+		    url:"<%=path%>/address/uplogo",
+			ache : false,
+			dataType : "text",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+					alert("请与管理员联系");
+				},
+			success : function(data) {
+					alert(data);
+					location.reload();
+				}
+			});
+	});
+}
 
 function upload(){
 	   $("#modifyForm").ajaxSubmit({
@@ -170,7 +203,6 @@ function upload(){
 }
 function parentAddress(mId){
 	showWxpublic();
-	
 	$.ajax({
 		data : {"id":mId},
 	    url:"<%=path%>/addresstll/parentAddress",

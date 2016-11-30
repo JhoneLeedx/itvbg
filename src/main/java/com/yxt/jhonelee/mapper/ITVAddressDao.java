@@ -20,4 +20,6 @@ public interface ITVAddressDao {
 	public ITVAddress SecAddress(int mId);
 	
 	public int delAddress(@Param(value="mAreaCode")String mAreaCode,@Param(value="mState")int mState);
+	
+	public int delAddressLogo(int mId);
 }
