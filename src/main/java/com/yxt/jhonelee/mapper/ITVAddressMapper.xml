@@ -50,7 +50,7 @@
 			<if test="mState!=null">
 				state = #{mState},
 			</if>
-
+				wx_id = #{mWxId},
 			<choose>
 				<when
 					test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null and mState!=null and mAddressCode!=null">

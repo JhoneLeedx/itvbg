@@ -68,9 +68,15 @@ public class ITVAddressController {
 
 		ITVAddress address = service.SecOneItvAddress(areaCode);
 		address.setmShortName(shortName);
+		
 		if(urlwxCode.equals("请选择")){
+			address.setmWXQrcodeImageURL("");
+			address.setmWxId(0);
 		}else{
-			address.setmWXQrcodeImageURL(urlwxCode);
+			//添加wxID到数据库
+			String[] b = urlwxCode.split("@");
+			address.setmWXQrcodeImageURL(b[0]);
+			address.setmWxId(Integer.parseInt(b[1]));
 		}
 		String[] a = addressCodeValue.split("@");
 		if (a.length >= 2) {
@@ -151,5 +157,9 @@ public class ITVAddressController {
 		}else{
 			writer.write("图片删除成功失败");	
 		}
+	}
+	@RequestMapping("/showerror")
+	public String showerror() {
+		return "error";
 	}
 }

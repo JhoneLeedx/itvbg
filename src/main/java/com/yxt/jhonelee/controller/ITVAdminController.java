@@ -133,7 +133,8 @@ public class ITVAdminController {
 		Admin admin = service.OneAdmin(mId);
 		admin.setmId(mId);
 		admin.setmAdminName(mName);
-		admin.setmAdminPass(mPass);
+		String pass = Md5Util.EncoderByMd5(mPass);
+		admin.setmAdminPass(pass);
 		admin.setmType(mType);
         admin.setmPid(towm);
 		int up = service.updateAdmin(admin);

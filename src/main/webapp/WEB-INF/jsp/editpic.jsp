@@ -86,8 +86,7 @@
 
 function itvPicUpload() {
     $("#itvpicUpload").ajaxSubmit({
-		   url:"<%=path%>
-	/itvpic/itvpicUpload",
+		   url:"<%=path%>/itvpic/itvpicUpload",
 			type : "post",
 			dataType : "text",
 			contentType : "application/x-www-form-urlencoded; charset=utf-8",

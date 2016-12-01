@@ -19,7 +19,7 @@
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
-
+<script type="text/javascript" src="<%=path%>/lib/layer/2.1/layer.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -162,7 +162,6 @@
 	</c:when>
 </c:choose>
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="<%=path%>/lib/layer/2.1/layer.js"></script>
 <script type="text/javascript">
 
 function delLogo(mId) {
@@ -337,7 +336,7 @@ function findtown() {
 						$("#wxcode").html("");
 						for (var i=0;i<obj.length;i++) {
 							var wx = obj[i];
-							str += "<option value='" +wx.mWxUrl+ "'>"+wx.mName+"</option>";
+							str += "<option value='" +wx.mWxUrl+"@"+wx.mId+"'>"+wx.mName+"</option>";
 						}
 						$("#wxcode").append(str);
 					}

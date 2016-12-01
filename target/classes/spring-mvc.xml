@@ -11,11 +11,8 @@
 
 	<!-- 注解扫描包 -->
 	<context:component-scan base-package="com.yxt.jhonelee" />
-
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
-
-
 	<!--spring 视图拦截器 -->
 
 	<bean

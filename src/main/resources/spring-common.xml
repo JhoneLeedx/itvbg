@@ -14,19 +14,23 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<!--开发库  -->
-		 <property name="url" value="jdbc:mysql://company.99kst.com:3306/develop?useUnicode=true&amp;characterEncoding=utf-8" 
+		<!--开发库 -->
+		<!-- <property name="url" value="jdbc:mysql://company.99kst.com:3306/develop?useUnicode=true&amp;characterEncoding=utf-8" 
 			/> <property name="username" value="yxt" /> <property name="password" value="yxt315" 
-			/> 
+			/> -->
 		<!-- 云端数据库连接 -->
 		<!-- <property name="url" value="jdbc:mysql://172.16.0.246:3306/yxt?useUnicode=true&amp;characterEncoding=utf-8" 
 			/> <property name="username" value="yxt" /> <property name="password" value="yxt520119" 
 			/> -->
 		<!--演示环境 -->
-	<!-- 	<property name="url"
-			value="jdbc:mysql://172.16.0.197:3306/yxt?useUnicode=true&amp;characterEncoding=utf-8" />
+		<!-- <property name="url" value="jdbc:mysql://172.16.0.197:3306/yxt?useUnicode=true&amp;characterEncoding=utf-8" 
+			/> <property name="username" value="yxt" /> <property name="password" value="yxt123" 
+			/> -->
+		<!--测试环境 -->
+		<property name="url"
+			value="jdbc:mysql://company.99kst.com:13306/yxt?useUnicode=true&amp;characterEncoding=utf-8" />
 		<property name="username" value="yxt" />
-		<property name="password" value="yxt123" /> -->
+		<property name="password" value="kst4711" />
 	</bean>
 
 	<!-- 2. mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源 MyBatis定义数据源,同意加载配置 -->
