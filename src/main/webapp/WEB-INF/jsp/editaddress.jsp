@@ -154,6 +154,8 @@
 					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 						<input class="btn btn-primary radius" id="sub" type="button"
 							value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="upload()" />
+						<button onClick="layer_close();" class="btn btn-default radius"
+								type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 					</div>
 				</div>
 			</form>
@@ -161,7 +163,7 @@
 		</body>
 	</c:when>
 </c:choose>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript">
 
 function delLogo(mId) {
@@ -332,7 +334,7 @@ function findtown() {
 					success : function(data) {
 						var json = JSON.stringify(data);
 						var obj = jQuery.parseJSON(json);
-						var str = "<option>请选择</option>";
+						var	str = "<option>请选择</option>";
 						$("#wxcode").html("");
 						for (var i=0;i<obj.length;i++) {
 							var wx = obj[i];

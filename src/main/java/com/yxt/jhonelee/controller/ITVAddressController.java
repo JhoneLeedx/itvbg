@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yxt.jhonelee.model.Admin;
 import com.yxt.jhonelee.model.ITVAddress;
+import com.yxt.jhonelee.model.ItvWxpublic;
 import com.yxt.jhonelee.service.ITVAddressService;
+import com.yxt.jhonelee.service.ItvWxService;
 import com.yxt.jhonelee.util.Config;
 import com.yxt.jhonelee.util.Page;
 /**
@@ -33,6 +35,8 @@ public class ITVAddressController {
 
 	@Autowired
 	private ITVAddressService service;
+	@Autowired
+	private ItvWxService wxservice;
 
 	@RequestMapping("/showAddress")
 	public String getAddress(HttpServletRequest request,HttpSession session) {
@@ -122,6 +126,8 @@ public class ITVAddressController {
 	@RequestMapping("/editAddress")
 	public String editAddress(@RequestParam(value="id")int id,HttpServletRequest request){
 		ITVAddress address = service.SecAddress(id);
+		ItvWxpublic wx = wxservice.oneWxpublic(address.getmWxId());
+		request.setAttribute("wx", wx);
 		request.setAttribute("address", address);
 		return "editaddress";
 	}
