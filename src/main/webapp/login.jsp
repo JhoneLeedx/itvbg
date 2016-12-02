@@ -155,6 +155,11 @@ function check() {
 		}
 
 	}
+		window.document.onkeydown = function (event){
+			if(event.keyCode == 13){
+				submits();
+			}
+		}
 </script>
 <div class="footer">四川易讯通健康医疗技术发展有限公司</div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>

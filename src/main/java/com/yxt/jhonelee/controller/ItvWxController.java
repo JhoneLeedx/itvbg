@@ -93,7 +93,7 @@ public class ItvWxController {
 			try {
 				String file_ture_name = UUID.randomUUID().toString().replaceAll("\\-", "") + wxtype;
 				FileUtils.writeByteArrayToFile(new File(wxfile, file_ture_name), wxurl.getBytes());
-				String wxUrl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
+				String wxUrl = Config.CESHICLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 						+ "/images/upload/wx/" + file_ture_name;
 				wxpublic.setmWxUrl(wxUrl);
 			} catch (IOException e) {
@@ -131,7 +131,7 @@ public class ItvWxController {
 				try {
 					String file_ture_name = UUID.randomUUID().toString().replaceAll("\\-", "") + wxtype;
 					FileUtils.writeByteArrayToFile(new File(wxfile, file_ture_name), wxurl.getBytes());
-					String wxUrl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
+					String wxUrl = Config.CESHICLOUDURL + ":" + request.getServerPort() + request.getContextPath()
 							+ "/images/upload/wx/" + file_ture_name;
 					pWxpublic.setmWxUrl(wxUrl);
 				} catch (IOException e) {
