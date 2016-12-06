@@ -108,7 +108,7 @@ public class ITVAddressController {
 				 * request.getServerPort() + request.getContextPath() +
 				 * "/images/upload/logo/" + file_ture_name;
 				 */
-				String logourl = Config.CESHICLOUDURL + ":" + request.getServerPort() + request.getContextPath()
+				String logourl = Config.LOCALURL + ":" + request.getServerPort() + request.getContextPath()
 						+ "/images/upload/logo/" + file_ture_name;
 				address.setmLogoIMageURL(logourl);
 

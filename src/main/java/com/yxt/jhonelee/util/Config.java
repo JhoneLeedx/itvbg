@@ -16,7 +16,7 @@ public class Config {
 	public static final String LEADHOSPITALPIC="E://IPTVupload//医院图片//leadHospital";
 	public static final String YAODIANPIC="E://IPTVupload//医院图片//yaodian";
 	//演示医院图片存放地址
-/*	public static final String BASICHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//basicHospital";
+	/* public static final String BASICHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//basicHospital";
 	public static final String GUIDEHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//guideHospital";
 	public static final String LEADHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//leadHospital";
 	public static final String YAODIANPIC="E://websites//iptv//IPTVupload//医院图片//yaodian";*/
