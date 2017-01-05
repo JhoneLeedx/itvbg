@@ -30,6 +30,8 @@
 	href="<%=path%>/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/bootstrap/css/file.css" />
 <title>Insert title here</title>
 </head>
 <c:choose>
@@ -61,11 +63,17 @@
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-3">医院图片：</label>
 						<div class="formControls col-xs-8 col-sm-9">
-							<span class="btn-upload form-group"> <input id="itvpic"
-								name="itvpic" type="file" accept=".gif,.png,.jpg"
-								style="margin-left: 15px" value="asda" />
+							<span class="btn-upload form-group"> <label class="file"
+								for="itvpic" style="margin-left: 15px"> 选择图片 </label>  <input
+								type="file" id="itvpic" name="itvpic" accept="image/*"
+								style="display: none" onchange="imgPreview(this)">
 							</span>
+							
 						</div>
+					</div class="row cl">
+					<img
+								id="preview" style="width: 60px;height 40px; margin-left: 220px;margin-top: 20px" />
+					<div>
 					</div>
 					<div class="row cl">
 						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
@@ -82,12 +90,12 @@
 </c:choose>
 <script type="text/javascript"
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="<%=path%>/bootstrap/js/showimage.js"></script>
 <script type="text/javascript">
 
 function itvPicUpload() {
     $("#itvpicUpload").ajaxSubmit({
-		   url:"<%=path%>
-	/itvpic/itvpicUpload",
+		   url:"<%=path%>/itvpic/itvpicUpload",
 			type : "post",
 			dataType : "text",
 			contentType : "application/x-www-form-urlencoded; charset=utf-8",

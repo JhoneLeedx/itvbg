@@ -95,7 +95,7 @@
 									<td><fmt:formatDate value="${wx.mCreateTime}"
 											pattern="yyyy-MM-dd" /></td>
 									<td><a
-										onclick="editWx('添加公众号信息','<%=path%>/itvwx/editwx?id=${wx.mId }')">
+										onclick="editWx('编辑公众号信息','<%=path%>/itvwx/editwx?id=${wx.mId }')">
 											<i class="Hui-iconfont">&#xe6df;</i>编辑
 									</a> <c:choose>
 											<c:when test="${wx.mState==1 }">

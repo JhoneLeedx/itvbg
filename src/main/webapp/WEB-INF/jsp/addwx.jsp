@@ -30,6 +30,9 @@
 	href="<%=path%>/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/bootstrap/css/file.css" />
+<script type="text/javascript" src="<%=path%>/bootstrap/js/showimage.js"></script>
 <title>Insert title here</title>
 </head>
 <c:choose>
@@ -50,10 +53,15 @@
 						<label class="form-label col-xs-4 col-sm-3"><span
 							class="c-red">*</span>微信公众号图片：</label>
 						<div class="formControls col-xs-8 col-sm-9">
-							<span class="btn-upload form-group"> <input id="itvpic"
-								name="wxurl" type="file" accept=".gif,.png,.jpg" />
+							<span class="btn-upload form-group"> <label class="file"
+								for="awxurl" style="margin-left: 15px"> 选择图片 </label>  <input
+								type="file" id="awxurl" name="wxurl" accept="image/*"
+								style="display: none" onchange="imgPreview(this)">
 							</span>
 						</div>
+					</div>
+					<div class="row cl">
+						<img id="preview" style="width: 60px; margin-left: 220px;margin-top: 20px" />
 					</div>
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-3"><span

@@ -14,6 +14,7 @@
 		<result property="mLogoIMageURL" column="logo_image" />
 		<result property="mIsFull" column="is_full" />
 		<result property="mState" column="state" />
+		<result property="mWxId" column="wx_id"/>
 		<result property="mCreateTime" column="create_time" />
 	</resultMap>
 
@@ -41,7 +42,7 @@
 				address_code = #{mAddressCode},
 			</if>
 
-			<if test="mWXQrcodeImageURL!=''">
+			<if test="mWXQrcodeImageURL!=null">
 				wx_qrcode_image=#{mWXQrcodeImageURL},
 			</if>
 			<if test="mLogoIMageURL!=null">
@@ -50,7 +51,7 @@
 			<if test="mState!=null">
 				state = #{mState},
 			</if>
-
+				wx_id = #{mWxId},
 			<choose>
 				<when
 					test="mLogoIMageURL!=null and mWXQrcodeImageURL!=null and mAddressId!=0 and mShortName!=null and mState!=null and mAddressCode!=null">
@@ -83,13 +84,21 @@
 			area_code = #{mAreaCode}
 		</where>
 	</update>
-	
+
 	<select id="SecAddress" resultMap="ITVAddressMap" resultType="ITVAddress">
-				select * from ITV_ADDRESS
+		select * from ITV_ADDRESS
 		<where>
 			id = #{mId}
 		</where>
 		limit 1
 	</select>
-	
+	<update id="delAddressLogo" parameterType="int">
+		update ITV_ADDRESS
+		<set>
+			logo_image= ""
+		</set>
+		<where>
+			id = #{mId}
+		</where>
+	</update>
 </mapper>

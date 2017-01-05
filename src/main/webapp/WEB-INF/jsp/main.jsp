@@ -44,8 +44,7 @@
 <script type="text/javascript" src="<%=path%>/static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" 
-	src="<%=path%>/bootstrap/js/nextpage.js"></script>
+<script type="text/javascript" src="<%=path%>/bootstrap/js/nextpage.js"></script>
 <title>Insert title here</title>
 </head>
 <c:choose>
@@ -95,8 +94,15 @@
 										</c:choose></td>
 									<td><c:choose>
 											<c:when test="${!empty itvaddress.mWXQrcodeImageURL }">
-												<img alt="" src="${itvaddress.mWXQrcodeImageURL }"
-													style="width: 50px">
+												<c:choose>
+													<c:when test="${itvaddress.mWXQrcodeImageURL=='请选择' }">
+											不存在
+											</c:when>
+													<c:otherwise>
+														<img alt="" src="${itvaddress.mWXQrcodeImageURL }"
+															style="width: 50px">
+													</c:otherwise>
+												</c:choose>
 											</c:when>
 											<c:otherwise>
 						不存在

@@ -19,7 +19,7 @@
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery.form.js"></script>
-
+<script type="text/javascript" src="<%=path%>/lib/layer/2.1/layer.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -30,16 +30,32 @@
 	href="<%=path%>/static/h-ui.admin/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/bootstrap/css/file.css" />
 <title>Insert title here</title>
 </head>
 <c:choose>
 	<c:when test="${!empty admin }">
 		<c:choose>
 			<c:when test="${address.mAddressId>0 }">
-				<body onload="parentAddress(${address.mAddressId})">
+				<c:choose>
+					<c:when test="${!empty wxpublic }">
+						<body onload="parentAddress(${address.mAddressId})">
+					</c:when>
+					<c:otherwise>
+						<body onload="parentAddress(${address.mAddressId}),showWxpublic()">
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<body onload="findprovince()">
+				<c:choose>
+					<c:when test="${!empty wxpublic }">
+						<body onload="findprovince()">
+					</c:when>
+					<c:otherwise>
+						<body onload="findprovince(),showWxpublic()">
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 		<article class="page-container">
@@ -64,7 +80,7 @@
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3"><span
-						class="c-red">*</span>简称：</label>
+						class="c-red">*</span>地区简称：</label>
 					<div class="formControls col-xs-8 col-sm-9">
 						<input type="text" class="input-text"
 							value="${address.mShortName }" placeholder="" name="shortName">
@@ -90,20 +106,41 @@
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">logo图片：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<span class="btn-upload form-group"> <input id="logo_url"
-							name="logo" type="file" accept=".gif,.png,.jpg"
-							style="margin-left: 15px" value="asda" />
+						<span class="btn-upload form-group"> <label class="file"
+							for="logo_url" style="margin-left: 15px"> 选择图片 </label> <img
+							id="preview" style="width: 60px; margin-left: 10px" /> <input
+							type="file" id="logo_url" name="logo" accept="image/*"
+							style="display: none" onchange="imgPreview(this)">
 						</span>
 					</div>
 				</div>
+				<!-- 添加logo图片显示和删除功能 -->
+				<div class="row cl">
+					<c:if test="${address.mLogoIMageURL!='' }">
+						<label class="form-label col-xs-4 col-sm-3">当前logo图片：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<img alt="" src="${address.mLogoIMageURL}"
+								style="margin-left: 10px; margin-right: 20px; width: 50px" /> <a
+								onclick="delLogo(${address.mId})"> <i class="Hui-iconfont">&#xe6e2;</i>删除
+							</a>
+						</div>
+					</c:if>
+				</div>
+
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">微信公众号：</label>
 					<div class="formControls col-xs-8 col-sm-9">
 						<span class="select-box"> <select class="select" size="1"
-							id="wxcode" name="wxCode">
-								<option>请选择</option>
-								<option
-									value="http://118.123.167.5:8990/itvbg/images/upload/wx/yzg.jpg">医总管</option>
+							id="wxcode" name="wxCode" onchange="show()">
+								<c:choose>
+									<c:when test="${! empty wxpublic }">
+										<option value="${wxpublic.mWxUrl }@${wxpublic.mId}">${wxpublic.mName }</option>
+										<option value='请选择@0'>请选择</option>
+									</c:when>
+									<c:otherwise>
+										<option value='请选择@0'>请选择</option>
+									</c:otherwise>
+								</c:choose>
 						</select>
 						</span>
 					</div>
@@ -143,6 +180,8 @@
 					<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 						<input class="btn btn-primary radius" id="sub" type="button"
 							value="&nbsp;&nbsp;提交&nbsp;&nbsp;" onclick="upload()" />
+						<button onClick="layer_close();" class="btn btn-default radius"
+							type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 					</div>
 				</div>
 			</form>
@@ -150,8 +189,31 @@
 		</body>
 	</c:when>
 </c:choose>
-<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript"
+	src="<%=path%>/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="<%=path%>/bootstrap/js/showimage.js"></script>
 <script type="text/javascript">
+
+function delLogo(mId) {
+	
+	layer.confirm('确认要logo图片删除吗？',function(index){
+		$.ajax({
+			data : {"id":mId},
+		    url:"<%=path%>/address/uplogo",
+			ache : false,
+			dataType : "text",
+			async : true,
+			contentType : "application/x-www-form-urlencoded; charset=utf-8",
+			error : function() {
+					alert("请与管理员联系");
+				},
+			success : function(data) {
+					alert(data);
+					window.parent.location.reload();
+				}
+			});
+	});
+}
 
 function upload(){
 	   $("#modifyForm").ajaxSubmit({
@@ -169,8 +231,7 @@ function upload(){
 	   });
 }
 function parentAddress(mId){
-	showWxpublic();
-	
+	//showWxpublic();
 	$.ajax({
 		data : {"id":mId},
 	    url:"<%=path%>/addresstll/parentAddress",
@@ -206,7 +267,7 @@ function parentAddress(mId){
 }
 
 function findprovince() {
-	showWxpublic();
+	//showWxpublic();
 	var country = $("#country").val();
 	$.ajax({
 		data : {"codevalue":country},
@@ -301,15 +362,22 @@ function findtown() {
 					success : function(data) {
 						var json = JSON.stringify(data);
 						var obj = jQuery.parseJSON(json);
-						var str = "<option>请选择</option>";
+						var	str = "<option value='请选择@0'>请选择</option>";
 						$("#wxcode").html("");
 						for (var i=0;i<obj.length;i++) {
 							var wx = obj[i];
-							str += "<option value='" +wx.mWxUrl+ "'>"+wx.mName+"</option>";
+							str += "<option value='" +wx.mWxUrl+"@"+wx.mId+"'>"+wx.mName+"</option>";
 						}
 						$("#wxcode").append(str);
 					}
 				});
 }
+ 
+ function show(){
+	 var va = $("#wxcode").val();
+	 if(va=="请选择@0"){
+		 showWxpublic();
+	 }
+ }
 </script>
 </html>

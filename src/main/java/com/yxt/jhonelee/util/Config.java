@@ -6,19 +6,19 @@ package com.yxt.jhonelee.util;
  */
 public class Config {
 
-	public static final String URL = "http://123.56.23.62";
-	public static final String LOCALURL = "http://localhost";
-	public static final String CLOUDURL="http://118.123.167.5";
-	public static final String YANSHICLOUDURL="http://118.123.167.248";
-	
-/*	public static final String BASICHOSPITALPIC="E://IPTVupload//医院图片//basicHospital";
+	public static final String LOCALURL = "http://localhost";//本地
+	public static final String CLOUDURL="http://118.123.167.5";//正式环境ip
+	public static final String YANSHICLOUDURL="http://118.123.167.248";//演示环境ip
+	public static final String CESHICLOUDURL="http://182.140.244.190";//测试环境ip
+	//正式医院图片存放地址.测试
+	public static final String BASICHOSPITALPIC="E://IPTVupload//医院图片//basicHospital";
 	public static final String GUIDEHOSPITALPIC="E://IPTVupload//医院图片//guideHospital";
 	public static final String LEADHOSPITALPIC="E://IPTVupload//医院图片//leadHospital";
-	public static final String YAODIANPIC="E://IPTVupload//医院图片//yaodian";*/
-	
-	public static final String BASICHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//basicHospital";
+	public static final String YAODIANPIC="E://IPTVupload//医院图片//yaodian";
+	//演示医院图片存放地址
+	/* public static final String BASICHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//basicHospital";
 	public static final String GUIDEHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//guideHospital";
 	public static final String LEADHOSPITALPIC="E://websites//iptv//IPTVupload//医院图片//leadHospital";
-	public static final String YAODIANPIC="E://websites//iptv//IPTVupload//医院图片//yaodian";
+	public static final String YAODIANPIC="E://websites//iptv//IPTVupload//医院图片//yaodian";*/
 	
 }

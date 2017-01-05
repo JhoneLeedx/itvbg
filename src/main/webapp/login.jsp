@@ -4,6 +4,25 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String name = "";
+	String psw = "";
+	String checked = "";
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null && cookies.length > 0) {
+		//遍历Cookie  
+		for (int i = 0; i < cookies.length; i++) {
+			Cookie cookie = cookies[i];
+			//此处类似与Map有name和value两个字段,name相等才赋值,并处理编码问题   
+			if ("name".equals(cookie.getName())) {
+				name = cookie.getValue();
+				//将"记住我"设置为勾选   
+				checked = "checked";
+			}
+			if ("psw".equals(cookie.getName())) {
+				psw = cookie.getValue();
+			}
+		}
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -28,10 +47,12 @@
 	type="text/css" />
 <!--  [endif]-->
 <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
-<title>四川易讯通健康医疗技术发展有限公司</title>
+<title>四川易迅通健康医疗技术发展有限公司</title>
 </head>
 <body>
-<div class="header"><h3 style="color: white;font-style: oblique;margin-left: 30px">家庭医生后台管理系统</h3></div>
+	<div class="header">
+		<h3 style="color: white; font-style: oblique; margin-left: 30px">家庭医生后台管理系统</h3>
+	</div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
 			<form class="form form-horizontal">
@@ -39,14 +60,14 @@
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="formControls col-xs-8">
 						<input id="user" name="user" type="text" placeholder="请输入用户名"
-							class="input-text size-L">
+							class="input-text size-L" value="<%=name %>">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 					<div class="formControls col-xs-8">
 						<input id="password" name="password" type="password"
-							placeholder="密码" class="input-text size-L">
+							placeholder="密码" class="input-text size-L" value="<%=psw %>">
 					</div>
 				</div>
 				<div class="row cl">
@@ -60,7 +81,9 @@
 					</div>
 				</div>
 				<div class="row cl">
-					<div class="formControls col-xs-8 col-xs-offset-3"></div>
+					<div class="formControls col-xs-8 col-xs-offset-3">
+						<input type="checkbox" /><label style="margin-left: 10px">记住密码</label>
+					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-xs-8 col-xs-offset-3">
@@ -155,8 +178,13 @@ function check() {
 		}
 
 	}
+	window.document.onkeydown = function(event) {
+		if (event.keyCode == 13) {
+			submits();
+		}
+	}
 </script>
-<div class="footer">四川易讯通健康医疗技术发展有限公司</div>
+<div class="footer">四川易迅通健康医疗技术发展有限公司</div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 </html>

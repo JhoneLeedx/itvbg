@@ -61,7 +61,7 @@
 			</nav>
 			<div id="tab-system" class="HuiTab">
 				<div class="tabBar cl">
-					<span>指导医院</span><span>社区卫生中心</span><span>药店</span><span>牵头医院</span>
+					<span>枢纽医院</span><span>基层医疗机构</span><span>药店</span><span>牵头医院</span>
 				</div>
 				<div class="tabCon">
 					<div class="mt-20">
@@ -187,7 +187,7 @@
 												</c:if></td>
 											<td>${itvpic3.mTelphone }</td>
 											<td><a
-												onclick="edit('图片编辑','<%=path%>/itvpic/editpic?id=${itvpic3.mId}">
+												onclick="edit('图片编辑','<%=path%>/itvpic/editpic?id=${itvpic3.mId}')">
 													<i class="Hui-iconfont">&#xe6df;</i>编辑
 											</a></td>
 										</tr>
@@ -235,7 +235,7 @@
 												</c:if></td>
 											<td>${itvpic4.mTelphone }</td>
 											<td><a
-												onclick="edit('图片编辑','<%=path%>/itvpic/editpic?id=${itvpic4.mId}">
+												onclick="edit('图片编辑','<%=path%>/itvpic/editpic?id=${itvpic4.mId}')">
 													<i class="Hui-iconfont">&#xe6df;</i>编辑
 											</a></td>
 										</tr>

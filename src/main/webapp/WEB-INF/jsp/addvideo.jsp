@@ -17,7 +17,6 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <script type="text/javascript"
 	src="<%=path%>/bootstrap/js/jquery-1.9.1.min.js"></script>
-
 <link rel="stylesheet" type="text/css"
 	href="<%=path%>/static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css"

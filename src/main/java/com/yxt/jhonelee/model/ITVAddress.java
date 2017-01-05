@@ -16,6 +16,7 @@ public class ITVAddress implements Serializable{
 	private String mShortName;//地区简称
 	private int mAddressId;//地区id
 	private String mAddressCode;//地区code
+	private int mWxId;
 	private String mWXQrcodeImageURL;//相关地区微信二维码图片的url地址
 	private String mLogoIMageURL;//当前地区logo图片的url地址
 	private int mIsFull;//信息是否完整
@@ -56,6 +57,12 @@ public class ITVAddress implements Serializable{
 	}
 	public void setmAddressCode(String mAddressCode) {
 		this.mAddressCode = mAddressCode;
+	}
+	public int getmWxId() {
+		return mWxId;
+	}
+	public void setmWxId(int mWxId) {
+		this.mWxId = mWxId;
 	}
 	public String getmWXQrcodeImageURL() {
 		return mWXQrcodeImageURL;
